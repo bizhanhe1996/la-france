@@ -1,6 +1,5 @@
 <template>
-Solutions
-  
+    Solutions
 </template>
 
 <script lang="ts" setup>

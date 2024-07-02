@@ -1,19 +1,47 @@
 <template>
   <header>
     <nav>
-      <ul
-        class="flex gap-3 bg-black text-white p-3 align-center justify-center font-bold"
-      >
-        <li><NuxtLink to="/">Home</NuxtLink></li>
-        <li><NuxtLink to="/projects">Projects</NuxtLink></li>
-        <li><NuxtLink to="/solutions">Solutions</NuxtLink></li>
-        <li><NuxtLink to="/contact-us">Contact Us</NuxtLink></li>
-        <li><NuxtLink to="/about-us">About Us</NuxtLink></li>
+      <ul class="flex gap-3 bg-black text-white p-3 align-center justify-center font-bold">
+        <li v-for="(topMenuLink, index) in topMenuLinks" :key="index">
+          <NuxtLink :to="topMenuLink.to">{{ topMenuLink.innerHtml }}</NuxtLink>
+        </li>
       </ul>
     </nav>
   </header>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
 
-<style></style>
+type TopMenuLink = {
+  to: string;
+  innerHtml: string;
+};
+
+const topMenuLinks: TopMenuLink[] = ref([
+  {
+    to: "/",
+    innerHtml: "Home"
+  },
+  {
+    to: "/projects",
+    innerHtml: "Projects"
+  },
+  {
+    to: "/solutions",
+    innerHtml: "Solutions"
+  },
+  {
+    to: "/contact-us",
+    innerHtml: "Contact Us"
+  },
+  {
+    to: "/about-us",
+    innerHtml: "About Us"
+  }
+]);
+
+</script>
+
+<style>
+
+</style>

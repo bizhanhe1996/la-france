@@ -10,7 +10,8 @@ export default defineNuxtConfig({
     ]
   },
   modules: [
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/eslint-module'
   ],
   app: {
     head: {

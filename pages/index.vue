@@ -1,6 +1,6 @@
 <template>
     <div>
-        C'est moi, et c'est assez.
+        <HomeSlider />
     </div>
 </template>
 

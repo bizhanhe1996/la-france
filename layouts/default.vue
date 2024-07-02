@@ -2,7 +2,6 @@
   <div>
     <AppHeader />
     <main>
-        <AppAside />
         <slot />
     </main>
     <AppFooter />
