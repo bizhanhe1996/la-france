@@ -10,16 +10,18 @@ export default defineNuxtConfig({
     ]
   },
   modules: [
-    '@nuxtjs/tailwindcss',
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/tailwindcss'
   ],
   app: {
     head: {
       title: "My Sample App With Nuxt",
       meta: [
         {name: "viewport", content:"width=device-width, initial-scale=1"},
-        {name: "charset", content: "utf-8"}
+        {name: "charset", content: "utf-8"},
       ]
     }
-  }
+  },
+  css: [
+    '~/assets/css/main.css'
+  ]
 })

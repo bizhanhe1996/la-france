@@ -1,0 +1,10 @@
+.router-link-active {
+
+}
+
+.router-link-exact-active {
+    color: cyan;
+    text-decoration: underline;
+    text-underline-offset: 8px;
+    text-decoration-thickness: 3px;
+}

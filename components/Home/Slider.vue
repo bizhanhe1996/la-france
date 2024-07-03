@@ -1,5 +1,5 @@
 <template>
-  <div class="relative" id="home-slider">
+  <div class="component-slider">
     <i
       class="absolute right-10 bg-white py-1 px-4 rounded-lg opacity-75 cursor-pointer select-none"
       @click="nextSlide"
@@ -7,7 +7,7 @@
     >
     <img
       v-for="(image, index) in images"
-      :class="{ hidden: !image.display, 'w-full': true }"
+      :class="{ hidden: !image.display, 'slide': true }"
       :key="'image' + index"
       :src="image.src"
     />
@@ -84,11 +84,17 @@ const previousSlide = () => {
 </script>
 
 <style>
-#home-slider {
+.component-slider {
+  position:relative;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 300px;
   overflow: hidden;
+  img {
+    width: -webkit-fill-available;
+    height:inherit%;
+    object-fit: cover;
+  }
 }
 </style>
