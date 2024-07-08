@@ -93,7 +93,7 @@ const previousSlide = () => {
   overflow: hidden;
   img {
     width: -webkit-fill-available;
-    height:inherit%;
+    height:inherit;
     object-fit: cover;
   }
 }
