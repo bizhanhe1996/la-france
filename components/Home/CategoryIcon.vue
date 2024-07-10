@@ -1,6 +1,6 @@
 <template>
   <NuxtLink :to="link">
-    <div class="flex flex-col gap-2 items-center text-center">
+    <div class="flex flex-col gap-4 items-center text-center hover:shadow-lg transition-shadow rounded-lg p-4 hover:shadow-blue-200">
       <BootstrapIcon class="text-7xl" :style="{color: color}" :name="icon" />
       <h6 class="text-2xl font-bold">{{ title }}</h6>
       <p>{{ text }}</p>
