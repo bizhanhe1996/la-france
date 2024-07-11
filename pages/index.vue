@@ -5,7 +5,7 @@
     <!-- four feature -->
     <Row class="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-4 m-4">
       <Column
-        v-for="(iconBox, index) in iconBoxes"
+        v-for="(iconBox, index) in iconBoxes.data.value"
         :key="'icon-box-' + index"
         class="col-span-1"
       >
@@ -21,12 +21,11 @@
     <!-- 2 col row -->
     <div class="bg-gray-200">
       <h3 class="p-10 text-3xl text-center drop-shadow-xl">
-        <HomeTypingText 
+        <HomeTypingText
           text="La VIE commence avec ton sourire :)"
           class="text-orange-500 font-bold"
-          />
+        />
       </h3>
-
       <Row class="grid sm:grid-cols-1 md:grid-cols-2 overflow-hidden">
         <Column class="col-span-1">
           <img
@@ -39,8 +38,8 @@
         <Column class="col-span-1 p-8">
           <ul class="list-none space-y-6 max-w-fit m-auto">
             <li
-              v-for="(homeFeatureIcon, index) in homeFeatureIcons"
-              :key="`home-feature-icon-${index}`"
+              v-for="homeFeatureIcon in homeFeatureIcons.data.value"
+              :key="`home-feature-icon-${1}`"
             >
               <HomeFeatureIcon
                 :icon="homeFeatureIcon.icon"
@@ -58,74 +57,19 @@
 </template>
 
 <script lang="ts" setup>
-type IconBoxDetail = {
-  icon: string;
-  color?: string;
-  link: string;
-  title: string;
-  text?: string;
-};
+import type { HomeFeatureIconType } from "~/types/HomeFeatureIcon";
+import type { IconBoxDetail } from "~/types/IconBoxDetails";
 
-const iconBoxes: IconBoxDetail[] = [
-  {
-    icon: "earbuds",
-    color: "#4CAF50",
-    link: "#",
-    title: "Les Earbuds",
-    text: "Tu aimes la musique?",
-  },
-  {
-    color: "#FFC107",
-    icon: "tablet-landscape",
-    link: "#",
-    title: "Les Tablets",
-    text: "Un plus grand portable!",
-  },
-  {
-    color: "#2196F3",
-    icon: "laptop",
-    link: "#",
-    title: "Les Ordinateurs",
-    text: "Tu vuex un autr ordinateur?",
-  },
-  {
-    color: "#F44336",
-    icon: "phone",
-    link: "#",
-    title: "Les Portables",
-    text: "Achete ton portable maintenant.",
-  },
-];
+const iconBoxes = await useAsyncData("iconBoxes", async () => {
+  const response: IconBoxDetail[] = await $fetch("/api/public/home/icon-boxes");
+  return response;
+});
 
-type HomeFeatureIconType = {
-  icon: string;
-  rotate: boolean;
-  color: string;
-  title: string;
-  text: string;
-};
+const homeFeatureIcons = await useAsyncData("homeFeatureIcons", async () => {
+  const response: HomeFeatureIconType[] = await $fetch(
+    "/api/public/home/features"
+  );
+  return response;
+});
 
-const homeFeatureIcons: HomeFeatureIconType[] = [
-  {
-    icon: "airplane",
-    rotate: true,
-    color: "#03A9F4",
-    title: "Tres Vite!",
-    text: "Nous apportons rapid!",
-  },
-  {
-    icon: "credit-card",
-    rotate: false,
-    color: "#F44336",
-    title: "Achete Online!",
-    text: "Ne besoin d'argent!",
-  },
-  {
-    icon: "bag-check-fill",
-    rotate: false,
-    color: "#4CAF50",
-    title: "Safe",
-    text: "Buy safe and secure.",
-  },
-];
 </script>
