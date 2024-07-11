@@ -3,8 +3,8 @@
     <!-- slider -->
     <HomeSlider />
     <!-- four feature -->
-    <row class="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-4 m-4">
-      <column
+    <Row class="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-4 m-4">
+      <Column
         v-for="(iconBox, index) in iconBoxes"
         :key="'icon-box-' + index"
         class="col-span-1"
@@ -16,63 +16,54 @@
           :title="iconBox.title"
           :text="iconBox.text"
         />
-      </column>
-    </row>
+      </Column>
+    </Row>
     <!-- 2 col row -->
     <div class="bg-gray-200">
-      <h3 class="p-10 text-3xl text-center font-bold">
-        la <span class="text-red-500">VIE</span> commence avec ton sourire
-        <span class="text-blue-500">:)</span>
+      <h3 class="p-10 text-3xl text-center drop-shadow-xl">
+        <HomeTypingText 
+          text="La VIE commence avec ton sourire :)"
+          class="text-orange-500 font-bold"
+          />
       </h3>
-      <row class="grid sm:grid-cols-1 md:grid-cols-2 py-4">
-        <column class="col-span-1">
+
+      <Row class="grid sm:grid-cols-1 md:grid-cols-2 overflow-hidden">
+        <Column class="col-span-1">
           <img
-            class="w-2/3 m-auto"
+            class="w-2/3 m-auto lg:rounded-t-3xl lg:shadow-2xl lg:shadow-red-500 aspect-auto"
             src="/images/home/linux-laptop.webp"
             id="home-linux-laptop"
             alt="laptop"
           />
-        </column>
-        <column class="col-span-1">
+        </Column>
+        <Column class="col-span-1 p-8">
           <ul class="list-none space-y-6 max-w-fit m-auto">
-            <li>
+            <li
+              v-for="(homeFeatureIcon, index) in homeFeatureIcons"
+              :key="`home-feature-icon-${index}`"
+            >
               <HomeFeatureIcon
-                icon="airplane"
-                color="skyblue"
-                title="Tres Vite!"
-                text="Nous apportons rapid!"
-              />
-            </li>
-            <li>
-              <HomeFeatureIcon
-                icon="credit-card"
-                color="red"
-                title="Achete Online!"
-                text="Ne besoin d'argent!"
-              />
-            </li>
-            <li>
-              <HomeFeatureIcon
-                icon="bag-check-fill"
-                color="green"
-                title="Safe"
-                text="Buy safe and secure."
+                :icon="homeFeatureIcon.icon"
+                :rotate="homeFeatureIcon.rotate"
+                :color="homeFeatureIcon.color"
+                :title="homeFeatureIcon.title"
+                :text="homeFeatureIcon.text"
               />
             </li>
           </ul>
-        </column>
-      </row>
+        </Column>
+      </Row>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 type IconBoxDetail = {
-  icon: String;
-  color?: String;
-  link: String;
-  title: String;
-  text?: String;
+  icon: string;
+  color?: string;
+  link: string;
+  title: string;
+  text?: string;
 };
 
 const iconBoxes: IconBoxDetail[] = [
@@ -105,6 +96,36 @@ const iconBoxes: IconBoxDetail[] = [
     text: "Achete ton portable maintenant.",
   },
 ];
-</script>
 
-<style></style>
+type HomeFeatureIconType = {
+  icon: string;
+  rotate: boolean;
+  color: string;
+  title: string;
+  text: string;
+};
+
+const homeFeatureIcons: HomeFeatureIconType[] = [
+  {
+    icon: "airplane",
+    rotate: true,
+    color: "#03A9F4",
+    title: "Tres Vite!",
+    text: "Nous apportons rapid!",
+  },
+  {
+    icon: "credit-card",
+    rotate: false,
+    color: "#F44336",
+    title: "Achete Online!",
+    text: "Ne besoin d'argent!",
+  },
+  {
+    icon: "bag-check-fill",
+    rotate: false,
+    color: "#4CAF50",
+    title: "Safe",
+    text: "Buy safe and secure.",
+  },
+];
+</script>

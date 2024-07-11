@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center gap-4">
-    <BootstrapIcon class="text-4xl" :style="{'color':color}" :name="icon" />
+    <BootstrapIcon :class="{'text-4xl':true,'rotate-45':rotate}" :style="{'color':color}" :name="icon" />
     <div class="text-left">
       <h6 class="font-bold text-2xl">{{ title }}</h6>
       <p>{{ text }}</p>
@@ -13,6 +13,11 @@ const props = defineProps({
   icon: {
     type: String,
     required: true,
+  },
+  rotate: {
+    type: Boolean,
+    required: false,
+    default:false
   },
   title: {
     type: String,
