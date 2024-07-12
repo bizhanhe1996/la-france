@@ -1,7 +1,7 @@
 <template>
   <header>
     <nav>
-      <ul class="flex gap-3 bg-black text-white p-3 align-center justify-center font-bold">
+      <ul class="flex gap-3 bg-sky-950 text-white p-3 align-center justify-center font-bold">
         <li v-for="(topMenuLink, index) in topMenuLinks" :key="index">
           <NuxtLink class="app-header-link" :to="topMenuLink.to">{{ topMenuLink.innerHtml }}</NuxtLink>
         </li>

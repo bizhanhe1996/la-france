@@ -19,7 +19,7 @@
       </Column>
     </Row>
     <!-- 2 col row -->
-    <div class="bg-gray-200">
+    <section class="bg-gray-200 clip-path">
       <h3 class="p-10 text-3xl text-center drop-shadow-xl">
         <HomeTypingText
           text="La VIE commence avec ton sourire :)"
@@ -52,7 +52,28 @@
           </ul>
         </Column>
       </Row>
-    </div>
+    </section>
+    <!-- latest Projects -->
+    <section class="p-4 bg-cover bg-center bg-no-repeat" id="home-latest-projects">
+      <h2 class="text-center text-3xl font-bold p-4 text-white">
+        C'est Sont Nos Le Plus Nouveax Projets.
+      </h2>
+      <div class="flex justify-center p-4">
+        <div class="grid grid-flow-row grid-cols-3 gap-4 max-w-fit">
+          <div class="relative overflow-hidden rounded-lg cursor-pointer flex items-center justify-center" v-for="projectImage in projectImages" :key="'project-' + num">
+            <img
+              class="hover:scale-125 hover:rotate-12 hover:blur-sm m-auto select-none hover:sepia transition-all"
+              :src="projectImage.path"
+              :alt="projectImage.alt"
+            />
+            <p class="select-none break-words absolute text-white text-center text-2xl bg-gray-600 w-full bg-opacity-30 p-1">
+              {{ projectImage.alt }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <p></p>
+    </section>
   </div>
 </template>
 
@@ -72,4 +93,48 @@ const homeFeatureIcons = await useAsyncData("homeFeatureIcons", async () => {
   return response;
 });
 
+const projectImages = [
+  {
+    path: "/images/home/projects/project-1.jpg",
+    alt: "Une Femme",
+  },
+  {
+    path: "/images/home/projects/project-2.jpg",
+    alt: "Le Cafe",
+  },
+  {
+    path: "/images/home/projects/project-3.jpg",
+    alt: "Ma Ville",
+  },
+  {
+    path: "/images/home/projects/project-4.jpg",
+    alt: "Project 4",
+  },
+  {
+    path: "/images/home/projects/project-5.jpg",
+    alt: "Vert",
+  },
+  {
+    path: "/images/home/projects/project-6.jpg",
+    alt: "L'arbre",
+  },
+  {
+    path: "/images/home/projects/project-7.jpg",
+    alt: "Project 7",
+  },
+  {
+    path: "/images/home/projects/project-8.jpg",
+    alt: "Project 8",
+  },
+  {
+    path: "/images/home/projects/project-9.jpg",
+    alt: "Le Pont",
+  },
+];
 </script>
+
+<style>
+section#home-latest-projects {
+  background-image: url(/images/home/color-gradient.jpg);
+}
+</style>
