@@ -1,58 +1,79 @@
 <template>
-  <div class="component-slider">
+  <div class="component-slider shadow-xl">
+    <!-- right -->
     <i
-      class="absolute right-10 bg-white py-1 px-4 rounded-lg opacity-75 cursor-pointer select-none"
+      class="absolute z-[1] right-[1rem] bg-white flex items-center justify-center w-14 h-14 rounded-full opacity-75 cursor-pointer select-none hover:opacity-100 transition-all"
       @click="nextSlide"
-      >Next</i
     >
+      <BootstrapIcon name="chevron-right" />
+    </i>
+    <!-- image -->
     <img
-      v-for="(image, index) in images"
-      :class="{ hidden: !image.display, 'slide': true }"
-      :key="'image' + index"
-      :src="image.src"
+      class="relative hover:sepia transition-[filter]"
+      v-for="(slide, index) in slides"
+      :class="{ hidden: !slide.display, slide: true }"
+      :key="'slide-' + index"
+      :src="slide.src"
     />
+    <div class="absolute flex flex-col gap-4 text-center">
+      <span class="text-4xl">{{slides[currentSlideIndex].title}}</span>
+      <p class="text-md">{{slides[currentSlideIndex].subtitle}}</p>
+    </div>
+    <!-- left -->
     <i
-      class="absolute left-10 bg-white py-1 px-4 rounded-lg opacity-75 cursor-pointer select-none"
+      class="absolute z-[1] left-[1rem] bg-white flex items-center justify-center w-14 h-14 rounded-full opacity-75 cursor-pointer select-none hover:opacity-100 transition-all"
       @click="previousSlide"
-      >Previous</i
     >
+      <BootstrapIcon name="chevron-left" />
+    </i>
+    <!-- bullts -->
+    <ul class="absolute list-none flex gap-4 bottom-4" v-if="renderBullets">
+      <li
+        class="text-white cursor-pointer"
+        v-for="(_, index) in slides"
+        :key="'slider-bullet' + index"
+      >
+        <BootstrapIcon 
+          :class="{'text-amber-500':currentSlideIndex == index}" 
+          name="circle-fill"   
+        />
+      </li>
+    </ul>
   </div>
 </template>
 
 <script lang="ts" setup>
-const images = ref([
-  {
-    src: "/images/home/slider/A.jpg",
-    display: true,
+const props = defineProps({
+  renderBullets: {
+    type: Boolean,
+    required: false,
+    default: false,
   },
-  {
-    src: "/images/home/slider/B.jpg",
-    display: false,
+  slides: {
+    type: Array,
+    required: true,
   },
-  {
-    src: "/images/home/slider/C.jpg",
-    display: false,
-  },
-]);
+});
 
 let currentSlideIndex = ref(0);
 
-const hideAllImages = () => {
-  images.value.forEach((image) => (image.display = false));
+const hideAllSlides = () => {
+  props.slides.forEach((slide) => (slide.display = false));
 };
 
-const showCurrentSlideIndexImage = () => {
-  images.value[currentSlideIndex.value].display = true;
+const showCurrentSlideIndexSlide = () => {
+  props.slides[currentSlideIndex.value].display = true;
 };
 
 const sliderSwitcher = () => {
-  hideAllImages();
-  if (currentSlideIndex.value == images.value.length - 1) {
-    showCurrentSlideIndexImage();
+  hideAllSlides();
+  // if it is the last slide
+  if (currentSlideIndex.value == props.slides.length - 1) {
+    showCurrentSlideIndexSlide();
     currentSlideIndex.value = 0;
     return;
   }
-  showCurrentSlideIndexImage();
+  showCurrentSlideIndexSlide();
   currentSlideIndex.value += 1;
 };
 
@@ -63,29 +84,30 @@ onMounted(() => {
 });
 
 const nextSlide = () => {
-  if (currentSlideIndex.value === images.value.length - 1) {
+  if (currentSlideIndex.value === props.slides.length - 1) {
     currentSlideIndex.value = 0;
   } else {
     currentSlideIndex.value += 1;
   }
-  hideAllImages();
-  showCurrentSlideIndexImage();
+  hideAllSlides();
+  showCurrentSlideIndexSlide();
 };
 
 const previousSlide = () => {
   if (currentSlideIndex.value === 0) {
-    currentSlideIndex.value = images.value.length - 1;
+    currentSlideIndex.value = props.slides.length - 1;
   } else {
     currentSlideIndex.value -= 1;
   }
-  hideAllImages();
-  showCurrentSlideIndexImage();
+  hideAllSlides();
+  showCurrentSlideIndexSlide();
 };
+
 </script>
 
 <style>
 .component-slider {
-  position:relative;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,7 +115,7 @@ const previousSlide = () => {
   overflow: hidden;
   img {
     width: -webkit-fill-available;
-    height:inherit;
+    height: inherit;
     object-fit: cover;
   }
 }
