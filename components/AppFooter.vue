@@ -1,5 +1,10 @@
 <template>
   <footer>
+
+    
+      <img class="block w-full"  src="/public/public/footer-wave.svg" alt="footer-wave">
+
+
     <div
       class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-emerald-900 gap-8 text-justify p-8 text-gray-300"
     >
@@ -90,7 +95,6 @@
 </script>
 
 <style>
-
 
 #footer-nuxt-logo {
   width: 60%;

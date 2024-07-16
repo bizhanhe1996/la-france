@@ -4,20 +4,20 @@ export default defineEventHandler((event) => {
   const slides: HomeSlide[] = [
     {
       src: "/images/home/slider/A.jpg",
-      title: "Slide one",
-      subtitle: "This is the slider one.",
+      title: "Tu es beau",
+      subtitle: "Tout le monde sait",
       display: true,
     },
     {
       src: "/images/home/slider/B.jpg",
-      title: "Slide two",
-      subtitle: "This is the slider two.",
+      title: "Je t'aime",
+      subtitle: "Parle avec moi plus souvent",
       display: false,
     },
     {
       src: "/images/home/slider/C.jpg",
-      title: "Slide three",
-      subtitle: "This is the slider three.",
+      title: "Nous sommes ici",
+      subtitle: "J'aime mon travail",
       display: false,
     },
   ];

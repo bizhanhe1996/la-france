@@ -1,10 +1,2 @@
-.router-link-active {
-
-}
-
-.router-link-exact-active.app-header-link {
-    color: yellow;
-    text-decoration: underline;
-    text-underline-offset: 8px;
-    text-decoration-thickness: 3px;
-}
+@import "_animations";
+@import "_links";

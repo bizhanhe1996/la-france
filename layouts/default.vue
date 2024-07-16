@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="relative">
     <AppHeader />
     <main>
-        <slot />
+      <slot />
     </main>
     <AppFooter />
   </div>
@@ -10,4 +10,29 @@
 
 <script setup>
 
+
+onMounted(() => {
+
+  // defining the observer
+  const visibilityObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const animationClassSuffix = entry.target.getAttribute('data-animation');
+        entry.target.classList.add("animate-custom-" + animationClassSuffix);
+        visibilityObserver.unobserve(entry.target);
+      }
+    });
+  });
+
+  // getting all the elements that should be observed
+  const observables = document.querySelectorAll("[data-animation]");
+  
+  // observing all the elements that should be observed
+  observables.forEach(observable => {
+    visibilityObserver.observe(observable);
+  });
+
+});
 </script>
+
+<style></style>

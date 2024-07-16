@@ -1,27 +1,29 @@
 <template>
-  <div class="component-slider shadow-xl">
+  <div class="component-slider shadow-xl select-none">
     <!-- right -->
     <i
-      class="absolute z-[1] right-[1rem] bg-white flex items-center justify-center w-14 h-14 rounded-full opacity-75 cursor-pointer select-none hover:opacity-100 transition-all"
+      class="absolute z-[1] right-[1rem] bg-white flex items-center justify-center w-10 h-10 rounded-full opacity-75 cursor-pointer select-none hover:opacity-100 transition-all"
       @click="nextSlide"
     >
       <BootstrapIcon name="chevron-right" />
     </i>
     <!-- image -->
     <img
-      class="relative hover:sepia transition-[filter]"
+      class="relative brightness-75"
       v-for="(slide, index) in slides"
       :class="{ hidden: !slide.display, slide: true }"
       :key="'slide-' + index"
       :src="slide.src"
+      draggable="false"
     />
-    <div class="absolute flex flex-col gap-4 text-center">
-      <span class="text-4xl">{{slides[currentSlideIndex].title}}</span>
+    <!-- title and subtitle -->
+    <div class="absolute flex flex-col gap-4 text-center text-white">
+      <span class="text-4xl uppercase">{{slides[currentSlideIndex].title}}</span>
       <p class="text-md">{{slides[currentSlideIndex].subtitle}}</p>
     </div>
     <!-- left -->
     <i
-      class="absolute z-[1] left-[1rem] bg-white flex items-center justify-center w-14 h-14 rounded-full opacity-75 cursor-pointer select-none hover:opacity-100 transition-all"
+      class="absolute z-[1] left-[1rem] bg-white flex items-center justify-center w-10 h-10 rounded-full opacity-75 cursor-pointer select-none hover:opacity-100 transition-all"
       @click="previousSlide"
     >
       <BootstrapIcon name="chevron-left" />

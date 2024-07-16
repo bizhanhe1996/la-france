@@ -1,0 +1,162 @@
+/* zoom in */
+@keyframes animation-zoom-in {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.animate-custom-zoom-in {
+  animation-name: animation-zoom-in;
+}
+
+/* zoom-out */
+@keyframes animation-zoom-out {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+.animate-custom-zoom-out {
+  animation-name: animation-zoom-out;
+}
+
+/* fade-in */
+@keyframes animation-fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.animate-custom-fade-in {
+  animation-name: animation-fade-in;
+}
+
+/* fade-out */
+@keyframes animation-fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.animate-custom-fade-out {
+  animation-name: animation-fade-out;
+}
+
+/* from-left */
+@keyframes animation-from-left {
+  0% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+.animate-custom-from-left {
+  animation-name: animation-from-left;
+}
+
+/* from-right */
+@keyframes animation-from-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+.animate-custom-from-right {
+  animation-name: animation-from-right;
+}
+
+/* from-top */
+@keyframes animation-from-top {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+.animate-custom-from-top {
+  animation-name: animation-from-top;
+}
+
+/* from-bottom */
+@keyframes animation-from-bottom {
+  0% {
+    transform: translateY(50%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+.animate-custom-from-bottom {
+  animation-name: animation-from-bottom;
+}
+
+/* animation configurations */
+[data-animation] {
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+/* delay classes */
+
+.animation-delay-1 {
+  animation-delay: 250ms;
+}
+.animation-delay-2 {
+  animation-delay: 500ms;
+}
+.animation-delay-3 {
+  animation-delay: 750ms;
+}
+.animation-delay-4 {
+  animation-delay: 1000ms;
+}
+.animation-delay-5 {
+  animation-delay: 1250ms;
+}
+.animation-delay-6 {
+  animation-delay: 1500ms;
+}
+.animation-delay-7 {
+  animation-delay: 1750ms;
+}
+.animation-delay-8 {
+  animation-delay: 2000ms;
+}
+.animation-delay-9 {
+  animation-delay: 2250ms;
+}
+.animation-delay-10 {
+  animation-delay: 2500ms;
+}
+.animation-delay-11 {
+  animation-delay: 2750ms;
+}
+.animation-delay-12 {
+  animation-delay: 3000ms;
+}
+.animation-delay-13 {
+  animation-delay: 3250ms;
+}
+.animation-delay-14 {
+  animation-delay: 3500ms;
+}
+.animation-delay-15 {
+  animation-delay: 3750ms;
+}
+.animation-delay-16 {
+  animation-delay: 4000ms;
+}

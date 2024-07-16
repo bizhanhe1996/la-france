@@ -1,0 +1,4 @@
+.router-link-exact-active.app-header-link {
+    color: yellow;
+    text-decoration: none;
+}
