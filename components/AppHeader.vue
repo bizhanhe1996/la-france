@@ -1,15 +1,18 @@
 <template>
-  <!-- small screens -->
+  <!-- small screens toggler -->
   <div
     class="md:hidden text-white text-2xl absolute z-[3] m-2 p-2 cursor-pointer rounded-full inline-flex !aspect-square"
     @click="toggleMobileMenu"
   >
     <BootstrapIcon :name="isMenuOpened ? 'x-lg' : 'list'" />
   </div>
-  <!-- large screens -->
+  <!-- menu -->
   <header
-    class="bg-gray-800 sm:absolute md:static z-[2] w-full overflow-hidden"
-    :style="{ height: isMenuOpened ? 'fit-content' : 0 }"
+    :class="`sm:absolute md:static z-[2] w-full overflow-hidden`"
+    :style="{
+      height: isMenuOpened ? 'fit-content' : 0,
+      background: backgroundColor
+    }"
   >
     <nav>
       <ul
@@ -30,8 +33,21 @@
 </template>
 
 <script lang="ts" setup>
+
+// props
+const props = defineProps({
+  backgroundColor: {
+    type: String,
+    required: false,
+    default: "black",
+  }
+});
+
+// refs
 const isMenuOpened = ref(true);
 
+
+// methods
 const toggleMobileMenu = () => {
   isMenuOpened.value = !isMenuOpened.value;
 };
@@ -64,6 +80,7 @@ const topMenuLinks: TopMenuLink[] = [
   },
 ];
 
+// onMounted
 onMounted(() => {
   window.addEventListener("resize", () => {
     isMenuOpened.value = false;

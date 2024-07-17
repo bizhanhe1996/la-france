@@ -1,6 +1,10 @@
 <template>
   <div class="relative">
-    <AppHeader />
+    <AppHeader 
+      backgroundColor="black"
+      transparent="true"
+    
+    />
     <main>
       <slot />
     </main>
@@ -19,6 +23,9 @@ onMounted(() => {
       if (entry.isIntersecting) {
         const animationClassSuffix = entry.target.getAttribute('data-animation');
         entry.target.classList.add("animate-custom-" + animationClassSuffix);
+        entry.target.addEventListener("animationstart", (event) => {
+          event.target.classList.remove("opacity-0");
+        })
         visibilityObserver.unobserve(entry.target);
       }
     });

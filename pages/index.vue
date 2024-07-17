@@ -7,7 +7,7 @@
       <Column
         v-for="(iconBox, index) in iconBoxes.data.value"
         :key="'icon-box-' + index"
-        class="col-span-1"\
+        :class="`col-span-1 opacity-0 animation-delay-${index}`"
         data-animation="zoom-in"
       >
         <HomeCategoryIcon
@@ -124,35 +124,61 @@
           />
         </Column>
       </Row>
-      <!-- eiffel row -->
+      <!-- counters -->
       <section class="py-8">
         <div id="eiffel-overlay"></div>
         <div class="relative z-1 drop-shadow-lg">
-          <div class="text-center text-3xl text-white mb-6 animation-delay-16" data-animation="fade-in">
+          <div
+            class="text-center text-3xl text-white mb-6 opacity-0 font-bold "
+            data-animation="fade-in"
+          >
             Parce que vous êtes INTELLIGENTS!
           </div>
           <Row class="grid grid-cols-2 md:grid-cols-4 py-4 gap-y-8">
-            <Column class="col-span-1">
-              <HomeCounter :count="150" subtitle="Etudiants" color="white" data-animation="zoom-in" />
-            </Column>
-            <Column class="col-span-1">
-              <HomeCounter :count="200" subtitle="Universites" color="white" data-animation="zoom-in" />
-            </Column>
-            <Column class="col-span-1">
-              <HomeCounter :count="170" subtitle="Villes" color="white" data-animation="zoom-in" />
-            </Column>
-            <Column class="col-span-1">
-              <HomeCounter :count="300" subtitle="Lycees" color="white" data-animation="zoom-in" />
+            <Column
+              v-for="(counter, index) in counters.data.value"
+              :key="`home-counter-${index}`"
+              :class="`col-span-1 animation-delay-${index + 1} opacity-0`"
+              data-animation="zoom-in"
+            >
+              <HomeCounter
+                :count="counter.count"
+                :subtitle="counter.subtitle"
+                :color="counter.color"
+              />
             </Column>
           </Row>
         </div>
       </section>
     </div>
+    <!-- famous people -->
+    <section>
+      <h2 class="text-center text-3xl px-4 py-8 opacity-0 font-bold" data-animation="from-top">
+        Un Pays De Gens Grands 
+      </h2>
+      <Row class="grid grid-flow-row grid-cols-3 gap-8 p-4">
+        <Column
+          v-for="(person, index) in famousPeople"
+          :key="`famous-person-${index}`"
+          :class="`sm:col-span-3 lg:col-span-1 opacity-0 animation-delay-${index+2} ease-in`"
+          data-animation="zoom-in"
+        >
+          <HomePersonCard
+            :imageSrc="person.imageSrc"
+            :imageAlt="person.imageAlt"
+            :title="person.title"
+            :desciption="person.description? person.description: null"
+          />
+        </Column>
+      </Row>
+      <div class="text-center px-4 py-8">
+        Plus ICI.
+      </div>
+    </section>
   </div>
 </template>
 
 <script lang="ts" setup>
-
 const homePageSlides = await useAsyncData("homePageSlides", async () => {
   return await $fetch("/api/public/home/slides");
 });
@@ -169,6 +195,47 @@ const projectImages = await useAsyncData("projectImages", async () => {
   return await $fetch("/api/public/home/projects");
 });
 
+const counters = await useAsyncData("counters", async () => {
+  return await $fetch("/api/public/home/counters");
+});
+
+const famousPeople = [
+  {
+    imageSrc: "/public/people/charles-de-gaulle.jpeg",
+    imageAlt: "Charles de gaulle",
+    title: "Charles De Gaulle",
+  },
+
+  {
+    imageSrc: "/public/people/joan-de-arc.jpeg",
+    imageAlt: "joan d'arc",
+    title: "Joan D'Arc",
+  },
+
+  {
+    imageSrc: "/public/people/napoleon.jpeg",
+    imageAlt: "napoleon bonaparte",
+    title: "Napoleon Bonaparte",
+  },
+
+  {
+    imageSrc: "/public/people/pasteur.jpeg",
+    imageAlt: "luis pasteur",
+    title: "Luis Pasteur",
+  },
+
+  {
+    imageSrc: "/public/people/victor-hugo.jpeg",
+    imageAlt: "victor hugo",
+    title: "Victor Hugo",
+  },
+
+  {
+    imageSrc: "/public/people/voltaire.jpeg",
+    imageAlt: "voltaire",
+    title: "Voltaire",
+  },
+];
 </script>
 
 <style>
