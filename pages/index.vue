@@ -115,13 +115,10 @@
             </p>
           </div>
         </Column>
-        <Column class="col-span-1 flex justify-center items-center">
-          <img
-            class="w-2/3 lg:w-1/3 drop-shadow sm:mb-8"
-            data-animation="from-left"
-            src="/public/france.svg"
-            alt="France"
-          />
+        <Column
+          class="col-span-1 flex justify-center items-center overflow-hidden"
+        >
+          image here
         </Column>
       </Row>
       <!-- counters -->
@@ -129,7 +126,7 @@
         <div id="eiffel-overlay"></div>
         <div class="relative z-1 drop-shadow-lg">
           <div
-            class="text-center text-3xl text-white mb-6 opacity-0 font-bold "
+            class="text-center text-3xl text-white mb-6 opacity-0 font-bold"
             data-animation="fade-in"
           >
             Parce que vous êtes INTELLIGENTS!
@@ -153,27 +150,59 @@
     </div>
     <!-- famous people -->
     <section>
-      <h2 class="text-center text-3xl px-4 py-8 opacity-0 font-bold" data-animation="from-top">
-        Un Pays De Gens Grands 
+      <h2
+        class="text-center text-3xl px-4 py-8 opacity-0 font-bold"
+        data-animation="from-top"
+      >
+        Un Pays De Gens Grands
       </h2>
       <Row class="grid grid-flow-row grid-cols-3 gap-8 p-4">
         <Column
-          v-for="(person, index) in famousPeople"
+          v-for="(person, index) in famousPeople.data.value"
           :key="`famous-person-${index}`"
-          :class="`sm:col-span-3 lg:col-span-1 opacity-0 animation-delay-${index+2} ease-in`"
+          :class="`sm:col-span-3 lg:col-span-1 opacity-0 animation-delay-${
+            index + 2
+          } ease-in`"
           data-animation="zoom-in"
         >
           <HomePersonCard
             :imageSrc="person.imageSrc"
             :imageAlt="person.imageAlt"
             :title="person.title"
-            :desciption="person.description? person.description: null"
+            :desciption="person.description ? person.description : null"
           />
         </Column>
       </Row>
-      <div class="text-center px-4 py-8">
-        Plus ICI.
-      </div>
+      <div class="text-center px-4 py-8">Plus ICI.</div>
+    </section>
+    <!-- Louvre row -->
+    <section class="bg-amber-50">
+      <Row class="grid sm:grid-cols-1 md:grid-cols-2 ">
+        <Column class="col-span-1 h-full">
+          <img class="w-full h-full" src="/public/louvre.jpeg" alt="Louvre" />
+        </Column>
+        <Column class="col-span-1 px-4 flex flex-col justify-around">
+          <h2 class="text-center text-3xl p-4 font-bold capitalize opacity-0" data-animation="fade-in">
+            Le Musée Du Louvre Est Le Plus Grand Musée Du Monde.
+          </h2>
+          <Row class="lg:columns-2 sm:columns-1">
+            <Column
+              class="mb-4 "
+              v-for="(louvreFeature, index) in louvreFeatures" :key="`louvre-feature-${index}`"
+            >
+            <div :class="`opacity-0 animation-delay-${(index+1)*2 }`" data-animation="zoom-in">
+
+              <HomeLouvreFeature
+                  :icon="louvreFeature.icon"
+                  :title="louvreFeature.title"
+                  :text="louvreFeature.text"
+                  :colorClass="louvreFeature.colorClass"
+                />
+            </div>  
+            </Column>
+          </Row>
+        </Column>
+      </Row>
     </section>
   </div>
 </template>
@@ -199,41 +228,34 @@ const counters = await useAsyncData("counters", async () => {
   return await $fetch("/api/public/home/counters");
 });
 
-const famousPeople = [
-  {
-    imageSrc: "/public/people/charles-de-gaulle.jpeg",
-    imageAlt: "Charles de gaulle",
-    title: "Charles De Gaulle",
-  },
+const famousPeople = await useAsyncData("famousPeople", async () => {
+  return await $fetch("/api/public/home/famous-people");
+});
 
+const louvreFeatures = [
   {
-    imageSrc: "/public/people/joan-de-arc.jpeg",
-    imageAlt: "joan d'arc",
-    title: "Joan D'Arc",
+    icon: "star",
+    title: "Part A",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat animi et magni perspiciatis, tenetur in nemo aspernatur nisi temporibus deleniti laudantium suscipit assumenda iste nostrum?",
+    colorClass: "text-blue-500"
   },
-
   {
-    imageSrc: "/public/people/napoleon.jpeg",
-    imageAlt: "napoleon bonaparte",
-    title: "Napoleon Bonaparte",
+    icon: "heart",
+    title: "Part B",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat animi et magni perspiciatis, tenetur in nemo aspernatur nisi temporibus deleniti laudantium suscipit assumenda iste nostrum?",
+    colorClass: "text-rose-500"
   },
-
   {
-    imageSrc: "/public/people/pasteur.jpeg",
-    imageAlt: "luis pasteur",
-    title: "Luis Pasteur",
+    icon: "peace",
+    title: "Part C",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat animi et magni perspiciatis, tenetur in nemo aspernatur nisi temporibus deleniti laudantium suscipit assumenda iste nostrum?",
+    colorClass: "text-amber-500"
   },
-
   {
-    imageSrc: "/public/people/victor-hugo.jpeg",
-    imageAlt: "victor hugo",
-    title: "Victor Hugo",
-  },
-
-  {
-    imageSrc: "/public/people/voltaire.jpeg",
-    imageAlt: "voltaire",
-    title: "Voltaire",
+    icon: "book",
+    title: "Part D",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat animi et magni perspiciatis, tenetur in nemo aspernatur nisi temporibus deleniti laudantium suscipit assumenda iste nostrum?",
+    colorClass: "text-emerald-500"
   },
 ];
 </script>

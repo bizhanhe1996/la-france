@@ -3,7 +3,6 @@
     <AppHeader 
       backgroundColor="black"
       transparent="true"
-    
     />
     <main>
       <slot />
