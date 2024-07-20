@@ -176,29 +176,57 @@
       <div class="text-center px-4 py-8">Plus ICI.</div>
     </section>
     <!-- Louvre row -->
-    <section class="bg-amber-50">
-      <Row class="grid sm:grid-cols-1 md:grid-cols-2 ">
-        <Column class="col-span-1 h-full">
-          <img class="w-full h-full" src="/public/louvre.jpeg" alt="Louvre" />
+    <section class="bg-gray-100">
+      <Row class="grid sm:grid-cols-1 md:grid-cols-2">
+        <Column class="col-span-1 h-full opacity-0" data-animation="fade-in">
+          <div
+            v-for="(louvreImage, index) in louvreImages.value"
+            :key="`louvre-image-${index}`"
+            v-show="louvreImage.display"
+            class="flex relative items-center justify-center"
+          >
+            <img
+              class="w-full h-full"
+              :src="louvreImage.src"
+              :alt="louvreImage.alt"
+            />
+            <div
+              class="absolute m-auto w-1/2 p-8 flex flex-col gap-y-4 justify-between text-center bg-black/30"
+            >
+              <h4 class="text-2xl text-white uppercase font-bold">
+                {{ louvreImage.title }}
+              </h4>
+              <p class="text-white/75">{{ louvreImage.subtitle }}</p>
+            </div>
+          </div>
         </Column>
         <Column class="col-span-1 px-4 flex flex-col justify-around">
-          <h2 class="text-center text-3xl p-4 font-bold capitalize opacity-0" data-animation="fade-in">
-            Le Musée Du Louvre Est Le Plus Grand Musée Du Monde.
+          <h2
+            class="text-center text-3xl p-4 font-bold capitalize opacity-0"
+            data-animation="fade-in"
+          >
+            <HomeTypingText
+              text="Le Musée Du Louvre Est Le Plus Grand Musée Du Monde."
+              class="text-slate-800 font-bold"
+            />
           </h2>
           <Row class="lg:columns-2 sm:columns-1">
             <Column
-              class="mb-4 "
-              v-for="(louvreFeature, index) in louvreFeatures" :key="`louvre-feature-${index}`"
+              class="mb-4"
+              v-for="(louvreFeature, index) in louvreFeatures.data.value"
+              :key="`louvre-feature-${index}`"
             >
-            <div :class="`opacity-0 animation-delay-${(index+1)*2 }`" data-animation="zoom-in">
-
-              <HomeLouvreFeature
+              <div
+                :class="`opacity-0 animation-delay-${(index + 1) * 2}`"
+                data-animation="zoom-in"
+              >
+                <HomeLouvreFeature
                   :icon="louvreFeature.icon"
                   :title="louvreFeature.title"
                   :text="louvreFeature.text"
                   :colorClass="louvreFeature.colorClass"
                 />
-            </div>  
+              </div>
             </Column>
           </Row>
         </Column>
@@ -208,56 +236,43 @@
 </template>
 
 <script lang="ts" setup>
-const homePageSlides = await useAsyncData("homePageSlides", async () => {
-  return await $fetch("/api/public/home/slides");
-});
+// IMPORTS
+import { useFetch } from "nuxt/app";
+import { onMounted, reactive } from "vue";
 
-const iconBoxes = await useAsyncData("iconBoxes", async () => {
-  return await $fetch("/api/public/home/icon-boxes");
-});
+// FETCHS
+const homePageSlides = await useFetch("/api/public/home/slides");
+const iconBoxes = await useFetch("/api/public/home/icon-boxes");
+const homeFeatureIcons = await useFetch("/api/public/home/features");
+const projectImages = await useFetch("/api/public/home/projects");
+const counters = await useFetch("/api/public/home/counters");
+const famousPeople = await useFetch("/api/public/home/famous-people");
+const louvreFeatures = await useFetch("/api/public/home/louvre-features");
+const {
+  data: { value: louvreImagesData },
+} = await useFetch("/api/public/home/louvre-images");
+const louvreImages = reactive(louvreImagesData);
 
-const homeFeatureIcons = await useAsyncData("homeFeatureIcons", async () => {
-  return await $fetch("/api/public/home/features");
+// ON MOUNTED
+onMounted(() => {
+  const interval = setInterval(() => {
+    louvreImages.value.every((louvreImage: any, currentIndex: number) => {
+      if (louvreImage.display == true) {
+        louvreImage.display = false;
+        const isTheLastImage: boolean =
+          currentIndex == louvreImages.value.length - 1;
+        if (isTheLastImage) {
+          louvreImages.value[0].display = true;
+        } else {
+          louvreImages.value[currentIndex + 1].display = true;
+        }
+        return false;
+      } else {
+        return true;
+      }
+    });
+  }, 2500);
 });
-
-const projectImages = await useAsyncData("projectImages", async () => {
-  return await $fetch("/api/public/home/projects");
-});
-
-const counters = await useAsyncData("counters", async () => {
-  return await $fetch("/api/public/home/counters");
-});
-
-const famousPeople = await useAsyncData("famousPeople", async () => {
-  return await $fetch("/api/public/home/famous-people");
-});
-
-const louvreFeatures = [
-  {
-    icon: "star",
-    title: "Part A",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat animi et magni perspiciatis, tenetur in nemo aspernatur nisi temporibus deleniti laudantium suscipit assumenda iste nostrum?",
-    colorClass: "text-blue-500"
-  },
-  {
-    icon: "heart",
-    title: "Part B",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat animi et magni perspiciatis, tenetur in nemo aspernatur nisi temporibus deleniti laudantium suscipit assumenda iste nostrum?",
-    colorClass: "text-rose-500"
-  },
-  {
-    icon: "peace",
-    title: "Part C",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat animi et magni perspiciatis, tenetur in nemo aspernatur nisi temporibus deleniti laudantium suscipit assumenda iste nostrum?",
-    colorClass: "text-amber-500"
-  },
-  {
-    icon: "book",
-    title: "Part D",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat animi et magni perspiciatis, tenetur in nemo aspernatur nisi temporibus deleniti laudantium suscipit assumenda iste nostrum?",
-    colorClass: "text-emerald-500"
-  },
-];
 </script>
 
 <style>
@@ -270,7 +285,7 @@ const louvreFeatures = [
 }
 
 #eiffel-background {
-  background-image: url(/public/public/eiffel.jpg);
+  background-image: url(/images/home/eiffel.jpg);
   position: relative;
 }
 
