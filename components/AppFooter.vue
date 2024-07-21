@@ -1,12 +1,7 @@
 <template>
-  <footer>
-
-    
-      <img class="block w-full"  src="/public/public/footer-wave.svg" alt="footer-wave">
-
-
+  <footer class="text-gray-300">
     <div
-      class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-emerald-900 gap-8 text-justify p-8 text-gray-300"
+      class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-zinc-900 gap-8 text-justify p-8"
     >
       <div class="col-span-1">
         <h4 class="text-2xl font-bold pb-3">Les Projets</h4>
@@ -85,7 +80,7 @@
         </a>
       </div>
     </div>
-    <div class="bg-black text-center text-gray-500 p-2">
+    <div class="bg-stone-950 text-center p-2">
       <span>Designed and Developed by</span> <a class="text-cyan-400" href="https://github.com/bizhanhe1996">bizhanhe1996</a>
     </div>
   </footer>

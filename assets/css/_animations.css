@@ -53,7 +53,7 @@
 /* from-left */
 @keyframes animation-from-left {
   0% {
-    transform: translateX(50%);
+    transform: translateX(-50%);
   }
   100% {
     transform: translateX(0%);
@@ -66,7 +66,7 @@
 /* from-right */
 @keyframes animation-from-right {
   0% {
-    transform: translateX(-50%);
+    transform: translateX(50%);
   }
   100% {
     transform: translateX(0%);

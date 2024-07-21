@@ -1,1 +1,2 @@
 - mega menu: responsive
+- typing text: intersection observer

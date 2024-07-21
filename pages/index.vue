@@ -232,6 +232,80 @@
         </Column>
       </Row>
     </section>
+    <!-- row with button -->
+    <section class="bg-teal-700 p-16">
+      <Row class="grid grid-cols-2 gap-y-16">
+        <Column
+          class="text-white text-center text-3xl flex sm:col-span-2 md:col-span-1"
+        >
+          <div class="m-auto opacity-0" data-animation="from-left">
+            <p>Achetez votre billet d'avion</p>
+            &nbsp;
+            <span class="uppercase font-serif font-bold">maintenant!</span>
+          </div>
+        </Column>
+        <Column
+          class="flex flex-wrap justify-center gap-4 sm:col-span-2 md:col-span-1"
+        >
+          <AppButton
+            class="opacity-0 animation-delay-1"
+            data-animation="zoom-in"
+            text="Cliquez"
+            icon="airplane"
+            theme="primary"
+          />
+          <AppButton
+            class="opacity-0 animation-delay-2"
+            data-animation="zoom-in"
+            text="Cliquez"
+            icon="star"
+            theme="secondary"
+          />
+          <AppButton
+            class="opacity-0 animation-delay-3"
+            data-animation="zoom-in"
+            text="Cliquez"
+            icon="ticket"
+            theme="info"
+          />
+          <AppButton
+            class="opacity-0 animation-delay-4"
+            data-animation="zoom-in"
+            text="Cliquez"
+            icon="bag"
+            theme="warning"
+          />
+          <AppButton
+            class="opacity-0 animation-delay-5"
+            data-animation="zoom-in"
+            text="Cliquez"
+            icon="activity"
+            theme="danger"
+          />
+          <AppButton
+            class="opacity-0 animation-delay-6"
+            data-animation="zoom-in"
+            text="Cliquez"
+            icon="heart-fill"
+            theme="success"
+          />
+          <AppButton
+            class="opacity-0 animation-delay-7"
+            data-animation="zoom-in"
+            text="Cliquez"
+            icon="tools"
+            theme="white"
+          />
+          <AppButton
+            class="opacity-0 animation-delay-8"
+            data-animation="zoom-in"
+            text="Cliquez"
+            icon="eye"
+            theme="black"
+          />
+        </Column>
+      </Row>
+    </section>
   </div>
 </template>
 

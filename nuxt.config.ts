@@ -26,7 +26,7 @@ export default defineNuxtConfig({
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         { name: "charset", content: "utf-8" },
       ],
-      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.svg" }],
+      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.png" }],
     },
   },
   css: ["~/assets/css/main.css"],
