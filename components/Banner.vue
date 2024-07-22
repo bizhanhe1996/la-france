@@ -2,7 +2,7 @@
   <div class="component-banner">
     <img class="banner-image" :src="src" :alt="alt" />
     <div class="banner-text">
-      <div class="flex flex-col justify-center items-center gap-5">
+      <div class="flex flex-col justify-center items-center gap-5 select-none">
         <h2 class="text-5xl  text-center text-white font-bold">{{ title }}</h2>
         <span class="text-white text-center">{{ subTitle }}</span>
       </div>
