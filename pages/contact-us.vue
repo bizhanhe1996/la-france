@@ -15,19 +15,15 @@
     </p>
     <form class="border p-4 rounded-lg shadow-sm" action="#">
       <div class="grid grid-cols-2 gap-y-4">
-        <div class="sm:col-span-2 md:col-span-1">           
-            <FormInputText
-                label="Prénom"
-                info="Extra info"
-                
-            />
+        <div class="sm:col-span-2 md:col-span-1">
+          <FormInputText
+            label="Prénom"
+            info="Extra info"
+            :validations="['required']"
+          />
         </div>
         <div class="sm:col-span-2 md:col-span-1">
-            <FormInputText
-                label="E-mail"
-                error="This is an error"
-                :validations="['email']"
-            />
+          <FormInputText label="E-mail" :validations="['required', 'mobile']" />
         </div>
       </div>
 
