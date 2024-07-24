@@ -14,23 +14,53 @@
       Lorem ipsum dolor, sit amet consectetur adipisicing elit.
     </p>
     <form class="border p-4 rounded-lg shadow-sm" action="#">
-      <div class="grid grid-cols-2 gap-y-4">
-        <div class="sm:col-span-2 md:col-span-1">
-          <FormInputText
+      <Row class="grid grid-cols-3 gap-4">
+        <Column class="sm:col-span-3 md:col-span-1">
+          <!-- prenom -->
+          <FormAppInput
             label="Prénom"
             info="Extra info"
             :validations="['required']"
           />
-        </div>
-        <div class="sm:col-span-2 md:col-span-1">
-          <FormInputText label="E-mail" :validations="['required', 'mobile']" />
-        </div>
-      </div>
+        </Column>
+        <Column class="sm:col-span-3 md:col-span-1">
+          <!-- email -->
+          <FormAppInput
+            label="E-mail"
+            :validations="['required', 'email']"
+            info="Should be a valid email address."
+            placeholder="quelque_chose@mail.fr"
+          />
+        </Column>
+        <Column class="sm:col-span-3 md:col-span-1">
+          <!-- mobile -->
+          <FormAppInput
+            :type="'tel'"
+            label="Numero du Portable"
+            placeholder="0912..."
+            info="Onze Chiffres"
+            :validations="['required', 'mobile']"
+          />
+        </Column>
+      
+        <Column class="sm:col-span-3 md:col-span-2">
+          <FormAppInput
+            type="textarea"
+            label="Message"
+            placeholder="Écrivez votre message ici."
+            :validations="['required']"
+          />
+        </Column>
 
-      message
-      <textarea type="textarea"></textarea>
+        <Column class="sm:col-span-3 md:col-span-1">
+          <FormAppInput
+            type="checkbox"
+            label="Consent"
+          />
+        </Column>
 
-      Consent<input type="checkbox" />
+
+      </Row>
 
       Homme<input type="radio" value="0" /> Femme<input
         type="radio"
