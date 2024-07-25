@@ -2,7 +2,7 @@
   <fieldset class="ciel-input-group">
     <!-- input -->
     <input
-      v-if="['text','tel','email'].includes(props.type)"
+      v-if="['text', 'tel', 'email'].includes(props.type)"
       @blur="handleOnBlurValidation"
       @input="handleOnInputValidation"
       v-model="inputValue"
@@ -17,12 +17,13 @@
       :id="props.label"
     />
     <!-- textarea -->
-    <textarea v-else-if="props.type === 'textarea'"
-    @blur="handleOnBlurValidation"
-    v-model="inputValue"
-    class="peer"
-    :placeholder="props.placeholder"
-    :class="{
+    <textarea
+      v-else-if="props.type === 'textarea'"
+      @blur="handleOnBlurValidation"
+      v-model="inputValue"
+      class="peer"
+      :placeholder="props.placeholder"
+      :class="{
         'ring-red-300': errorMessage,
         'ring-sky-300': errorMessage === null,
       }"
@@ -30,39 +31,56 @@
       :id="props.label"
     ></textarea>
     <!-- checkbox -->
-    <div
-      v-else-if="props.type === 'checkbox'"
-      class="w-8 h-8 focus-within:ring-2 ring-sky-300 border-4 rounded-lg flex items-center justify-center z-[2] relative overflow-hidden"
-      type="checkbox"
-    >
-      <input 
-        type="checkbox" 
-        class="peer w-full h-full opacity-0 z-[3] cursor-pointer" 
-        :name="props.label"
-        :id="props.label"
-        
+    <div class="checkbox-container" v-else-if="props.type === 'checkbox'">
+      <div>
+        <input
+          type="checkbox"
+          class="peer"
+          :name="props.label"
+          :id="props.label"
         />
-      <BootstrapIcon 
-        class="scale-0 peer-checked:scale-100 absolute transition z-[1] text-4xl text-blue-500"
-        name="check-square-fill" 
-        
-      />
+        <BootstrapIcon
+          class="peer-checked:scale-100 scale-0 absolute transition z-[1] text-4xl text-blue-500"
+          name="check-square-fill"
+        />
+      </div>
+      <label v-if="props.label" :for="props.label">{{ props.label }}</label>
     </div>
-    <!-- label -->
+    <!-- switch -->
+    <div class="switch-container" v-else-if="props.type === 'switch'">
+      <div :class="{ 'bg-blue-500': switchStatus }">
+        <input
+          class="peer"
+          :id="props.label"
+          type="checkbox"
+          @change="toggleSwitchStatus"
+        />
+        <b class="peer-checked:translate-x-4"></b>
+      </div>
+      <label :for="props.label">{{ props.label }}</label>
+    </div>
+    <!-- simple label -->
     <label
-    class="peer-focus:text-sky-300 peer-focus:-translate-y-6"
-    v-if="props.label" :for="props.label"
+      class="simple-label peer-focus:text-sky-300 peer-focus:-translate-y-6"
+      v-if="props.label && ['text', 'email', 'tel'].includes(props.type)"
+      :for="props.label"
       >{{ props.label }}
-        <i class="asterisk" v-if="props.validations?.includes('required')">*</i>
-      </label
-    >
+      <i class="asterisk" v-if="props.validations?.includes('required')">*</i>
+    </label>
     <!-- texts -->
     <div class="texts">
       <!-- info -->
       <small class="info" v-if="props.info">{{ props.info }}</small>
       <!-- error -->
-      <small class="error">
-        {{ errorMessage }}</small
+      <small class="error"> {{ errorMessage }}</small>
+      <!-- switch status -->
+      <small
+        v-if="props.type == 'switch'"
+        :class="{
+          'text-blue-500': switchStatus,
+          'text-gray-500': !switchStatus,
+        }"
+        >{{ switchStatus ? "On" : "Off" }}</small
       >
     </div>
   </fieldset>
@@ -73,19 +91,14 @@
 import { PropType, ref, Ref } from "vue";
 
 // types
-type InputTypes = "text" | "email" | "tel" | "textarea" | "checkbox";
-type ValidationRule =
-  | "email"
-  | "required"
-  | "mobile"
-  | "integer"
-  | "float"
-  | "number";
+type InputTypes = "text" | "email" | "tel" | "textarea" | "checkbox" | "switch";
+type ValidationRule = "email" | "required" | "mobile";
 
 // models
 const inputValue = defineModel<string>();
 
 // refs
+const switchStatus: Ref = ref(false);
 const errorMessage: Ref = ref(null);
 const fadeOutFlag: Ref = ref(null);
 
@@ -127,14 +140,13 @@ const onBlurValidationsFactory: object = {
 };
 
 const onInputValidationFactory: object = {
-  "tel": {
+  tel: {
     watcher: (inputValue: string) => {
       const pattern: RegExp = /\D/g;
       return inputValue.replace(pattern, "");
-    }
-  }
-}
-
+    },
+  },
+};
 
 // props
 const props = defineProps({
@@ -171,6 +183,11 @@ const props = defineProps({
 });
 
 // functions
+
+const toggleSwitchStatus = () => {
+  switchStatus.value = !switchStatus.value;
+};
+
 const handleOnBlurValidation = (): void => {
   // if has any validation
   const hasAnyValidation: boolean = props.validations.length > 0;
@@ -190,20 +207,14 @@ const handleOnBlurValidation = (): void => {
   }
   fadeOutFlag.value = true;
   errorMessage.value = null;
-  
 };
 
 const handleOnInputValidation = (): void => {
-
   if (props.type in onInputValidationFactory) {
     const watcher = onInputValidationFactory[props.type].watcher;
     inputValue.value = watcher(inputValue.value);
   }
-
-}
-
-
-
+};
 </script>
 
 <style lang="postcss" scoped>
@@ -224,7 +235,36 @@ fieldset.ciel-input-group {
     }
   }
 
-  label {
+  div.checkbox-container {
+    @apply flex gap-2 items-center;
+    div {
+      @apply w-8 h-8 focus-within:ring-2 ring-sky-300 border-4 rounded-lg flex items-center justify-center z-[2] relative overflow-hidden;
+      input {
+        @apply w-full h-full opacity-0 z-[3] cursor-pointer;
+      }
+    }
+    label {
+      @apply text-gray-400;
+    }
+  }
+
+  div.switch-container {
+    @apply flex-nowrap inline-flex w-min gap-2 items-center;
+    div {
+      @apply flex transition-colors border-4 focus-within:ring-sky-300 focus-within:ring-2 relative items-center h-6 w-10 rounded-3xl p-1 cursor-pointer;
+      input {
+        @apply opacity-0 absolute w-full cursor-pointer;
+      }
+      b {
+        @apply transition-all h-2 inline-block w-2 rounded-full bg-gray-200 cursor-pointer;
+      }
+    }
+    label {
+      @apply text-gray-400;
+    }
+  }
+
+  label.simple-label {
     @apply left-4 px-2 bg-gray-100 rounded-md rounded-b-none absolute -translate-y-4 text-gray-400 transition-all duration-1000;
     i.asterisk {
       @apply text-red-500;
