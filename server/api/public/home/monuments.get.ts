@@ -2,19 +2,21 @@ export default defineEventHandler(async (event) => {
   const monuments = [
     {
       name: "Eiffel",
-      location: "Tu aimes la musique?",
+      location: "La tour Eiffel",
+      backgroundColor:"#1d4ed8",
+      color: "white"
     },
     {
       name: "Louvre",
-      location: "Un plus grand portable!",
-    },
-    {
-      name: "Arc de Triomphe",
-      location: "Tu vuex un autr ordinateur?",
+      location: "Le musee du Louvre",
+      backgroundColor: "white",
+      color:"gray"
     },
     {
       name: "Versailles",
-      location: "Achete ton portable maintenant.",
+      location: "Arc de Triomphe",
+      backgroundColor: "#b91c1c",
+      color:"white"
     },
   ];
   return monuments;

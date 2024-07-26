@@ -1,28 +1,28 @@
 export default defineEventHandler(() => {
-  const projectImages = [
+  const galleryImages = [
     {
       path: "/images/home/projects/project-1.jpg",
-      alt: "Une Femme",
+      alt: "Eiffel",
     },
     {
       path: "/images/home/projects/project-2.jpg",
-      alt: "Le Cafe",
+      alt: "Louvre",
     },
     {
       path: "/images/home/projects/project-3.jpg",
-      alt: "Ma Ville",
+      alt: "Versailles",
     },
     {
       path: "/images/home/projects/project-4.jpg",
-      alt: "Project 4",
+      alt: "Arc de Triomphe",
     },
     {
       path: "/images/home/projects/project-5.jpg",
-      alt: "Vert",
+      alt: "Notre-Dame",
     },
     {
       path: "/images/home/projects/project-6.jpg",
-      alt: "L'arbre",
+      alt: "Mont Saint-Michel",
     },
     {
       path: "/images/home/projects/project-7.jpg",
@@ -37,5 +37,5 @@ export default defineEventHandler(() => {
       alt: "Le Pont",
     },
   ];
-  return projectImages;
+  return galleryImages;
 });
