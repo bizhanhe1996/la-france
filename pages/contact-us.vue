@@ -56,10 +56,16 @@
             <FormInput type="checkbox" label="Consent" />
             <FormInput type="switch" label="Switch" />
           </div>
-          <ul class="list-disc" >
-            <li>radio</li>
-            <li>circle range</li>
+          <h1 class="ms-4 text-xl">Gender</h1>
+          <div class="flex justify-between">
+            <FormInput type="radio" name="age" value="1" label="Male" />
+            <FormInput type="radio" name="age" value="0" label="Female" />
+            <FormInput type="radio" name="age" value="-1" label="Other" />
+          </div>
+          <ul class="list-disc">
             <li>linear range</li>
+            <li>range</li>
+            <li>select: tag, multi, search ...</li>
           </ul>
         </Column>
       </Row>

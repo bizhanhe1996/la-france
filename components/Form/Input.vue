@@ -1,6 +1,6 @@
 <template>
   <fieldset class="ciel-input-group">
-    <!-- input -->
+    <!-- simple input -->
     <input
       v-if="['text', 'tel', 'email'].includes(props.type)"
       @blur="handleOnBlurValidation"
@@ -13,7 +13,7 @@
         'ring-sky-300': errorMessage === null,
       }"
       :placeholder="props.placeholder"
-      :name="props.label"
+      :name="props.name"
       :id="props.label"
     />
     <!-- textarea -->
@@ -27,7 +27,7 @@
         'ring-red-300': errorMessage,
         'ring-sky-300': errorMessage === null,
       }"
-      :name="props.label"
+      :name="props.name"
       :id="props.label"
     ></textarea>
     <!-- checkbox -->
@@ -36,7 +36,7 @@
         <input
           type="checkbox"
           class="peer"
-          :name="props.label"
+          :name="props.name"
           :id="props.label"
         />
         <BootstrapIcon
@@ -59,6 +59,24 @@
       </div>
       <label :for="props.label">{{ props.label }}</label>
     </div>
+    <!-- radio -->
+    <div class="radio-container" v-else-if="props.type === 'radio'">
+      <fieldset>
+        <i :class="{ 'bg-blue-500': radioInput }"></i>
+        <input
+          ref="radioInput"
+          :name="props.name"
+          :id="props.label"
+          :value="props.value"
+          @change="handleRadioChange"
+          type="radio"
+        />
+      </fieldset>
+      <label class="ms-2" :for="props.name">
+        {{ props.label }}
+      </label>
+    </div>
+
     <!-- simple label -->
     <label
       class="simple-label peer-focus:text-sky-300 peer-focus:-translate-y-6"
@@ -91,13 +109,21 @@
 import { PropType, ref, Ref } from "vue";
 
 // types
-type InputTypes = "text" | "email" | "tel" | "textarea" | "checkbox" | "switch";
+type InputTypes =
+  | "text"
+  | "email"
+  | "tel"
+  | "textarea"
+  | "checkbox"
+  | "switch"
+  | "radio";
 type ValidationRule = "email" | "required" | "mobile";
 
 // models
 const inputValue = defineModel<string>();
 
 // refs
+const radioInput = ref(null);
 const switchStatus: Ref = ref(false);
 const errorMessage: Ref = ref(null);
 const fadeOutFlag: Ref = ref(null);
@@ -180,9 +206,22 @@ const props = defineProps({
     required: false,
     default: null,
   },
+  name: {
+    type: String,
+    required: false,
+  },
+  value: {
+    type: String,
+    required: false,
+  },
 });
 
 // functions
+
+const handleRadioChange = (event: Event) => {
+  
+  
+};
 
 const toggleSwitchStatus = () => {
   switchStatus.value = !switchStatus.value;
@@ -257,6 +296,22 @@ fieldset.ciel-input-group {
       }
       b {
         @apply transition-all h-2 inline-block w-2 rounded-full bg-gray-200 cursor-pointer;
+      }
+    }
+    label {
+      @apply text-gray-400;
+    }
+  }
+
+  div.radio-container {
+    @apply flex relative cursor-pointer;
+    fieldset {
+      @apply w-6 h-6 border-4 rounded-full focus-within:ring-2 transition-all ring-sky-300;
+      i {
+        @apply w-4 h-4 rounded-full absolute border-2 transition-all;
+      }
+      input {
+        @apply absolute top-0 left-0 w-full h-full cursor-pointer opacity-0;
       }
     }
     label {
