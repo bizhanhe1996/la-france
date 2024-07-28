@@ -51,7 +51,7 @@
           <h1 class="text-4xl mb-4 leading-relaxed text-center">
             Le Française est une belle launge.
           </h1>
-          <p class="text-justify">
+          <p class="text-justify text-gray-500">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi ut
             rem, doloremque eveniet expedita at harum ipsa optio asperiores?
             Quaerat, mollitia similique sapiente quis repellat blanditiis
@@ -61,9 +61,10 @@
         </div>
       </Column>
       <Column
-        class="col-span-1 flex justify-center items-center overflow-hidden"
+        class="col-span-1 flex flex-col gap-4 justify-center items-center overflow-hidden sm:mb-16"
       >
-        image here
+        <h1 class="text-7xl font-serif font-bold">Bon<b class="text- xl">j</b>our!</h1>
+        <span class="text-gray-500">Comment allez vous?</span>
       </Column>
     </Row>
     <!-- counters -->

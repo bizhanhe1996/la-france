@@ -8,7 +8,6 @@
     <nav
       :style="{
         height: isMenuOpened ? 'fit-content' : 0,
-        background: backgroundColor,
       }"
     >
       <ul>
@@ -21,14 +20,6 @@
 </template>
 
 <script lang="ts" setup>
-// props
-const props = defineProps({
-  backgroundColor: {
-    type: String,
-    required: false,
-    default: "black",
-  },
-});
 
 // refs
 const isMenuOpened = ref(true);
@@ -78,10 +69,12 @@ onMounted(() => {
 header.home-header {
   @apply select-none;
   i {
-    @apply md:hidden text-white text-2xl z-[3] absolute m-2 p-2 cursor-pointer rounded-full inline-flex !aspect-square;
+    @apply sm:fixed md:hidden text-white text-2xl absolute m-2 p-2 cursor-pointer rounded-full inline-flex !aspect-square;
+    z-index: 4;
   }
   nav {
-    @apply sm:fixed md:static z-[2] w-full overflow-hidden;
+    @apply sm:fixed md:static w-full overflow-hidden bg-cyan-950;
+    z-index: 3;
     ul {
       @apply gap-3 flex sm:flex-col md:flex-row text-white p-3 items-center justify-center font-bold;
     }

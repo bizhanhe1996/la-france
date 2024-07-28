@@ -1,11 +1,9 @@
 <template>
   <div class="component-banner">
-    <img class="banner-image" :src="src" :alt="alt" />
-    <div class="banner-text">
-      <div class="flex flex-col justify-center items-center gap-5 select-none">
-        <h2 class="text-5xl  text-center text-white font-bold">{{ title }}</h2>
-        <span class="text-white text-center">{{ subTitle }}</span>
-      </div>
+    <img :src="src" :alt="alt" />
+    <div>
+      <h4>{{ title }}</h4>
+      <p>{{ subTitle }}</p>
     </div>
   </div>
 </template>
@@ -31,22 +29,28 @@ defineProps({
 });
 </script>
 
-<style>
+<style lang="postcss">
 .component-banner {
   position: relative;
-  
-  img.banner-image {
+  img {
     width: 100%;
     height: 300px;
     object-fit: cover;
     -webkit-user-drag: none;
   }
-  div.banner-text {
-    z-index: 4;
+  div {
+    z-index: 2;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    @ally flex flex-col justify-center items-center gap-5 select-none;
+    h4 {
+      @apply text-5xl text-center text-white font-bold;
+    }
+    p {
+      @apply text-white text-center;
+    }
   }
 }
 </style>

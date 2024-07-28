@@ -1,9 +1,6 @@
 <template>
   <div class="relative">
-    <AppHeader 
-      backgroundColor="black"
-      transparent="true"
-    />
+    <AppHeader />
     <main>
       <slot />
     </main>
