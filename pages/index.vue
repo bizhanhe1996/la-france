@@ -262,7 +262,6 @@ import { onMounted, reactive } from "vue";
 // FETCHS
 const homePageSlides = await useFetch("/api/public/home/slides");
 const monuments = await useFetch("/api/public/home/monuments");
-const homeFeatureIcons = await useFetch("/api/public/home/features");
 const galleryImages = await useFetch("/api/public/home/gallery");
 const counters = await useFetch("/api/public/home/counters");
 const famousPeople = await useFetch("/api/public/home/famous-people");

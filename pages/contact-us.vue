@@ -42,7 +42,6 @@
             :validations="['required', 'mobile']"
           />
         </Column>
-
         <Column class="sm:col-span-3 md:col-span-2">
           <FormInput
             type="textarea"
@@ -63,10 +62,34 @@
             <FormInput type="radio" name="age" value="-1" label="Other" />
           </div>
           <ul class="list-disc">
+            <li>select: tag, multi, search ...</li>
             <li>linear range</li>
             <li>range</li>
-            <li>select: tag, multi, search ...</li>
           </ul>
+        </Column>
+      </Row>
+      <Row class="grid grid-cols-12 gap-4">
+        <Column class="sm:col-span-12 md:col-span-4">
+          <FormInput type="select" name="select" label="Custom select" :options="[
+            {
+              icon:'star',
+              label:'Shiraz',
+              description:'Fars',
+              value:'sh'
+            },
+            {
+              icon:'instagram',
+              label:'Isfahan',
+              description:'Isfahan',
+              value:'sf'
+            },
+            {
+              icon:'telegram',
+              label:'Mashhad',
+              description:'Khorasan Razavi',
+              value:'md'
+            }
+          ]" />
         </Column>
       </Row>
     </form>

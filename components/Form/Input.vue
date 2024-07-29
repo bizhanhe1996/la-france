@@ -77,6 +77,40 @@
       </label>
     </div>
 
+    <!-- select -->
+    <div class="select-container" v-else-if="props.type === 'select'">
+      <div class="peer select-input">
+        <input
+          class="focus:ring-sky-300"
+          v-model="selectInputModel"
+          @input="handleSelectSearch"
+          @keydown="handleSelectEscape"
+        />
+      </div>
+      <ul
+        class="hidden rounded-b-lg w-full border-2 border-t-0 border-sky-300 select-list bg-gray-100 absolute peer-focus-within:!flex flex-col overflow-hidden"
+      >
+        <li
+          
+          v-for="(option, index) in printableOptions"
+          @mousedown="()=>selectInputModel = option.value"
+          :key="`option-${index}`"
+          class="cursor-pointer flex gap-4 items-center border-b-2 ps-4 hover:bg-blue-100"
+          :data-value="option.value"
+        >
+          <BootstrapIcon v-if="'icon' in option" :name="option.icon" />
+          <div class="flex flex-col">
+            <span class="text-gray-700 text-sm">
+              {{ option.label }}
+            </span>
+            <p class="text-gray-400 text-xs" v-if="'description' in option">
+              {{ option.description }}
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
     <!-- simple label -->
     <label
       class="simple-label peer-focus:text-sky-300 peer-focus:-translate-y-6"
@@ -116,7 +150,8 @@ type InputTypes =
   | "textarea"
   | "checkbox"
   | "switch"
-  | "radio";
+  | "radio"
+  | "select";
 type ValidationRule = "email" | "required" | "mobile";
 
 // models
@@ -214,14 +249,36 @@ const props = defineProps({
     type: String,
     required: false,
   },
+  options: {
+    type: Array,
+    required: false,
+    default: [],
+  },
 });
 
-// functions
+// models
 
-const handleRadioChange = (event: Event) => {
-  
-  
+const selectInputModel = ref();
+
+// functions
+const handleSelectSearch = (event) => {
+  props.options.forEach((option: any) => {
+    option.display = ["label", "description"].some((property) =>
+      option[property].toLowerCase().includes(event.target.value)
+    );
+  });
+  printableOptions.value = props.options.filter(
+    (option: any) => option.display
+  );
 };
+
+const handleSelectEscape = (event) => {
+  if (event.key === "Escape") {
+    event.target.blur();
+  }
+};
+
+const handleRadioChange = (event: Event) => {};
 
 const toggleSwitchStatus = () => {
   switchStatus.value = !switchStatus.value;
@@ -254,6 +311,8 @@ const handleOnInputValidation = (): void => {
     inputValue.value = watcher(inputValue.value);
   }
 };
+
+const printableOptions = ref(props.options);
 </script>
 
 <style lang="postcss" scoped>
@@ -261,7 +320,7 @@ fieldset.ciel-input-group {
   @apply flex flex-col relative gap-y-2 m-4 mb-0;
 
   input {
-    @apply px-4 py-2 rounded-lg bg-gray-100 transition;
+    @apply px-4 py-2 rounded-lg bg-gray-100 transition w-full;
     &:focus {
       @apply ring-2 outline-none;
     }
