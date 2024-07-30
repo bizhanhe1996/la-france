@@ -77,26 +77,40 @@
       </label>
     </div>
 
+
+
+
+
+
+
+
+
+
     <!-- select -->
-    <div class="select-container" v-else-if="props.type === 'select'">
-      <div class="peer select-input">
-        <input
-          class="focus:ring-sky-300"
-          v-model="selectInputModel"
-          @input="handleSelectSearch"
-          @keydown="handleSelectEscape"
-        />
-      </div>
+    <div class="select-container" v-else-if="props.type === 'select'">      
+      <input
+        class="focus:ring-sky-300"
+        v-model="selectInputModel"
+        @input="handleSelectInputSearch"
+        @keydown="handleSelectInputKeyDown"
+        @focus="handleSelectInputFocus"
+        @blur="handleSelectInputBlur"
+      />
+      
       <ul
-        class="hidden rounded-b-lg w-full border-2 border-t-0 border-sky-300 select-list bg-gray-100 absolute peer-focus-within:!flex flex-col overflow-hidden"
+        class="w-full border-2 select-list bg-gray-100 absolute flex flex-col overflow-hidden"
+        v-show="selectListModel"
       >
         <li
-          
           v-for="(option, index) in printableOptions"
-          @mousedown="()=>selectInputModel = option.value"
+          
           :key="`option-${index}`"
-          class="cursor-pointer flex gap-4 items-center border-b-2 ps-4 hover:bg-blue-100"
+          class="select-none cursor-pointer focus-within:flex focus:outline-0 focus flex gap-4 items-center border-b-2 ps-4 hover:bg-blue-100 focus:bg-blue-100"
           :data-value="option.value"
+          :title="option.label"
+          tabindex="0"
+          @mousedown="handleSelectItemSelected"
+          @keydown="handleSelectItemKeyDown"
         >
           <BootstrapIcon v-if="'icon' in option" :name="option.icon" />
           <div class="flex flex-col">
@@ -110,14 +124,22 @@
         </li>
       </ul>
     </div>
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <!-- simple label -->
     <label
+    v-if="props.label && ['text', 'email', 'tel', 'select'].includes(props.type)"
       class="simple-label peer-focus:text-sky-300 peer-focus:-translate-y-6"
-      v-if="props.label && ['text', 'email', 'tel'].includes(props.type)"
       :for="props.label"
       >{{ props.label }}
-      <i class="asterisk" v-if="props.validations?.includes('required')">*</i>
+      <i v-if="props.validations?.includes('required')" class="asterisk">*</i>
     </label>
     <!-- texts -->
     <div class="texts">
@@ -259,9 +281,33 @@ const props = defineProps({
 // models
 
 const selectInputModel = ref();
+const selectListModel = ref(false);
 
 // functions
-const handleSelectSearch = (event) => {
+
+const handleSelectItemKeyDown = (event) => {
+  event.preventDefault();
+  if (event.key === "ArrowDown") {
+    const nextElement = event.target.nextElementSibling;
+    if (nextElement) {
+      nextElement.focus()
+    } else {
+      event.target.parentNode.children[0].focus();
+    }
+  } else if (event.key === "ArrowUp") {
+    const prevElement = event.target.previousElementSibling;
+    if (prevElement) {
+      prevElement.focus()
+    } else {
+      [...event.target.parentNode.children].at(-1).focus();
+    }
+  } else if (event.key === "Enter") {
+    selectInputModel.value = event.target.getAttribute("title");
+    selectListModel.value = false;
+  }
+}
+
+const handleSelectInputSearch = (event) => {
   props.options.forEach((option: any) => {
     option.display = ["label", "description"].some((property) =>
       option[property].toLowerCase().includes(event.target.value)
@@ -272,11 +318,49 @@ const handleSelectSearch = (event) => {
   );
 };
 
-const handleSelectEscape = (event) => {
+const handleSelectInputKeyDown = (event) => {
   if (event.key === "Escape") {
     event.target.blur();
+  } else if (event.key === 'ArrowDown') {
+    const ul = event.target.nextElementSibling;
+    ul.querySelector("li").focus();
+    selectListModel.value = true;
   }
 };
+
+const handleSelectInputFocus = (event) => {
+  selectListModel.value = true;
+}
+
+const handleSelectItemSelected = (event) => {
+  selectInputModel.value = event.target.getAttribute("title");
+  selectListModel.value = false;
+}
+
+const handleSelectInputBlur = (event) => {
+  if (document.activeElement?.nodeName != "LI") {
+    selectListModel.value = false;
+  }
+}
+
+const printableOptions = ref<any>(props.options);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const handleRadioChange = (event: Event) => {};
 
@@ -312,7 +396,7 @@ const handleOnInputValidation = (): void => {
   }
 };
 
-const printableOptions = ref(props.options);
+
 </script>
 
 <style lang="postcss" scoped>

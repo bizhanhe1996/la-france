@@ -14,7 +14,6 @@ export default defineNuxtConfig({
         "./app.vue",
       ],
       theme: {
-        // customizing tailwindCSS breakpoints
         screens: {
           sm: "360px",
           md: "768px",
@@ -39,7 +38,7 @@ export default defineNuxtConfig({
   css: ["~/assets/css/main.css"],
   typescript: {
     tsConfig: {
-      "extends": "./.nuxt/tsconfig.json",
-    }
-  }
+      extends: "./.nuxt/tsconfig.json",
+    },
+  },
 });

@@ -62,7 +62,7 @@
             <FormInput type="radio" name="age" value="-1" label="Other" />
           </div>
           <ul class="list-disc">
-            <li>select: tag, multi, search ...</li>
+            <li>select: tag, multi</li>
             <li>linear range</li>
             <li>range</li>
           </ul>
@@ -70,26 +70,22 @@
       </Row>
       <Row class="grid grid-cols-12 gap-4">
         <Column class="sm:col-span-12 md:col-span-4">
-          <FormInput type="select" name="select" label="Custom select" :options="[
-            {
-              icon:'star',
-              label:'Shiraz',
-              description:'Fars',
-              value:'sh'
-            },
-            {
-              icon:'instagram',
-              label:'Isfahan',
-              description:'Isfahan',
-              value:'sf'
-            },
-            {
-              icon:'telegram',
-              label:'Mashhad',
-              description:'Khorasan Razavi',
-              value:'md'
-            }
-          ]" />
+          <FormInput
+            type="select"
+            name="city"
+            label="Ville"
+            info="Type to search"
+            :options="selectOptions"
+          />
+        </Column>
+        <Column class="sm:col-span-12 md:col-span-4">
+          <FormInput
+            type="select"
+            name="user"
+            label="User"
+            info="Type to search"
+            :options="selectOptions"
+          />
         </Column>
       </Row>
     </form>
@@ -103,4 +99,37 @@ const bannerImageDetails = ref({
   title: "Contactez-nous",
   subTitle: "Contactez-nous avec ces informations!",
 });
+
+const selectOptions = [
+  {
+    icon: "facebook",
+    label: "Shiraz",
+    description: "Fars",
+    value: "sh",
+  },
+  {
+    icon: "instagram",
+    label: "Isfahan",
+    description: "Isfahan",
+    value: "sf",
+  },
+  {
+    icon: "telegram",
+    label: "Mashhad",
+    description: "Khorasan Razavi",
+    value: "md",
+  },
+  {
+    icon: "whatsapp",
+    label: "Tehran",
+    description: "Tehran",
+    value: "th",
+  },
+  {
+    icon: "tiktok",
+    label: "Tabriz",
+    description: "Azarbaijan Sharghi",
+    value: "tb",
+  },
+];
 </script>
