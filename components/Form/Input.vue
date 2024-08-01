@@ -76,18 +76,8 @@
         {{ props.label }}
       </label>
     </div>
-
-
-
-
-
-
-
-
-
-
-    <!-- select -->
-    <div class="select-container" v-else-if="props.type === 'select'">      
+    <!-- single select -->
+    <div class="select-container" v-else-if="props.type === 'select'">
       <input
         class="focus:ring-sky-300"
         v-model="selectInputModel"
@@ -96,14 +86,12 @@
         @focus="handleSelectInputFocus"
         @blur="handleSelectInputBlur"
       />
-      
       <ul
-        class="w-full border-2 select-list bg-gray-100 absolute flex flex-col overflow-hidden"
+        class="w-full -translate-y-1 border-2 select-list bg-gray-100 absolute flex flex-col overflow-hidden"
         v-show="selectListModel"
       >
         <li
           v-for="(option, index) in printableOptions"
-          
           :key="`option-${index}`"
           class="select-none cursor-pointer focus-within:flex focus:outline-0 focus flex gap-4 items-center border-b-2 ps-4 hover:bg-blue-100 focus:bg-blue-100"
           :data-value="option.value"
@@ -124,18 +112,67 @@
         </li>
       </ul>
     </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+    <!-- tags -->
+    <div class="tags-container" v-else-if="props.type === 'tags'">
+      <div
+        title="tags-inputdiv"
+        class="bg-gray-100 flex flex-row gap-2 flex-wrap transition focus:ring-sky-300 focus:ring-2 py-2 px-4 outline-none rounded-lg"
+        @keydown="
+          (event) => {
+            if (event.key === 'Backspace' && !tagsQuery) {
+              selectedTags.pop();
+            }
+          }
+        "
+      >
+        <span
+          class="px-4 hover:border-red-300 ring-sky-300 focus:outline-none text-xs py-1 rounded-lg cursor-pointer bg-gray-200 text-black select-none border-gray-300 border-2"
+          v-for="(selectedTag, index) in selectedTags"
+          :key="`selected-tag-${index}`"
+          contenteditable="false"
+          @click="handleTagRemove(selectedTag.value)"
+        >
+          {{ selectedTag.label }}
+        </span>
+        <p
+          ref="tagsQueryElement"
+          class="ms-2 outline-none border-b-2 border-black min-w-2 flex"
+          contenteditable="true"
+          @input="
+            (event) => {
+              tagsQuery = event.currentTarget.innerText;
+            }
+          "
+        ></p>
+      </div>
+      <ul
+        title="tags-options"
+        class="-translate-y-1 absolute p-2 border-2 rounded-b-xl bg-gray-100 w-full flex flex-row gap-2 z-[2] flex-wrap"
+      >
+        <li
+          class="px-4 focus:border-sky-300 ring-sky-300 focus:outline-none text-xs py-1 rounded-lg cursor-pointer bg-gray-200 text-black select-none border-gray-300 border-2"
+          v-for="(tag, index) in computedTags"
+          :key="`selectable-tag-${index}`"
+          tabindex="0"
+          @click="handleTagSelect(tag.value)"
+          @keydown="(event) => {
+            if (event.key ==='Enter') {
+              handleTagSelect(tag.value);
+            }
+          }"
+        >
+          <label>{{ tag.label }}</label>
+        </li>
+      </ul>
+    </div>
+
     <!-- simple label -->
     <label
-    v-if="props.label && ['text', 'email', 'tel', 'select'].includes(props.type)"
+      v-if="
+        props.label &&
+        ['text', 'email', 'tel', 'select', 'tags'].includes(props.type)
+      "
       class="simple-label peer-focus:text-sky-300 peer-focus:-translate-y-6"
       :for="props.label"
       >{{ props.label }}
@@ -173,7 +210,14 @@ type InputTypes =
   | "checkbox"
   | "switch"
   | "radio"
-  | "select";
+  | "select"
+  | "tags";
+
+type Tag = {
+  label: string;
+  value: string;
+};
+
 type ValidationRule = "email" | "required" | "mobile";
 
 // models
@@ -184,6 +228,9 @@ const radioInput = ref(null);
 const switchStatus: Ref = ref(false);
 const errorMessage: Ref = ref(null);
 const fadeOutFlag: Ref = ref(null);
+const tagsQuery: Ref = ref(null);
+const selectedTags: Ref<Array<Tag>> = ref([]);
+const tagsQueryElement: Ref = ref(null);
 
 // factories
 const onBlurValidationsFactory: object = {
@@ -276,6 +323,11 @@ const props = defineProps({
     required: false,
     default: [],
   },
+  tags: {
+    type: Array,
+    required: false,
+    default: [],
+  },
 });
 
 // models
@@ -290,14 +342,14 @@ const handleSelectItemKeyDown = (event) => {
   if (event.key === "ArrowDown") {
     const nextElement = event.target.nextElementSibling;
     if (nextElement) {
-      nextElement.focus()
+      nextElement.focus();
     } else {
       event.target.parentNode.children[0].focus();
     }
   } else if (event.key === "ArrowUp") {
     const prevElement = event.target.previousElementSibling;
     if (prevElement) {
-      prevElement.focus()
+      prevElement.focus();
     } else {
       [...event.target.parentNode.children].at(-1).focus();
     }
@@ -305,7 +357,7 @@ const handleSelectItemKeyDown = (event) => {
     selectInputModel.value = event.target.getAttribute("title");
     selectListModel.value = false;
   }
-}
+};
 
 const handleSelectInputSearch = (event) => {
   props.options.forEach((option: any) => {
@@ -321,7 +373,7 @@ const handleSelectInputSearch = (event) => {
 const handleSelectInputKeyDown = (event) => {
   if (event.key === "Escape") {
     event.target.blur();
-  } else if (event.key === 'ArrowDown') {
+  } else if (event.key === "ArrowDown") {
     const ul = event.target.nextElementSibling;
     ul.querySelector("li").focus();
     selectListModel.value = true;
@@ -330,37 +382,20 @@ const handleSelectInputKeyDown = (event) => {
 
 const handleSelectInputFocus = (event) => {
   selectListModel.value = true;
-}
+};
 
 const handleSelectItemSelected = (event) => {
   selectInputModel.value = event.target.getAttribute("title");
   selectListModel.value = false;
-}
+};
 
 const handleSelectInputBlur = (event) => {
   if (document.activeElement?.nodeName != "LI") {
     selectListModel.value = false;
   }
-}
+};
 
 const printableOptions = ref<any>(props.options);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const handleRadioChange = (event: Event) => {};
 
@@ -396,7 +431,35 @@ const handleOnInputValidation = (): void => {
   }
 };
 
+const handleTagSelect = (tagValue, event) => {
+  const isTagSelectedBefore = selectedTags.value.find(
+    (tag) => tag.value === tagValue
+  );
+  if (isTagSelectedBefore === undefined) {
+    selectedTags.value.push(props.tags.find((tag) => tag.value === tagValue));
+  }
+  
+  tagsQueryElement.value.
+  tagsQueryElement.value.focus();
+  tagsQuery.value = null;
+};
 
+const handleTagRemove = (selectedTagValue, event) => {
+  selectedTags.value = selectedTags.value.filter(
+    (tag) => tag.value !== selectedTagValue
+  );
+};
+
+// computeds
+const computedTags = computed(() => {
+  return props.tags.filter((tag) => {
+    if (!tagsQuery.value) {
+      return true;
+    } else {
+      return tag.label.toLowerCase().includes(tagsQuery.value?.toLowerCase());
+    }
+  });
+});
 </script>
 
 <style lang="postcss" scoped>

@@ -87,6 +87,15 @@
             :options="selectOptions"
           />
         </Column>
+        <Column class="sm:col-span-12 md:col-span-4">
+          <FormInput
+            type="tags"
+            name="tags"
+            label="Villes"
+            info="Quelles ville vous voulez visier?"
+            :tags="frenchCities"
+          />
+        </Column>
       </Row>
     </form>
   </section>
@@ -130,6 +139,45 @@ const selectOptions = [
     label: "Tabriz",
     description: "Azarbaijan Sharghi",
     value: "tb",
+  },
+];
+
+const frenchCities = [
+  {
+    label: "Paris",
+    value: "pr",
+  },
+  {
+    label: "Lyon",
+    value: "LY",
+  },
+  {
+    label: "Marseille",
+    value: "MR",
+  },
+  {
+    label: "Toulouse",
+    value: "TL",
+  },
+  {
+    label: "Nantes",
+    value: "NT",
+  },
+  {
+    label: "Bordeaux",
+    value: "BD",
+  },
+  {
+    label: "Lille",
+    value: "LI",
+  },
+  {
+    label: "Rennes",
+    value: "RE",
+  },
+  {
+    label: "Strasbourg",
+    value: "ST",
   },
 ];
 </script>
