@@ -114,13 +114,19 @@
     </div>
 
     <!-- tags -->
-    <div class="tags-container" v-else-if="props.type === 'tags'">
+    <div
+      class="tags-container"
+      v-else-if="props.type === 'tags'"
+      @focusout="handleTagsContainerFocusout"
+      @focusin="handleTagsContainerFocusin"
+     
+    >
       <div
         title="tags-inputdiv"
         class="bg-gray-100 flex flex-row gap-2 flex-wrap transition focus:ring-sky-300 focus:ring-2 py-2 px-4 outline-none rounded-lg"
         @keydown="
           (event) => {
-            if (event.key === 'Backspace' && !tagsQuery) {
+            if (event.key === 'Backspace' && !tagsQueryElement.innerText) {
               selectedTags.pop();
             }
           }
@@ -131,22 +137,21 @@
           v-for="(selectedTag, index) in selectedTags"
           :key="`selected-tag-${index}`"
           contenteditable="false"
-          @click="handleTagRemove(selectedTag.value)"
+          @click.capture="handleTagRemove(selectedTag.value)"
         >
           {{ selectedTag.label }}
         </span>
+        <!-- virtual input -->
         <p
           ref="tagsQueryElement"
-          class="ms-2 outline-none border-b-2 border-black min-w-2 flex"
+          class="ms-2 outline-none border-b-2 border-gray-500 min-w-10 flex"
           contenteditable="true"
-          @input="
-            (event) => {
-              tagsQuery = event.currentTarget.innerText;
-            }
-          "
+          @input="(event) => tagsQuery = event.target?.innerText"
         ></p>
       </div>
+      <!-- tags -->
       <ul
+        v-show="tagsUlShowFlag"
         title="tags-options"
         class="-translate-y-1 absolute p-2 border-2 rounded-b-xl bg-gray-100 w-full flex flex-row gap-2 z-[2] flex-wrap"
       >
@@ -156,11 +161,13 @@
           :key="`selectable-tag-${index}`"
           tabindex="0"
           @click="handleTagSelect(tag.value)"
-          @keydown="(event) => {
-            if (event.key ==='Enter') {
-              handleTagSelect(tag.value);
+          @keydown.prevent="
+            (event) => {
+              if (event.key === 'Enter') {
+                handleTagSelect(tag.value);
+              }
             }
-          }"
+          "
         >
           <label>{{ tag.label }}</label>
         </li>
@@ -199,7 +206,7 @@
 
 <script lang="ts" setup>
 // imports
-import { PropType, ref, Ref } from "vue";
+import { computed, ComputedRef, PropType, ref, Ref } from "vue";
 
 // types
 type InputTypes =
@@ -224,59 +231,9 @@ type ValidationRule = "email" | "required" | "mobile";
 const inputValue = defineModel<string>();
 
 // refs
-const radioInput = ref(null);
-const switchStatus: Ref = ref(false);
+
 const errorMessage: Ref = ref(null);
 const fadeOutFlag: Ref = ref(null);
-const tagsQuery: Ref = ref(null);
-const selectedTags: Ref<Array<Tag>> = ref([]);
-const tagsQueryElement: Ref = ref(null);
-
-// factories
-const onBlurValidationsFactory: object = {
-  required: {
-    handler: (value): boolean => {
-      const invalidValues = ["", null, undefined];
-      if (invalidValues.includes(value)) {
-        return false;
-      }
-      return true;
-    },
-    message: (label): string => {
-      return `${label} is required.`;
-    },
-  },
-  email: {
-    handler: (value): boolean => {
-      const pattern: RegExp =
-        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-      return pattern.test(value);
-    },
-    message: (label): string => {
-      // dont remove label, for consistency
-      return `This is not a valid email.`;
-    },
-  },
-  mobile: {
-    handler: (value): boolean => {
-      const pattern: RegExp = /^\d{11}$/;
-      return pattern.test(value);
-    },
-    message: (label): string => {
-      // dont remove label, for consistency
-      return `Ce n'est pas un numéro de portable.`;
-    },
-  },
-};
-
-const onInputValidationFactory: object = {
-  tel: {
-    watcher: (inputValue: string) => {
-      const pattern: RegExp = /\D/g;
-      return inputValue.replace(pattern, "");
-    },
-  },
-};
 
 // props
 const props = defineProps({
@@ -330,12 +287,84 @@ const props = defineProps({
   },
 });
 
-// models
+// validation
+const onBlurValidationsFactory: object = {
+  required: {
+    handler: (value): boolean => {
+      const invalidValues = ["", null, undefined];
+      if (invalidValues.includes(value)) {
+        return false;
+      }
+      return true;
+    },
+    message: (label): string => {
+      return `${label} is required.`;
+    },
+  },
+  email: {
+    handler: (value): boolean => {
+      const pattern: RegExp =
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return pattern.test(value);
+    },
+    message: (label): string => {
+      // dont remove label, for consistency
+      return `This is not a valid email.`;
+    },
+  },
+  mobile: {
+    handler: (value): boolean => {
+      const pattern: RegExp = /^\d{11}$/;
+      return pattern.test(value);
+    },
+    message: (label): string => {
+      // dont remove label, for consistency
+      return `Ce n'est pas un numéro de portable.`;
+    },
+  },
+};
+
+const onInputValidationFactory: object = {
+  tel: {
+    watcher: (inputValue: string) => {
+      const pattern: RegExp = /\D/g;
+      return inputValue.replace(pattern, "");
+    },
+  },
+};
+
+const handleOnBlurValidation = (): void => {
+  // if has any validation
+  const hasAnyValidation: boolean = props.validations.length > 0;
+  if (hasAnyValidation) {
+    // for passed each rule
+    for (const rule of props.validations) {
+      const handler = onBlurValidationsFactory[rule].handler;
+      const passThisRule = handler(inputValue.value);
+      if (passThisRule === false) {
+        const messageGenerator = onBlurValidationsFactory[rule].message;
+        const messageText = messageGenerator(props.label);
+        errorMessage.value = messageText;
+        fadeOutFlag.value = false;
+        return;
+      }
+    }
+  }
+  fadeOutFlag.value = true;
+  errorMessage.value = null;
+};
+
+const handleOnInputValidation = (): void => {
+  if (props.type in onInputValidationFactory) {
+    const watcher = onInputValidationFactory[props.type].watcher;
+    inputValue.value = watcher(inputValue.value);
+  }
+};
+
+// select
 
 const selectInputModel = ref();
 const selectListModel = ref(false);
-
-// functions
 
 const handleSelectItemKeyDown = (event) => {
   event.preventDefault();
@@ -397,62 +426,60 @@ const handleSelectInputBlur = (event) => {
 
 const printableOptions = ref<any>(props.options);
 
+// radio
+const radioInput = ref(null);
 const handleRadioChange = (event: Event) => {};
 
+// switch
+const switchStatus: Ref = ref(false);
 const toggleSwitchStatus = () => {
   switchStatus.value = !switchStatus.value;
 };
 
-const handleOnBlurValidation = (): void => {
-  // if has any validation
-  const hasAnyValidation: boolean = props.validations.length > 0;
-  if (hasAnyValidation) {
-    // for passed each rule
-    for (const rule of props.validations) {
-      const handler = onBlurValidationsFactory[rule].handler;
-      const passThisRule = handler(inputValue.value);
-      if (passThisRule === false) {
-        const messageGenerator = onBlurValidationsFactory[rule].message;
-        const messageText = messageGenerator(props.label);
-        errorMessage.value = messageText;
-        fadeOutFlag.value = false;
-        return;
-      }
-    }
-  }
-  fadeOutFlag.value = true;
-  errorMessage.value = null;
-};
+//  Tags
+const tagsUlShowFlag: Ref = ref(false);
+const selectedTags: Ref = ref([]);
+const tagsQueryElement: Ref = ref(null);
+const tagsQuery = ref<string>("");
 
-const handleOnInputValidation = (): void => {
-  if (props.type in onInputValidationFactory) {
-    const watcher = onInputValidationFactory[props.type].watcher;
-    inputValue.value = watcher(inputValue.value);
-  }
-};
-
-const handleTagSelect = (tagValue, event) => {
+const handleTagSelect = (tagValue, event?) => {
   const isTagSelectedBefore = selectedTags.value.find(
     (tag) => tag.value === tagValue
   );
   if (isTagSelectedBefore === undefined) {
-    selectedTags.value.push(props.tags.find((tag) => tag.value === tagValue));
+    selectedTags.value.push(
+      props.tags.find((tag: any) => tag.value === tagValue)
+    );
+    tagsQuery.value = "";
+    tagsQueryElement.value.focus();
+    tagsQueryElement.value.innerHTML = "";
   }
-  
-  tagsQueryElement.value.
-  tagsQueryElement.value.focus();
-  tagsQuery.value = null;
 };
 
-const handleTagRemove = (selectedTagValue, event) => {
+
+const handleTagRemove = (selectedTagValue, event?) => {
   selectedTags.value = selectedTags.value.filter(
     (tag) => tag.value !== selectedTagValue
   );
 };
 
-// computeds
-const computedTags = computed(() => {
-  return props.tags.filter((tag) => {
+const handleTagsContainerFocusin = () => {
+  tagsUlShowFlag.value = true;
+};
+
+const handleTagsContainerFocusout = async () => {
+  setTimeout(() => {
+    if (document.activeElement?.closest('.tags-container') === null) {
+      tagsUlShowFlag.value = false;
+    }
+  }, 1);
+};
+
+const computedTags: ComputedRef = computed(() => {  
+  const unselectedTags = props.tags.filter((tag: any) => {
+    return !selectedTags.value.find(selectedTag => selectedTag.value === tag.value)
+  })
+  return unselectedTags.filter((tag: any) => {
     if (!tagsQuery.value) {
       return true;
     } else {
