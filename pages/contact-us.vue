@@ -14,7 +14,7 @@
       Lorem ipsum dolor, sit amet consectetur adipisicing elit.
     </p>
     <form class="border p-4 rounded-lg shadow-sm" action="#">
-      <Row class="grid grid-cols-3 gap-4">
+      <Row class="grid grid-cols-3 gap-4 mb-4">
         <Column class="sm:col-span-3 md:col-span-1">
           <!-- prenom -->
           <FormInput
@@ -61,11 +61,6 @@
             <FormInput type="radio" name="age" value="0" label="Female" />
             <FormInput type="radio" name="age" value="-1" label="Other" />
           </div>
-          <ul class="list-disc">
-            <li>select: tag, multi</li>
-            <li>linear range</li>
-            <li>range</li>
-          </ul>
         </Column>
       </Row>
       <Row class="grid grid-cols-12 gap-4">

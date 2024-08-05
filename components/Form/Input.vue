@@ -79,21 +79,16 @@
     <!-- single select -->
     <div class="select-container" v-else-if="props.type === 'select'">
       <input
-        class="focus:ring-sky-300"
         v-model="selectInputModel"
         @input="handleSelectInputSearch"
         @keydown="handleSelectInputKeyDown"
         @focus="handleSelectInputFocus"
         @blur="handleSelectInputBlur"
       />
-      <ul
-        class="w-full -translate-y-1 border-2 select-list bg-gray-100 absolute flex flex-col overflow-hidden"
-        v-show="selectListModel"
-      >
+      <ul v-show="selectListModel">
         <li
           v-for="(option, index) in printableOptions"
           :key="`option-${index}`"
-          class="select-none cursor-pointer focus-within:flex focus:outline-0 focus flex gap-4 items-center border-b-2 ps-4 hover:bg-blue-100 focus:bg-blue-100"
           :data-value="option.value"
           :title="option.label"
           tabindex="0"
@@ -101,42 +96,29 @@
           @keydown="handleSelectItemKeyDown"
         >
           <BootstrapIcon v-if="'icon' in option" :name="option.icon" />
-          <div class="flex flex-col">
-            <span class="text-gray-700 text-sm">
+          <div>
+            <span>
               {{ option.label }}
             </span>
-            <p class="text-gray-400 text-xs" v-if="'description' in option">
+            <p v-if="'description' in option">
               {{ option.description }}
             </p>
           </div>
         </li>
       </ul>
     </div>
-
     <!-- tags -->
     <div
       class="tags-container"
       v-else-if="props.type === 'tags'"
       @focusout="handleTagsContainerFocusout"
       @focusin="handleTagsContainerFocusin"
-     
     >
-      <div
-        title="tags-inputdiv"
-        class="bg-gray-100 flex flex-row gap-2 flex-wrap transition focus:ring-sky-300 focus:ring-2 py-2 px-4 outline-none rounded-lg"
-        @keydown="
-          (event) => {
-            if (event.key === 'Backspace' && !tagsQueryElement.innerText) {
-              selectedTags.pop();
-            }
-          }
-        "
-      >
+      <div @keydown="handleTagsBoxKeyDown">
+        <!-- selected tags -->
         <span
-          class="px-4 hover:border-red-300 ring-sky-300 focus:outline-none text-xs py-1 rounded-lg cursor-pointer bg-gray-200 text-black select-none border-gray-300 border-2"
           v-for="(selectedTag, index) in selectedTags"
           :key="`selected-tag-${index}`"
-          contenteditable="false"
           @click.capture="handleTagRemove(selectedTag.value)"
         >
           {{ selectedTag.label }}
@@ -144,19 +126,13 @@
         <!-- virtual input -->
         <p
           ref="tagsQueryElement"
-          class="ms-2 outline-none border-b-2 border-gray-500 min-w-10 flex"
           contenteditable="true"
-          @input="(event) => tagsQuery = event.target?.innerText"
+          @input="handleTagsVirtualInputInput"
         ></p>
       </div>
-      <!-- tags -->
-      <ul
-        v-show="tagsUlShowFlag"
-        title="tags-options"
-        class="-translate-y-1 absolute p-2 border-2 rounded-b-xl bg-gray-100 w-full flex flex-row gap-2 z-[2] flex-wrap"
-      >
+      <!-- selectable tags -->
+      <ul v-show="tagsUlShowFlag">
         <li
-          class="px-4 focus:border-sky-300 ring-sky-300 focus:outline-none text-xs py-1 rounded-lg cursor-pointer bg-gray-200 text-black select-none border-gray-300 border-2"
           v-for="(tag, index) in computedTags"
           :key="`selectable-tag-${index}`"
           tabindex="0"
@@ -169,11 +145,10 @@
             }
           "
         >
-          <label>{{ tag.label }}</label>
+          {{ tag.label }}
         </li>
       </ul>
     </div>
-
     <!-- simple label -->
     <label
       v-if="
@@ -441,7 +416,6 @@ const tagsUlShowFlag: Ref = ref(false);
 const selectedTags: Ref = ref([]);
 const tagsQueryElement: Ref = ref(null);
 const tagsQuery = ref<string>("");
-
 const handleTagSelect = (tagValue, event?) => {
   const isTagSelectedBefore = selectedTags.value.find(
     (tag) => tag.value === tagValue
@@ -455,30 +429,36 @@ const handleTagSelect = (tagValue, event?) => {
     tagsQueryElement.value.innerHTML = "";
   }
 };
-
-
 const handleTagRemove = (selectedTagValue, event?) => {
   selectedTags.value = selectedTags.value.filter(
     (tag) => tag.value !== selectedTagValue
   );
 };
-
 const handleTagsContainerFocusin = () => {
   tagsUlShowFlag.value = true;
 };
-
 const handleTagsContainerFocusout = async () => {
   setTimeout(() => {
-    if (document.activeElement?.closest('.tags-container') === null) {
+    if (document.activeElement?.closest(".tags-container") === null) {
       tagsUlShowFlag.value = false;
     }
   }, 1);
 };
+const handleTagsVirtualInputInput = (event: any) => {
+  tagsQuery.value = event.target?.innerText;
+};
+const handleTagsBoxKeyDown = (event: any) => {
+  if (event.key === "Backspace" && !tagsQueryElement.value.innerText) {
+    selectedTags.value.pop();
+  }
+};
 
-const computedTags: ComputedRef = computed(() => {  
+const computedTags: ComputedRef = computed(() => {
   const unselectedTags = props.tags.filter((tag: any) => {
-    return !selectedTags.value.find(selectedTag => selectedTag.value === tag.value)
-  })
+    return !selectedTags.value.find(
+      (selectedTag) => selectedTag.value === tag.value
+    );
+  });
   return unselectedTags.filter((tag: any) => {
     if (!tagsQuery.value) {
       return true;
@@ -489,7 +469,7 @@ const computedTags: ComputedRef = computed(() => {
 });
 </script>
 
-<style lang="postcss" scoped>
+<style lang="postcss">
 fieldset.ciel-input-group {
   @apply flex flex-col relative gap-y-2 m-4 mb-0;
 
@@ -552,6 +532,46 @@ fieldset.ciel-input-group {
     }
   }
 
+  div.select-container {
+    input {
+      @apply focus-visible:ring-sky-300 focus:ring-2 z-[1];
+    }
+    ul {
+      @apply w-full -translate-y-1 border-2 select-none bg-gray-100 absolute flex flex-col overflow-hidden z-[2];
+      li {
+        @apply select-none cursor-pointer focus-within:flex focus:outline-0 flex gap-4 items-center border-b-2 ps-4 hover:bg-blue-100 focus:bg-blue-100;
+        div {
+          @apply flex flex-col;
+          span {
+            @apply text-gray-700 text-sm;
+          }
+          p {
+            @apply text-gray-400 text-xs;
+          }
+        }
+      }
+    }
+  }
+
+  div.tags-container {
+    @apply focus-within:ring-sky-300 focus-within:ring-2 rounded-lg transition;
+    div {
+      @apply bg-gray-100 flex z-[2] flex-row gap-2 flex-wrap transition focus:ring-sky-300 focus:ring-2 py-2 px-4 outline-none rounded-lg;
+      span {
+        @apply px-2 hover:border-red-300 ring-sky-300 focus:outline-none text-xs py-1 rounded-lg cursor-pointer bg-gray-200 text-black select-none border-gray-300 border-2;
+      }
+      p {
+        @apply ms-2 outline-none border-b-2 border-gray-500 min-w-10 flex;
+      }
+    }
+    ul {
+      @apply z-[1] -translate-y-1 absolute p-2 border-2 rounded-b-xl bg-gray-100 w-full flex flex-row gap-2 flex-wrap;
+      li {
+        @apply px-2 focus:border-sky-300 hover:border-sky-300 ring-sky-300 focus:outline-none text-xs py-1 rounded-lg cursor-pointer bg-gray-200 text-black select-none border-gray-300 border-2;
+      }
+    }
+  }
+
   label.simple-label {
     @apply left-4 px-2 bg-gray-100 rounded-md rounded-b-none absolute -translate-y-4 text-gray-400 transition-all duration-1000;
     i.asterisk {
@@ -568,33 +588,5 @@ fieldset.ciel-input-group {
       @apply text-red-500;
     }
   }
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fade-out {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
-.animate-fade-in {
-  animation: fade-in 1s ease;
-  animation-fill-mode: forwards;
-}
-
-.animate-fade-out {
-  animation: fade-out 1s ease;
-  animation-fill-mode: forwards;
 }
 </style>
