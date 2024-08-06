@@ -17,7 +17,7 @@
       <Row class="grid grid-cols-3 gap-4 mb-4">
         <Column class="sm:col-span-3 md:col-span-1">
           <!-- prenom -->
-          <FormInput
+          <FormsInput
             label="Prénom"
             info="Extra info"
             :validations="['required']"
@@ -25,7 +25,7 @@
         </Column>
         <Column class="sm:col-span-3 md:col-span-1">
           <!-- email -->
-          <FormInput
+          <FormsInput
             label="E-mail"
             :validations="['required', 'email']"
             info="Should be a valid email address."
@@ -34,7 +34,7 @@
         </Column>
         <Column class="sm:col-span-3 md:col-span-1">
           <!-- mobile -->
-          <FormInput
+          <FormsInput
             :type="'tel'"
             label="Numero du Portable"
             placeholder="0912..."
@@ -43,7 +43,7 @@
           />
         </Column>
         <Column class="sm:col-span-3 md:col-span-2">
-          <FormInput
+          <FormsInput
             type="textarea"
             label="Message"
             placeholder="Écrivez votre message ici."
@@ -52,20 +52,20 @@
         </Column>
         <Column class="sm:col-span-3 md:col-span-1">
           <div class="flex justify-between items-center">
-            <FormInput type="checkbox" label="Consent" />
-            <FormInput type="switch" label="Switch" />
+            <FormsInput type="checkbox" label="Consent" />
+            <FormsInput type="switch" label="Switch" />
           </div>
           <h1 class="ms-4 text-xl">Gender</h1>
           <div class="flex justify-between">
-            <FormInput type="radio" name="age" value="1" label="Male" />
-            <FormInput type="radio" name="age" value="0" label="Female" />
-            <FormInput type="radio" name="age" value="-1" label="Other" />
+            <FormsInput type="radio" name="age" value="1" label="Male" />
+            <FormsInput type="radio" name="age" value="0" label="Female" />
+            <FormsInput type="radio" name="age" value="-1" label="Other" />
           </div>
         </Column>
       </Row>
       <Row class="grid grid-cols-12 gap-4">
         <Column class="sm:col-span-12 md:col-span-4">
-          <FormInput
+          <FormsInput
             type="select"
             name="city"
             label="Ville"
@@ -74,7 +74,7 @@
           />
         </Column>
         <Column class="sm:col-span-12 md:col-span-4">
-          <FormInput
+          <FormsInput
             type="select"
             name="user"
             label="User"
@@ -83,7 +83,7 @@
           />
         </Column>
         <Column class="sm:col-span-12 md:col-span-4">
-          <FormInput
+          <FormsInput
             type="tags"
             name="tags"
             label="Villes"
