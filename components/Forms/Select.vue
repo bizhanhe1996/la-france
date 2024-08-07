@@ -6,6 +6,9 @@
       @keydown="handleSelectInputKeyDown"
       @focus="handleSelectInputFocus"
       @blur="handleSelectInputBlur"
+      :class="{
+        'ring-red-300 ring-2': isAnyError
+      }"
     />
     <ul v-show="selectListModel">
       <li
@@ -43,12 +46,31 @@ const props = defineProps({
     required: true,
     default: [],
   },
+  validations: {
+    type: Array as PropType<ValidationRule[]>,
+    required: false,
+    default: []
+  },
+  onBlurValidationsFactory: {
+    type: Object as PropType<object>,
+    required: true,
+  },
+  label: {
+    type: String as PropType<string>,
+    required: true,
+    default: 'select'
+  }
 });
+
+// emits
+
+const emit = defineEmits(['ValidationFailed','ValidationPassed']);
 
 // refs
 const selectInputModel: Ref = ref<boolean>();
 const selectListModel: Ref = ref<boolean>(false);
 const printableOptions: Ref = ref<SelectOption[]>(props.options);
+const isAnyError: Ref = ref<boolean>(false);
 
 const handleSelectItemKeyDown = (event) => {
   event.preventDefault();
@@ -103,10 +125,30 @@ const handleSelectItemSelected = (event) => {
 };
 
 const handleSelectInputBlur = (event) => {
-  if (document.activeElement?.nodeName != "LI") {
+  if (!document.activeElement.closest('select-container')) {
     selectListModel.value = false;
+    handleOnBlurValidation();
   }
 };
+
+const handleOnBlurValidation = () => {
+  const inputValue = selectInputModel.value;
+  // for each passed rule
+  for (let i = 0; i < props.validations.length; i++) {
+    const currentRule = props.validations[i];
+    const currentRuleHandler = props.onBlurValidationsFactory[currentRule].handler;
+    const isInputValueValid = currentRuleHandler(inputValue);
+    if (!isInputValueValid) {
+      const messageGenerator = props.onBlurValidationsFactory[currentRule].message;
+      const messageText = messageGenerator(props.label);
+      emit('ValidationFailed', messageText);
+      isAnyError.value = true;
+      return;
+    }
+  }
+  isAnyError.value = false;
+  emit('ValidationPassed');
+}
 </script>
 
 <style lang="postcss">

@@ -9,7 +9,7 @@
       :type="props.type"
       class="peer"
       :class="{
-        'ring-red-300': errorMessage,
+        'ring-red-300 ring-2': errorMessage,
         'ring-sky-300': errorMessage === null,
       }"
       :placeholder="props.placeholder"
@@ -76,7 +76,19 @@
         {{ props.label }}
       </label>
     </div>
-    <FormsSelect v-if="props.type === 'select'" :options="props.options" />
+    <FormsSelect
+      v-if="props.type === 'select'"
+      :label="props.label"
+      :options="props.options"
+      :validations="props.validations"
+      :on-blur-validations-factory="onBlurValidationsFactory"
+      @validation-failed="(message)=> {
+        errorMessage = message;
+      }"
+      @validation-passed="() => {
+        errorMessage = null;
+      }"
+    />
     <FormsTags v-if="props.type === 'tags'" :tags="props.tags" />
     <!-- label -->
     <label
@@ -117,7 +129,6 @@ const inputValue = defineModel<string>();
 
 // refs
 const errorMessage: Ref = ref(null);
-const fadeOutFlag: Ref = ref(null);
 
 // non-ref variables
 const inputTypesWithSimpleLabel: InputType[] = [
@@ -158,7 +169,7 @@ const props = defineProps({
   validations: {
     type: Array as PropType<ValidationRule[]>,
     required: false,
-    default: null,
+    default: [],
   },
   name: {
     type: String as PropType<string>,
@@ -227,23 +238,17 @@ const onInputValidationFactory: object = {
 };
 
 const handleOnBlurValidation = (): void => {
-  // if has any validation
-  const hasAnyValidation: boolean = props.validations.length > 0;
-  if (hasAnyValidation) {
-    // for passed each rule
-    for (const rule of props.validations) {
-      const handler = onBlurValidationsFactory[rule].handler;
-      const passThisRule = handler(inputValue.value);
-      if (passThisRule === false) {
-        const messageGenerator = onBlurValidationsFactory[rule].message;
-        const messageText = messageGenerator(props.label);
-        errorMessage.value = messageText;
-        fadeOutFlag.value = false;
-        return;
-      }
+  // for each passed rule
+  for (const rule of props.validations) {
+    const handler = onBlurValidationsFactory[rule].handler;
+    const passThisRule = handler(inputValue.value);
+    if (passThisRule === false) {
+      const messageGenerator = onBlurValidationsFactory[rule].message;
+      const messageText = messageGenerator(props.label);
+      errorMessage.value = messageText; 
+      return;
     }
   }
-  fadeOutFlag.value = true;
   errorMessage.value = null;
 };
 

@@ -70,6 +70,7 @@
             name="city"
             label="Ville"
             info="Type to search"
+            :validations="['required']"
             :options="selectOptions"
           />
         </Column>
