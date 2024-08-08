@@ -4,7 +4,12 @@
     @focusout="handleTagsContainerFocusout"
     @focusin="handleTagsContainerFocusin"
   >
-    <div @keydown="handleTagsBoxKeyDown">
+    <div
+      @keydown="handleTagsBoxKeyDown"
+      :class="{
+        'ring-red-300 ring-2': isThereAnyError,
+      }"
+    >
       <!-- selected tags -->
       <span
         v-for="(selectedTag, index) in selectedTags"
@@ -37,22 +42,45 @@
 </template>
 
 <script lang="ts" setup>
+// imports
 import { computed, ComputedRef, PropType, ref, Ref } from "vue";
 import { TagType } from "../../types/components/forms/TagType";
+import { ValidationRule } from "../../types/components/forms/ValidationRule.d.ts";
 
+// props
 const props = defineProps({
   tags: {
     type: Array as PropType<TagType[]>,
     required: false,
     default: [],
   },
+  label: {
+    type: String as PropType<string>,
+    requred: true,
+    default: "",
+  },
+  onBlurValidationFactory: {
+    type: Object,
+    required: true,
+  },
+  validations: {
+    type: Array as PropType<ValidationRule[]>,
+    requred: true,
+    default: [],
+  },
 });
 
-//  Tags
-const tagsUlShowFlag: Ref = ref(false);
-const selectedTags: Ref = ref([]);
+// emits
+const emit = defineEmits(["ValidationFailed", "ValidationPassed"]);
+
+//  refs
+const tagsUlShowFlag: Ref = ref<boolean>(false);
+const selectedTags: Ref = ref<[]>([]);
 const tagsQueryElement: Ref = ref(null);
-const tagsQuery = ref<string>("");
+const tagsQuery: Ref = ref<string>("");
+const isThereAnyError: Ref = ref<boolean>(false);
+
+// functions
 const handleTagSelect = (tagValue, event?) => {
   const isTagSelectedBefore = selectedTags.value.find(
     (tag) => tag.value === tagValue
@@ -66,30 +94,59 @@ const handleTagSelect = (tagValue, event?) => {
     tagsQueryElement.value.innerHTML = "";
   }
 };
+
 const handleTagRemove = (selectedTagValue, event?) => {
   selectedTags.value = selectedTags.value.filter(
     (tag) => tag.value !== selectedTagValue
   );
 };
+
 const handleTagsContainerFocusin = () => {
   tagsUlShowFlag.value = true;
 };
+
 const handleTagsContainerFocusout = async () => {
   setTimeout(() => {
     if (document.activeElement?.closest(".tags-container") === null) {
       tagsUlShowFlag.value = false;
+      handleOnBlurValidation();
     }
   }, 1);
 };
+
 const handleTagsVirtualInputInput = (event: any) => {
   tagsQuery.value = event.target?.innerText;
 };
+
 const handleTagsBoxKeyDown = (event: any) => {
   if (event.key === "Backspace" && !tagsQueryElement.value.innerText) {
     selectedTags.value.pop();
   }
 };
 
+const handleOnBlurValidation = () => {
+  const inputValue = selectedTags.value.reduce((sum, tag) => {
+    return sum + tag.value + ",";
+  }, "");
+  // for each passed validation rule
+  for (const validationRule of props.validations) {
+    const currentRuleHandler =
+      props.onBlurValidationFactory[validationRule].handler;
+    const isInputValueValid = currentRuleHandler(inputValue);
+    if (!isInputValueValid) {
+      const messageGenerator =
+        props.onBlurValidationFactory[validationRule].message;
+      const messageText = messageGenerator(props.label);
+      isThereAnyError.value = true;
+      emit("ValidationFailed", messageText);
+      return;
+    }
+  }
+  isThereAnyError.value = false;
+  emit("ValidationPassed");
+};
+
+// computed
 const selectableTags: ComputedRef = computed(() => {
   const unselectedTags = props.tags.filter((tag: any) => {
     return !selectedTags.value.find(

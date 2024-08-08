@@ -1,5 +1,6 @@
 <template>
   <button
+    :type="props.type"
     :class="`select-none relative py-2 px-4 gap-4 rounded-lg inline-flex items-center justify-center flex-nowrap shadow-lg hover:brightness-90 outline-none transition-all focus-visible:ring-4 overflow-hidden ${backgroundColor} ${ringColor}`"
     @click="handle"
   >
@@ -50,6 +51,11 @@ const props = defineProps({
     required: false,
     default: "primary",
   },
+  type: {
+    type: String,
+    required: false,
+    default: "button",
+  }
 });
 
 // refs

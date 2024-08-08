@@ -81,7 +81,7 @@
       :label="props.label"
       :options="props.options"
       :validations="props.validations"
-      :on-blur-validations-factory="onBlurValidationsFactory"
+      :on-blur-validations-factory="onBlurValidationFactory"
       @validation-failed="(message)=> {
         errorMessage = message;
       }"
@@ -89,7 +89,19 @@
         errorMessage = null;
       }"
     />
-    <FormsTags v-if="props.type === 'tags'" :tags="props.tags" />
+    <FormsTags 
+      v-if="props.type === 'tags'"
+      :label="props.label"
+      :tags="props.tags" 
+      :on-blur-validation-factory="onBlurValidationFactory"
+      :validations="props.validations"
+      @validation-failed="(message)=> {
+        errorMessage = message;
+      }"
+      @validation-passed="() => {
+        errorMessage = null;
+      }"
+      />
     <!-- label -->
     <label
       v-if="shouldRenderSimpleLabel"
@@ -192,7 +204,7 @@ const props = defineProps({
 });
 
 // validation
-const onBlurValidationsFactory: object = {
+const onBlurValidationFactory: object = {
   required: {
     handler: (value): boolean => {
       const invalidValues = ["", null, undefined];
@@ -240,10 +252,10 @@ const onInputValidationFactory: object = {
 const handleOnBlurValidation = (): void => {
   // for each passed rule
   for (const rule of props.validations) {
-    const handler = onBlurValidationsFactory[rule].handler;
+    const handler = onBlurValidationFactory[rule].handler;
     const passThisRule = handler(inputValue.value);
     if (passThisRule === false) {
-      const messageGenerator = onBlurValidationsFactory[rule].message;
+      const messageGenerator = onBlurValidationFactory[rule].message;
       const messageText = messageGenerator(props.label);
       errorMessage.value = messageText; 
       return;

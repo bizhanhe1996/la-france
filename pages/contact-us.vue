@@ -8,7 +8,6 @@
       :subTitle="bannerImageDetails.subTitle"
     />
   </section>
-
   <section class="m-4">
     <p class="text-center text-3xl p-4 mb-4">
       Lorem ipsum dolor, sit amet consectetur adipisicing elit.
@@ -63,7 +62,7 @@
           </div>
         </Column>
       </Row>
-      <Row class="grid grid-cols-12 gap-4">
+      <Row class="grid grid-cols-12 gap-4 mb-4">
         <Column class="sm:col-span-12 md:col-span-4">
           <FormsInput
             type="select"
@@ -90,6 +89,23 @@
             label="Villes"
             info="Quelles ville vous voulez visier?"
             :tags="frenchCities"
+            :validations="['required']"
+          />
+        </Column>
+      </Row>
+      <Row class="grid grid-cols-12 gap-4">
+        <Column class="col-span-12 flex justify-end gap-4">
+          <AppButton
+            type="reset"
+            text="Reset"
+            icon="x-square"
+            theme="secondary"
+          />
+          <AppButton
+            type="submit"
+            text="Send"
+            icon="send"
+            theme="primary"
           />
         </Column>
       </Row>
