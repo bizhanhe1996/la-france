@@ -27,7 +27,7 @@ export default defineNuxtConfig({
   modules: ["@nuxtjs/tailwindcss", "nuxt-bootstrap-icons"],
   app: {
     head: {
-      title: "My Sample App With Nuxt",
+      title: "La France",
       meta: [
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         { name: "charset", content: "utf-8" },
@@ -36,9 +36,4 @@ export default defineNuxtConfig({
     },
   },
   css: ["~/assets/css/main.css"],
-  typescript: {
-    tsConfig: {
-      extends: "./.nuxt/tsconfig.json",
-    },
-  },
 });

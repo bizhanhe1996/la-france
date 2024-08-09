@@ -22,8 +22,6 @@
 </template>
 
 <script lang="ts" setup>
-// imports
-import { computed, PropType, ref, Ref } from "vue";
 // types
 type theme =
   | "primary"
@@ -47,7 +45,7 @@ const props = defineProps({
     default: null,
   },
   theme: {
-    type: String as PropType<theme>,
+    type: String ,
     required: false,
     default: "primary",
   },

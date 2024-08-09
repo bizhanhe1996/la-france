@@ -42,20 +42,15 @@
 </template>
 
 <script lang="ts" setup>
-// imports
-import { computed, ComputedRef, PropType, ref, Ref } from "vue";
-import { TagType } from "../../types/components/forms/TagType";
-import { ValidationRule } from "../../types/components/forms/ValidationRule.d.ts";
-
 // props
 const props = defineProps({
   tags: {
-    type: Array as PropType<TagType[]>,
+    type: Array ,
     required: false,
     default: [],
   },
   label: {
-    type: String as PropType<string>,
+    type: String ,
     requred: true,
     default: "",
   },
@@ -64,7 +59,7 @@ const props = defineProps({
     required: true,
   },
   validations: {
-    type: Array as PropType<ValidationRule[]>,
+    type: Array ,
     requred: true,
     default: [],
   },

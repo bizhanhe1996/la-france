@@ -35,28 +35,24 @@
 </template>
 
 <script lang="ts" setup>
-// imports
-import { PropType, Ref, ref } from "vue";
-import { SelectOption } from "../../types/components/forms/SelectOption";
-
 // props
 const props = defineProps({
   options: {
-    type: Array as PropType<SelectOption[]>,
+    type: Array ,
     required: true,
     default: [],
   },
   validations: {
-    type: Array as PropType<ValidationRule[]>,
+    type: Array ,
     required: false,
     default: []
   },
   onBlurValidationsFactory: {
-    type: Object as PropType<object>,
+    type: Object ,
     required: true,
   },
   label: {
-    type: String as PropType<string>,
+    type: String ,
     required: true,
     default: 'select'
   }

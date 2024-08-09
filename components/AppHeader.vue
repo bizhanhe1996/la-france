@@ -23,7 +23,6 @@
 
 // refs
 const isMenuOpened = ref(true);
-
 // methods
 const toggleMobileMenu = () => {
   isMenuOpened.value = !isMenuOpened.value;
@@ -37,23 +36,28 @@ type TopMenuLink = {
 const topMenuLinks: TopMenuLink[] = [
   {
     to: "/",
-    innerHtml: "Maison",
+    innerHtml: "Accueil",
   },
   {
     to: "/projects",
-    innerHtml: "Projets",
+    innerHtml: "Français",
   },
   {
     to: "/solutions",
-    innerHtml: "Solutions",
+    innerHtml: "Histoire",
   },
   {
+    to: "/solutions",
+    innerHtml: "Monuments",
+  },
+
+  {
     to: "/contact-us",
-    innerHtml: "Appelle nous",
+    innerHtml: "Contactez-nous",
   },
   {
     to: "/about-us",
-    innerHtml: "Sur nous",
+    innerHtml: "Qui sommes-nous",
   },
 ];
 
@@ -76,7 +80,7 @@ header.home-header {
     @apply sm:fixed md:static w-full overflow-hidden bg-cyan-950;
     z-index: 3;
     ul {
-      @apply gap-3 flex sm:flex-col md:flex-row text-white p-3 items-center justify-center font-bold;
+      @apply gap-8 flex sm:flex-col md:flex-row text-white p-3 items-center justify-center font-bold;
     }
   }
 }

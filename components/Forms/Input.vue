@@ -130,12 +130,6 @@
 </template>
 
 <script lang="ts" setup>
-// imports
-import { computed, ComputedRef, PropType, ref, Ref } from "vue";
-import { InputType } from "./../../types/components/forms/InputType";
-import { ValidationRule } from "./../../types/components/forms/ValidationRule";
-import { TagType } from "./../../types/components/forms/TagType";
-
 // models
 const inputValue = defineModel<string>();
 
@@ -159,36 +153,36 @@ const props = defineProps({
     default: null,
   },
   type: {
-    type: String as PropType<InputType>,
+    type: String ,
     required: false,
     default: "text",
   },
   placeholder: {
-    type: String as PropType<string>,
+    type: String ,
     required: false,
     default: "",
   },
   info: {
-    type: String as PropType<string>,
+    type: String ,
     required: false,
     default: null,
   },
   error: {
-    type: String as PropType<string>,
+    type: String ,
     required: false,
     default: null,
   },
   validations: {
-    type: Array as PropType<ValidationRule[]>,
+    type: Array ,
     required: false,
     default: [],
   },
   name: {
-    type: String as PropType<string>,
+    type: String ,
     required: false,
   },
   value: {
-    type: String as PropType<string>,
+    type: String ,
     required: false,
   },
   options: {
@@ -197,7 +191,7 @@ const props = defineProps({
     default: [],
   },
   tags: {
-    type: Array as PropType<TagType[]>,
+    type: Array ,
     required: false,
     default: [],
   },
