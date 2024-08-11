@@ -43,7 +43,7 @@ const topMenuLinks: TopMenuLink[] = [
     innerHtml: "Français",
   },
   {
-    to: "/solutions",
+    to: "/histoire",
     innerHtml: "Histoire",
   },
   {

@@ -1,8 +1,10 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
+
   vite: {
     plugins: [],
   },
+
   tailwindcss: {
     config: {
       content: [
@@ -24,7 +26,9 @@ export default defineNuxtConfig({
       plugins: [],
     },
   },
+
   modules: ["@nuxtjs/tailwindcss", "nuxt-bootstrap-icons"],
+
   app: {
     head: {
       title: "La France",
@@ -35,5 +39,7 @@ export default defineNuxtConfig({
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.png" }],
     },
   },
+
   css: ["~/assets/css/main.css"],
+  compatibilityDate: "2024-08-11",
 });

@@ -32,6 +32,7 @@ defineProps({
 <style lang="postcss">
 .component-banner {
   position: relative;
+  @apply select-none;
   img {
     width: 100%;
     height: 300px;
@@ -44,7 +45,7 @@ defineProps({
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    @ally flex flex-col justify-center items-center gap-5 select-none;
+    @apply mix-blend-difference flex flex-col justify-center items-center gap-5 select-none;
     h4 {
       @apply text-5xl text-center text-white font-bold;
     }
