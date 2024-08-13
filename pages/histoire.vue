@@ -12,50 +12,48 @@
       class="vertical-timeline flex flex-col justify-center items-center gap-8 my-4 relative z-[2]"
     >
       <li>
-        <div class="prepend">
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto
-            fugit incidunt voluptatum eum, ad repudiandae laborum maiores
-            exercitationem voluptas. Molestias nesciunt blanditiis ipsum
-            recusandae ut eligendi veniam quasi quaerat voluptate, dolor nam
-            animi soluta repellendus!
-          </p>
+        <div class="prepend triangle">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto fugit
+          incidunt voluptatum eum, ad repudiandae laborum maiores exercitationem
+          voluptas. Molestias nesciunt blanditiis ipsum recusandae ut eligendi
+          veniam quasi quaerat voluptate, dolor nam animi soluta repellendus!
         </div>
-        <span
-          >Ancient <br />
-          France</span
-        >
-        <div class="append">
+        <span class="max-w-24"> Ancient France </span>
+        <div class="append !p-0">
           <img
-            width="75%"
-            src="https://picsum.photos/400/200"
+            class="w-full rounded-md"
+            src="/images/histoire/ancient.jpeg"
             alt="ancient france"
+            draggable="false"
           />
+          <div
+            class="select-none absolute text-center flex flex-col gap-4 transition hover:backdrop-blur-sm p-4"
+          >
+            <figcaption class="text-xl font-bold">Title</figcaption>
+            <small>Subtitle goes here.</small>
+          </div>
         </div>
       </li>
       <li>
-        <div class="prepend">
+        <div class="prepend overflow-hidden !p-0">
           <img
-            width="75%"
-            src="https://picsum.photos/400/400"
+            width="100%"
+            src="/images/histoire/charlemagne.jpeg"
             alt="ancient france"
+            draggable="false"
           />
-        </div>
-        <span>
-          The Frankish <br />
-          Kingdoms <br />
-          486-987
-        </span>
-        <div class="append">
-          <div>
-
-            <p class="mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, voluptatem suscipit? Delectus dicta quo distinctio nobis corrupti praesentium temporibus, voluptatem molestias adipisci eligendi aliquid facilis dolores culpa similique cupiditate iure consectetur, illo obcaecati ducimus soluta!
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi quisquam beatae et iusto eaque porro?
-            </p>
+          <div class="absolute flex flex-col text-center gap-4 transition hover:backdrop-blur-sm p-4 select-none">
+            <figcaption class="font-bold">Charlemagne The Great</figcaption>
+            <small>subtitle goes here.</small>
           </div>
+        </div>
+        <span class="max-w-32"> The Frankish Kingdoms 486-987 </span>
+        <div class="append triangle">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident,
+          voluptatem suscipit? Delectus dicta quo distinctio nobis corrupti
+          praesentium temporibus, voluptatem molestias adipisci eligendi aliquid
+          facilis dolores culpa similique cupiditate iure consectetur, illo
+          obcaecati ducimus soluta!
         </div>
       </li>
       <li>
@@ -87,18 +85,22 @@
       </li>
       <li>
         <span>
-          Post-Napoleonic <br> France <br> 1815-1914
+          Post-Napoleonic <br />
+          France <br />
+          1815-1914
         </span>
       </li>
       <li>
         <span>
-          World War <br> I & II <br> 1914-1945
+          World War <br />
+          I & II <br />
+          1914-1945
         </span>
       </li>
       <li>
         <span>
-          Modern Times <br> 1945-now
-
+          Modern Times <br />
+          1945-now
         </span>
       </li>
       <hr class="border-blue-500 border-2 absolute h-full z-[1]" />
@@ -122,9 +124,9 @@ ul.vertical-timeline {
   li {
     @apply z-[2] w-full flex items-center justify-evenly;
     div.prepend {
-      @apply p-4 bg-gray-200 relative text-justify rounded-md flex items-center justify-center;
+      @apply p-4 bg-gray-200 shadow-lg shadow-zinc-300 relative text-justify rounded-md flex items-center justify-center;
       flex-basis: 40%;
-      &::after {
+      &.triangle::after {
         content: "";
         clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
         @apply bg-gray-200 top-1/2 h-8 w-6 absolute -translate-y-1/2;
@@ -135,8 +137,8 @@ ul.vertical-timeline {
       @apply select-none text-white bg-blue-500 p-4 font-bold aspect-square rounded-full flex items-center justify-center text-center;
     }
     div.append {
-      @apply rounded-md flex items-center justify-center relative bg-gray-200 p-4;
-      &::before {
+      @apply rounded-md shadow-lg shadow-zinc-300 flex items-center justify-center relative bg-gray-200 p-4;
+      &.triangle::before {
         @apply h-8 w-6 bg-gray-200 absolute;
         content: "";
         right: 98%;
