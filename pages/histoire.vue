@@ -18,7 +18,7 @@
           voluptas. Molestias nesciunt blanditiis ipsum recusandae ut eligendi
           veniam quasi quaerat voluptate, dolor nam animi soluta repellendus!
         </div>
-        <span class="max-w-24"> Ancient France </span>
+        <span class="w-36"> Ancient France </span>
         <div class="append !p-0">
           <img
             class="w-full rounded-md"
@@ -47,7 +47,7 @@
             <small>subtitle goes here.</small>
           </div>
         </div>
-        <span class="max-w-32"> The Frankish Kingdoms 486-987 </span>
+        <span class="w-36"> The Frankish Kingdoms 486-987 </span>
         <div class="append triangle">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident,
           voluptatem suscipit? Delectus dicta quo distinctio nobis corrupti
@@ -57,50 +57,59 @@
         </div>
       </li>
       <li>
-        <span>
-          Early French <br />
-          Monarchies <br />
-          987-1453
+        <div class="prepend triangle">
+          <ul>
+            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio distinctio unde obcaecati! Amet maiores ut esse ea cumque quos vel fugit dignissimos reprehenderit repellendus magni, deserunt dolorem corporis voluptate accusantium?</li>
+            <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. At labore dolore provident ut aut, quaerat quam, rem sed enim optio eum, quas beatae sapiente assumenda necessitatibus sunt obcaecati et excepturi!</li>
+            <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus, veniam exercitationem alias odit sint modi quibusdam velit dignissimos nisi, sunt saepe! Ullam, voluptas. Ratione recusandae consequatur, nulla earum sint quae!</li>
+          </ul>
+        </div>
+        <span class="w-36">
+          Early French Monarchies 987-1453
+        </span>
+        <div class="append !p-0">
+          <img
+            class="w-full rounded-md"
+            src="/images/histoire/early-french-monarchies.jpg"
+            alt="ancient france"
+            draggable="false"
+          />
+          <div
+            class="select-none absolute text-center flex flex-col gap-4 transition hover:backdrop-blur-sm p-4"
+          >
+            <figcaption class="text-xl font-bold">Title</figcaption>
+            <small>Subtitle goes here.</small>
+          </div>
+        </div>
+      </li>
+      <li>
+        <span class="!bg-orange-500 w-36">
+          Pre-Revolutionary France 1453-1789
         </span>
       </li>
       <li>
-        <span>
-          Pre-Revolutionary <br />
-          France <br />
-          1453-1789
+        <span class="!bg-red-500 w-48">
+          Revolutionary France 1789-1799
         </span>
       </li>
       <li>
-        <span class="!bg-red-500 w-60">
-          Revolutionary <br />
-          France <br />
-          1789-1799
+        <span class="w-36"> Napoleon 1799-1815 </span>
+      </li>
+      <li>
+        <span class="w-36">
+          Post-Napoleonic France 1815-1914
         </span>
       </li>
       <li>
-        <span
-          >Napoleon <br />
-          1799-1815
-        </span>
-      </li>
-      <li>
-        <span>
-          Post-Napoleonic <br />
-          France <br />
-          1815-1914
-        </span>
-      </li>
-      <li>
-        <span>
-          World War <br />
-          I & II <br />
+        <span class="w-36">
+          World War
+          I & II
           1914-1945
         </span>
       </li>
       <li>
-        <span>
-          Modern Times <br />
-          1945-now
+        <span class="w-36">
+          Modern Times 1945-now
         </span>
       </li>
       <hr class="border-blue-500 border-2 absolute h-full z-[1]" />
