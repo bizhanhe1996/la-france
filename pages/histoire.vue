@@ -13,7 +13,13 @@
     >
       <li>
         <div class="prepend triangle">
-          <p class="text-justify text-slate-500">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto fugit incidunt voluptatum eum, ad repudiandae laborum maiores exercitationem voluptas. Molestias nesciunt blanditiis ipsum recusandae ut eligendi veniam quasi quaerat voluptate, dolor nam animi soluta repellendus!</p>
+          <p class="text-justify text-slate-500">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto
+            fugit incidunt voluptatum eum, ad repudiandae laborum maiores
+            exercitationem voluptas. Molestias nesciunt blanditiis ipsum
+            recusandae ut eligendi veniam quasi quaerat voluptate, dolor nam
+            animi soluta repellendus!
+          </p>
         </div>
         <span> Ancient France </span>
         <div class="append !p-0">
@@ -36,23 +42,44 @@
         </div>
         <span> The Frankish Kingdoms <small>486-987</small> </span>
         <div class="append triangle">
-          <p class="text-justify text-slate-500">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, voluptatem suscipit? Delectus dicta quo distinctio nobis corrupti praesentium temporibus, voluptatem molestias adipisci eligendi aliquid facilis dolores culpa similique cupiditate iure consectetur, illo obcaecati ducimus soluta!</p>
+          <p class="text-justify text-slate-500">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident,
+            voluptatem suscipit? Delectus dicta quo distinctio nobis corrupti
+            praesentium temporibus, voluptatem molestias adipisci eligendi
+            aliquid facilis dolores culpa similique cupiditate iure consectetur,
+            illo obcaecati ducimus soluta!
+          </p>
         </div>
       </li>
       <li>
         <div class="prepend triangle">
           <ul class="list-inside">
             <li class="mb-2">
-              <b>Merovingian Dynasty</b> 
-              <p class="text-slate-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio distinctio unde obcaecati! Amet maiores ut esse ea cumque quos vel fugit dignissimos reprehenderit repellendus magni, deserunt dolorem corporis voluptate accusantium?</p>
+              <b>Merovingian Dynasty</b>
+              <p class="text-slate-500">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
+                distinctio unde obcaecati! Amet maiores ut esse ea cumque quos
+                vel fugit dignissimos reprehenderit repellendus magni, deserunt
+                dolorem corporis voluptate accusantium?
+              </p>
             </li>
             <li class="mb-2">
-              <b>Carolingian Dynasty</b> 
-              <p class="text-slate-500">Lorem ipsum, dolor sit amet consectetur adipisicing elit. At labore dolore provident ut aut, quaerat quam, rem sed enim optio eum, quas beatae sapiente assumenda necessitatibus sunt obcaecati et excepturi!</p>
+              <b>Carolingian Dynasty</b>
+              <p class="text-slate-500">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. At
+                labore dolore provident ut aut, quaerat quam, rem sed enim optio
+                eum, quas beatae sapiente assumenda necessitatibus sunt
+                obcaecati et excepturi!
+              </p>
             </li>
             <li>
               <b>Capetian Dynasty</b>
-              <p class="text-slate-500">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus, veniam exercitationem alias odit sint modi quibusdam velit dignissimos nisi, sunt saepe! Ullam, voluptas. Ratione recusandae consequatur, nulla earum sint quae!</p>
+              <p class="text-slate-500">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Voluptatibus, veniam exercitationem alias odit sint modi
+                quibusdam velit dignissimos nisi, sunt saepe! Ullam, voluptas.
+                Ratione recusandae consequatur, nulla earum sint quae!
+              </p>
             </li>
           </ul>
         </div>
@@ -69,47 +96,135 @@
           />
         </div>
       </li>
+      <!-- pre-revolutionary -->
       <li>
         <div class="prepend !p-0 !bg-transparent !shadow-none">
           <timeline-image
-            path="/images/histoire/louie-xiv.jpg"
+            path="/images/histoire/louie-xiv.jpeg"
             alt="Louie XIV"
             title="Louie XIV"
             subtitle="Subtitle goes here."
           />
         </div>
-        <span class="!bg-orange-500 w-36">
+        <span id="pre-revolutionary">
           <text>Pre-Revolutionary France</text> <small>1453-1789</small>
         </span>
         <div class="append triangle">
           <ul class="list-inside list-dic">
             <li class="mb-2">
               <b>Social Structure</b>
-              <p class="text-slate-500 text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas rerum ducimus numquam dolor ad tenetur consectetur voluptatum distinctio vitae fugiat totam blanditiis, molestias delectus maxime amet dolorem a exercitationem eaque!</p>
+              <p class="text-slate-500 text-justify">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
+                rerum ducimus numquam dolor ad tenetur consectetur voluptatum
+                distinctio vitae fugiat totam blanditiis, molestias delectus
+                maxime amet dolorem a exercitationem eaque!
+              </p>
             </li>
             <li class="mb-2">
-              <b>Political Structure</b> 
-              <p class="text-slate-500 text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem voluptate quasi quam sunt temporibus vero enim rem sequi doloribus, quos ea et consectetur, voluptas nisi tenetur a labore quas, architecto laboriosam. Nostrum officiis quod odio qui nesciunt consequatur unde excepturi?</p>
+              <b>Political Structure</b>
+              <p class="text-slate-500 text-justify">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Voluptatem voluptate quasi quam sunt temporibus vero enim rem
+                sequi doloribus, quos ea et consectetur, voluptas nisi tenetur a
+                labore quas, architecto laboriosam. Nostrum officiis quod odio
+                qui nesciunt consequatur unde excepturi?
+              </p>
             </li>
             <li>
-              <b>Economic Conditions</b> 
-              <p class="text-slate-500 text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit modi dolore odio asperiores, iusto vel quod laboriosam illum a qui corrupti. Fuga voluptatem, culpa quisquam voluptas nisi hic architecto iusto quasi exercitationem esse optio. Itaque maxime sapiente placeat voluptas repellat.</p>
+              <b>Economic Conditions</b>
+              <p class="text-slate-500 text-justify">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit
+                modi dolore odio asperiores, iusto vel quod laboriosam illum a
+                qui corrupti. Fuga voluptatem, culpa quisquam voluptas nisi hic
+                architecto iusto quasi exercitationem esse optio. Itaque maxime
+                sapiente placeat voluptas repellat.
+              </p>
             </li>
           </ul>
         </div>
       </li>
+      <!-- revolution -->
       <li>
-        <span class="!bg-red-500 !w-48 animate-beat">
-          Revolutionary France <small>1789-1799</small>
+        <div class="prepend triangle">
+          <Row class="grid grid-cols-12 gap-4">
+            <Column class="sm:col-span-12 md:col-span-6 lg:col-span-6">
+              <h3 class="font-bold">Title A</h3>
+              <p class="mb-2 text-slate-500">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic
+                voluptate, quibusdam commodi laudantium molestias velit cum
+                saepe a distinctio totam?
+              </p>
+              <h3 class="font-bold">Title B</h3>
+              <p class="mb-2 text-slate-500">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic
+                voluptate, quibusdam commodi laudantium molestias velit cum
+                saepe a distinctio totam?
+              </p>
+              <h3 class="font-bold">Title C</h3>
+              <p class="text-slate-500">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic
+                voluptate, quibusdam commodi laudantium molestias velit cum
+                saepe a distinctio totam?
+              </p>
+            </Column>
+            <Column class="sm:col-span-12 md:col-span-6 lg:col-span-6">
+              <h3 class="font-bold">Title D</h3>
+              <p class="mb-2 text-slate-500">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic
+                voluptate, quibusdam commodi laudantium molestias velit cum
+                saepe a distinctio totam?
+              </p>
+              <h3 class="font-bold">Title E</h3>
+              <p class="mb-2 text-slate-500">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic
+                voluptate, quibusdam commodi laudantium molestias velit cum
+                saepe a distinctio totam?
+              </p>
+              <h3 class="font-bold">Title F</h3>
+              <p class="text-slate-500">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic
+                voluptate, quibusdam commodi laudantium molestias velit cum
+                saepe a distinctio totam?
+              </p>
+            </Column>
+          </Row>
+        </div>
+        <span class="bg-france-flag animate-beat">
+          <p class="!mix-blend-difference">Revolutionary France</p>
+          <small class="!mix-blend-difference">1789-1799</small>
         </span>
+        <div class="append !p-0">
+          <div class="flex flex-col gap-4 items-center">
+            <div class="w-1/2">
+              <timeline-image
+              path="/images/histoire/execution.jpeg"
+              alt="execution"
+              title="the Execution of Louie XIV"
+              subtitle="It is considered a pivotal event in the French Revolution."
+              />
+            </div>
+              <timeline-image
+              path="/images/histoire/bastille.jpeg"
+              alt="Storming of the Bastille"
+              title="Storming of the Bastille"
+              subtitle="It is considered a pivotal event in the French Revolution."
+            />
+            <div class="w-1/2">
+              <timeline-image
+                path="/images/histoire/marat.jpeg"
+                alt="Jean Paul Marat"
+                title="Jean Paul Marat"
+                subtitle="It is considered a pivotal event in the French Revolution."
+              />
+            </div>
+          </div>
+        </div>
       </li>
       <li>
         <span> Napoleon <small>1799-1815</small> </span>
       </li>
       <li>
-        <span>
-          Post-Napoleonic France <small>1815-1914</small>
-        </span>
+        <span> Post-Napoleonic France <small>1815-1914</small> </span>
       </li>
       <li>
         <span> World War I & II <small>1914-1945</small> </span>
@@ -169,14 +284,11 @@ ul.vertical-timeline {
 </style>
 
 <style>
-
 @keyframes animation-beat {
   from {
-    filter:drop-shadow(0 0 0 red);
     transform: scale(1);
   }
   to {
-    filter:drop-shadow(0 0 1rem red);
     transform: scale(1.1);
   }
 }
@@ -189,4 +301,11 @@ ul.vertical-timeline {
   animation-direction: alternate;
 }
 
+.bg-france-flag {
+  background: linear-gradient(to right, blue 0 33%, white 33% 66%, red 66% 99%);
+}
+
+span#pre-revolutionary {
+  background-image: url("/images/histoire/bourbons.jpeg");
+}
 </style>
