@@ -22,7 +22,7 @@
             animi soluta repellendus!
           </p>
         </div>
-        <span class="!shadow-green-500"> Ancient France </span>
+        <timeline-era title="Ancient France" period="-468" shadow="green"/>
         <div class="append !p-0 !shadow-green-500/50">
           <timeline-image
             path="/images/histoire/ancient.jpeg"
@@ -42,7 +42,11 @@
             subtitle="Subtitle goes here."
           />
         </div>
-        <span> The Frankish Kingdoms <small>486-987</small> </span>
+        <timeline-era
+          title="Frankish Kingdoms"
+          period="486-987"
+          shadow="orange"
+        />
         <div class="append triangle">
           <p class="text-justify text-slate-500">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident,
@@ -86,10 +90,11 @@
             </li>
           </ul>
         </div>
-        <span>
-          <text>Early French Monarchies</text>
-          <small>987-1453</small>
-        </span>
+        <timeline-era
+          title="Early French Monarchies"
+          period="987-1453"
+          shadow="brown"
+        />
         <div class="append !p-0">
           <timeline-image
             path="/images/histoire/early-french-monarchies.jpg"
@@ -109,15 +114,12 @@
             subtitle="Subtitle goes here."
           />
         </div>
-        <span class="!shadow-blue-500" id="pre-revolutionary">
-          <div
-            class="flex flex-col gap-2 bg-black/25 p-4 w-36 items-center justify-center"
-          >
-            <b>Pre-Revolutionary France</b>
-            <small>1453-1789</small>
-          </div>
-        </span>
-
+        <timeline-era
+          title="Pre-Revolutionary France"
+          period="1453-1789"
+          shadow="purple"
+          background="/images/histoire/bourbons.jpeg"
+        />
         <div class="append !shadow-blue-500/50 triangle">
           <ul class="list-inside list-dic">
             <li class="mb-2">
@@ -198,12 +200,18 @@
             </Column>
           </Row>
         </div>
-        <span class="bg-france-flag animate-beat !shadow-red-500">
-          <p class="!mix-blend-difference">Revolutionary France</p>
-          <small class="!mix-blend-difference">1789-1799</small>
-        </span>
+        <timeline-era
+          title="Revolutionary France"
+          period="1789-1815"
+          shadow="red"
+          background="/images/histoire/french-flag.jpeg"
+          beat
+        />
         <div class="append !p-0">
-          <timeline-gallery direction="horizontal" :images="revolutionaryFranceGallery" />
+          <timeline-gallery
+            direction="horizontal"
+            :images="revolutionaryFranceGallery"
+          />
         </div>
       </li>
       <!-- napoleon -->
@@ -211,27 +219,32 @@
         <div class="prepend !bg-transparent !shadow-none">
           <timeline-gallery direction="vertical" :images="napoleonGallery" />
         </div>
-        <span class="shadow-2xl !shadow-yellow-500" id="napoleon">
-          <div
-            class="flex flex-col gap-2 bg-black/25 p-4 w-36 items-center justify-center"
-          >
-            <b>Napoleon</b>
-            <small>1799-1815</small>
-          </div>
-        </span>
-
+        <timeline-era
+          title="Napoleon"
+          period="1799-1815"
+          shadow="gold"
+          background="/images/histoire/napoleon-flag.jpeg"
+        />
         <div class="append triangle !bg-none">
           <timeline-accordion />
         </div>
       </li>
       <li>
-        <span> Post-Napoleonic France <small>1815-1914</small> </span>
+        <timeline-era
+          title="Post-Napoleonic France"
+          period="1815-1914"
+          shadow="lime"
+        />
       </li>
       <li>
-        <span> World War I & II <small>1914-1945</small> </span>
+        <timeline-era
+          title="World War I & II"
+          period="1914-1945"
+          shadow="gray"
+        />
       </li>
       <li>
-        <span> Modern Times 1945-now </span>
+        <timeline-era title="Modern Times" period="1945-now" shadow="cyan" />
       </li>
       <hr class="border-blue-500 border-2 absolute h-full z-[1]" />
     </ul>
@@ -239,7 +252,6 @@
 </template>
 
 <script setup>
-
 // non ref variables
 const bannerDetails = {
   src: "/images/histoire/banner.jpeg",
@@ -289,7 +301,6 @@ const napoleonGallery = [
     subtitle: "subtitle goes here",
   },
 ];
-
 </script>
 
 <style lang="postcss">
@@ -306,13 +317,6 @@ ul.vertical-timeline {
         left: 98%;
       }
     }
-    & > span {
-      @apply select-none text-white bg-blue-500 p-4 font-bold aspect-square rounded-full flex flex-col items-center justify-center w-36 text-center overflow-hidden shadow-2xl;
-      small {
-        font-size: 0.8rem;
-        font-weight: normal;
-      }
-    }
     div.append {
       @apply rounded-md shadow-2xl flex items-center justify-center relative bg-gray-100 p-4;
       &.triangle::before {
@@ -326,33 +330,4 @@ ul.vertical-timeline {
   }
 }
 
-@keyframes animation-beat {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.1);
-  }
-}
-
-.animate-beat {
-  animation-name: animation-beat;
-  animation-duration: 1s;
-  animation-timing-function: ease;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-
-.bg-france-flag {
-  background: linear-gradient(to right, blue 0 33%, white 33% 66%, red 66% 99%);
-}
-
-span#napoleon {
-  background-image: url("/images/histoire/napoleon-flag.jpeg");
-  @apply bg-center bg-contain bg-no-repeat;
-}
-
-span#pre-revolutionary {
-  background-image: url("/images/histoire/bourbons.jpeg");
-}
 </style>
