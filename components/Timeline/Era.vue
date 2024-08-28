@@ -1,7 +1,7 @@
 <template>
   <span
     data-animation="zoom-in"
-    :class="{ 'vertical-timeline-era': true, 'animate-beat': beat }"
+    class="vertical-timeline-era"
     :style="{
       'background-image': `url(${background})`,
       'box-shadow': `0 0 3rem 0.25rem ${shadow}`,
@@ -56,22 +56,5 @@ span.vertical-timeline-era {
     font-size: 0.8rem;
     font-weight: normal;
   }
-}
-
-@keyframes animation-beat {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.1);
-  }
-}
-
-.animate-beat {
-  animation-name: animation-beat;
-  animation-duration: 1s;
-  animation-timing-function: ease;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
 }
 </style>

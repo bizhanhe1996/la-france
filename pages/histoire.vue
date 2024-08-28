@@ -22,7 +22,7 @@
             animi soluta repellendus!
           </p>
         </div>
-        <timeline-era title="Ancient France" period="-468" shadow="green"/>
+        <timeline-era title="Ancient France" period="-468" shadow="green" />
         <div class="append !p-0 !shadow-green-500/50">
           <timeline-image
             path="/images/histoire/ancient.jpeg"
@@ -108,9 +108,9 @@
       <li>
         <div class="prepend !p-0 !shadow-blue-500/50">
           <timeline-image
-            path="/images/histoire/louie-xiv.jpeg"
-            alt="Louie XIV"
-            title="Louie XIV"
+            path="/images/histoire/louis-xiv.jpeg"
+            alt="Louis XIV"
+            title="Louis XIV"
             subtitle="Subtitle goes here."
           />
         </div>
@@ -229,12 +229,37 @@
           <timeline-accordion />
         </div>
       </li>
+      <!-- post napoleonic france -->
       <li>
+        <div class="prepend triangle">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia
+            exercitationem, consequuntur optio incidunt repudiandae magni
+            officiis deleniti laboriosam fuga minus! Sunt cum sint odio odit
+            quasi modi in fuga architecto!
+          </p>
+        </div>
         <timeline-era
           title="Post-Napoleonic France"
           period="1815-1914"
           shadow="lime"
         />
+        <div class="append">
+          <div class="slider-container flex">
+            <figure>
+              <figcaption>Louis XVIII</figcaption>
+              <img src="/images/histoire/louis-xviii.jpeg" alt="Louis XVIII" />
+            </figure>
+            <figure>
+              <figcaption>Louis Philippe 1</figcaption>
+              <img src="/images/histoire/louis-philippe-1.jpeg" alt="Louis Philippe 1" />
+            </figure>
+            <figure>
+              <figcaption>Napoleon III</figcaption>
+              <img src="/images/histoire/napoleon-III.jpeg" alt="Napoleon III" />
+            </figure>
+          </div>
+        </div>
       </li>
       <li>
         <timeline-era
@@ -263,8 +288,8 @@ const bannerDetails = {
 const revolutionaryFranceGallery = [
   {
     path: "/images/histoire/execution.jpeg",
-    alt: "execution of Louie XIV",
-    title: "the Execution of Louie XIV",
+    alt: "execution of Louis XIV",
+    title: "the Execution of Louis XIV",
     subtitle: "It is considered a pivotal event in the French Revolution.",
   },
   {
@@ -329,5 +354,4 @@ ul.vertical-timeline {
     }
   }
 }
-
 </style>
