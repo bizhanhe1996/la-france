@@ -13,7 +13,7 @@
     >
       <!-- ancient france -->
       <li>
-        <div class="prepend triangle !shadow-green-500/50">
+        <div class="prepend triangle !shadow-green-500/50" data-animation="from-left">
           <p class="text-justify text-slate-500">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto
             fugit incidunt voluptatum eum, ad repudiandae laborum maiores
@@ -231,7 +231,7 @@
       </li>
       <!-- post napoleonic france -->
       <li>
-        <div class="prepend triangle">
+        <div class="prepend triangle !shadow-zinc-500">
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia
             exercitationem, consequuntur optio incidunt repudiandae magni
@@ -242,23 +242,10 @@
         <timeline-era
           title="Post-Napoleonic France"
           period="1815-1914"
-          shadow="lime"
+          shadow="gray"
         />
-        <div class="append">
-          <div class="slider-container flex">
-            <figure>
-              <figcaption>Louis XVIII</figcaption>
-              <img src="/images/histoire/louis-xviii.jpeg" alt="Louis XVIII" />
-            </figure>
-            <figure>
-              <figcaption>Louis Philippe 1</figcaption>
-              <img src="/images/histoire/louis-philippe-1.jpeg" alt="Louis Philippe 1" />
-            </figure>
-            <figure>
-              <figcaption>Napoleon III</figcaption>
-              <img src="/images/histoire/napoleon-III.jpeg" alt="Napoleon III" />
-            </figure>
-          </div>
+        <div class="append !p-0 !shadow-zinc-500">
+          <timeline-carousell :images="postNapoleonicCarousell" />
         </div>
       </li>
       <li>
@@ -326,6 +313,26 @@ const napoleonGallery = [
     subtitle: "subtitle goes here",
   },
 ];
+
+const postNapoleonicCarousell = [
+  {
+    title: "Napoleon III",
+    src: "/images/histoire/napoleon-III.jpeg",
+    alt: "Napoleon III",
+  },
+  {
+    title: "Louis Philippe 1",
+    src: "/images/histoire/louis-philippe-1.jpeg",
+    alt: "Louis Philippe 1",
+  },
+  {
+    title: "Louis XVIII",
+    src: "/images/histoire/louis-xviii.jpeg",
+    alt: "Louis XVIII",
+  },
+];
+
+
 </script>
 
 <style lang="postcss">
