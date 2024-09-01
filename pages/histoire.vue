@@ -13,7 +13,10 @@
     >
       <!-- ancient france -->
       <li>
-        <div class="prepend triangle !shadow-green-500/50" data-animation="from-left">
+        <div
+          class="prepend triangle !shadow-green-500/50"
+          data-animation="from-left"
+        >
           <p class="text-justify text-slate-500">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto
             fugit incidunt voluptatum eum, ad repudiandae laborum maiores
@@ -23,7 +26,10 @@
           </p>
         </div>
         <timeline-era title="Ancient France" period="-468" shadow="green" />
-        <div class="append !p-0 !shadow-green-500/50">
+        <div
+          class="append !p-0 !shadow-green-500/50"
+          data-animation="from-right"
+        >
           <timeline-image
             path="/images/histoire/ancient.jpeg"
             alt="ancient france"
@@ -34,7 +40,7 @@
       </li>
       <!-- frankish kingdoms -->
       <li>
-        <div class="prepend overflow-hidden !p-0">
+        <div class="prepend overflow-hidden !p-0" data-animation="from-left">
           <timeline-image
             path="/images/histoire/charlemagne.jpeg"
             alt="frankish kingdoms"
@@ -47,7 +53,7 @@
           period="486-987"
           shadow="orange"
         />
-        <div class="append triangle">
+        <div class="append triangle" data-animation="from-right">
           <p class="text-justify text-slate-500">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident,
             voluptatem suscipit? Delectus dicta quo distinctio nobis corrupti
@@ -59,7 +65,7 @@
       </li>
       <!-- erly french monarchies -->
       <li>
-        <div class="prepend triangle">
+        <div class="prepend triangle" data-animation="from-left">
           <ul class="list-inside">
             <li class="mb-2">
               <b>Merovingian Dynasty</b>
@@ -95,7 +101,7 @@
           period="987-1453"
           shadow="brown"
         />
-        <div class="append !p-0">
+        <div class="append !p-0" data-animation="from-right">
           <timeline-image
             path="/images/histoire/early-french-monarchies.jpg"
             alt="early french monarchies"
@@ -106,7 +112,10 @@
       </li>
       <!-- pre-revolutionary -->
       <li>
-        <div class="prepend !p-0 !shadow-blue-500/50">
+        <div
+          class="prepend !p-0 !shadow-blue-500/50"
+          data-animation="from-left"
+        >
           <timeline-image
             path="/images/histoire/louis-xiv.jpeg"
             alt="Louis XIV"
@@ -120,7 +129,10 @@
           shadow="purple"
           background="/images/histoire/bourbons.jpeg"
         />
-        <div class="append !shadow-blue-500/50 triangle">
+        <div
+          class="append !shadow-blue-500/50 triangle"
+          data-animation="from-right"
+        >
           <ul class="list-inside list-dic">
             <li class="mb-2">
               <b>Social Structure</b>
@@ -156,7 +168,10 @@
       </li>
       <!-- revolution -->
       <li>
-        <div class="prepend triangle !shadow-red-500/50">
+        <div
+          class="prepend triangle !shadow-red-500/50"
+          data-animation="from-left"
+        >
           <Row class="grid grid-cols-12 gap-4">
             <Column class="sm:col-span-12 md:col-span-6 lg:col-span-6">
               <h3 class="font-bold">Title A</h3>
@@ -207,7 +222,7 @@
           background="/images/histoire/french-flag.jpeg"
           beat
         />
-        <div class="append !p-0">
+        <div class="append !p-0" data-animation="from-right">
           <timeline-gallery
             direction="horizontal"
             :images="revolutionaryFranceGallery"
@@ -216,7 +231,10 @@
       </li>
       <!-- napoleon -->
       <li>
-        <div class="prepend !bg-transparent !shadow-none">
+        <div
+          class="prepend !bg-transparent !shadow-none"
+          data-animation="from-left"
+        >
           <timeline-gallery direction="vertical" :images="napoleonGallery" />
         </div>
         <timeline-era
@@ -225,13 +243,16 @@
           shadow="gold"
           background="/images/histoire/napoleon-flag.jpeg"
         />
-        <div class="append triangle !bg-none">
+        <div class="append triangle !bg-none" data-animation="from-right">
           <timeline-accordion />
         </div>
       </li>
       <!-- post napoleonic france -->
       <li>
-        <div class="prepend triangle !shadow-zinc-500">
+        <div
+          class="prepend triangle !shadow-zinc-500"
+          data-animation="from-left"
+        >
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia
             exercitationem, consequuntur optio incidunt repudiandae magni
@@ -244,7 +265,7 @@
           period="1815-1914"
           shadow="gray"
         />
-        <div class="append !p-0 !shadow-zinc-500">
+        <div class="append !p-0 !shadow-zinc-500" data-animation="from-right">
           <timeline-carousell :images="postNapoleonicCarousell" />
         </div>
       </li>
@@ -331,8 +352,6 @@ const postNapoleonicCarousell = [
     alt: "Louis XVIII",
   },
 ];
-
-
 </script>
 
 <style lang="postcss">
