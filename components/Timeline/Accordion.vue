@@ -1,105 +1,46 @@
 <template>
   <div
-    class="accordion bg-gray-100 p-4 rounded-md shadow-2xl shadow-yellow-500/50"
+    class="accordion bg-gray-100"
+    
   >
-    <details @click.prevent="handleAccordionClick">
+    <details
+      v-for="(item, index) in items"
+      :key="`accordion-item-${index}`"
+      @click.prevent="handleAccordionClick"
+    >
       <summary>
-        <span>War of the Second Coalition</span>
-        <small>(1798-1802)</small>
+        <span>{{ item.title }}</span>
+        <small>{{ item.subTitle }}</small>
       </summary>
-      <p>
-        This war pitted France against a coalition including Austria, Russia,
-        the Ottoman Empire, and Great Britain. It ended with French victory and
-        the Treaty of Amiens in 1802.
-      </p>
-    </details>
-    <details @click.prevent="handleAccordionClick">
-      <summary>
-        <span>War of the Third Coalition</span>
-        <small>(1803-1806)</small>
-      </summary>
-      <ul>
-        <li>
-          <span>Battle of Austerlitz (1805)</span>
-          <p>Napoleon's decisive victory over Russian and Austrian forces.</p>
-        </li>
-        <li>
-          <span>Battle of Trafalgar (1805)</span>
-          <p>
-            British naval victory that ended Napoleon's plans to invade England.
-          </p>
+      <p v-if="item.text">{{ item.text }}</p>
+      <ul v-else-if="item.subItems">
+        <li
+          v-for="(subItem, subItemIndex) in item.subItems"
+          :key="`item-${index}-subItem-${subItemIndex}`"
+        >
+          <span>{{ subItem.title }}</span>
+          <p>{{ subItem.text }}</p>
         </li>
       </ul>
-    </details>
-    <details @click.prevent="handleAccordionClick">
-      <summary>
-        <span>War of the Fourth Coalition</span>
-        <small>(1806-1807)</small>
-      </summary>
-      <ul>
-        <li>
-          <span>Battle of Jena-Auerstedt (1806)</span>
-          <p>Decisive French victory over Prussia</p>
-        </li>
-        <li>
-          <span>Battle of Eylau (1807)</span>
-          <p>Inconclusive battle between French and Russian forces</p>
-        </li>
-        <li>
-          <span>Battle of Friedland (1807)</span>
-          <p>French victory leading to the Treaty of Tilsit</p>
-        </li>
-      </ul>
-    </details>
-    <details @click.prevent="handleAccordionClick">
-      <summary><span>Peninsular War</span> <small>(1808-1814)</small></summary>
-      <p>
-        This long conflict in Spain and Portugal tied down significant French
-        forces and contributed to Napoleon's eventual defeat.
-      </p>
-    </details>
-    <details @click.prevent="handleAccordionClick">
-      <summary>
-        <span>War of the Fifth Coalition</span> <small>(1809)</small>
-      </summary>
-      <p>
-        Austria's attempt to break French domination, ending in French victory
-        at the Battle of Wagram.
-      </p>
-    </details>
-    <details @click.prevent="handleAccordionClick">
-      <summary>
-        <span>French invasion of Russia</span> <small>(1812)</small>
-      </summary>
-      <p>
-        Napoleon's disastrous campaign into Russia that severely weakened French
-        power.
-      </p>
-    </details>
-    <details @click.prevent="handleAccordionClick">
-      <summary>
-        <span>War of the Sixth Coalition</span>
-        <small>(1813-1814)</small>
-      </summary>
-      <p>
-        Allied powers united to defeat Napoleon, culminating in his first
-        abdication in 1814.
-      </p>
-    </details>
-    <details @click.prevent="handleAccordionClick">
-      <summary>
-        <span>Hundred Days and Waterloo Campaign</span>
-        <small>(1815)</small>
-      </summary>
-      <p>
-        Napoleon's final bid for power after escaping exile, ending with his
-        defeat at Waterloo
-      </p>
     </details>
   </div>
 </template>
 
 <script setup>
+const props = defineProps({
+  items: {
+    type: Array,
+    required: true,
+  },
+  shadow: {
+    type: String,
+    required: false,
+    default: "gray",
+  },
+});
+
+const { items, shadow } = props;
+
 // functions
 const handleAccordionClick = (event) => {
   document
@@ -111,7 +52,7 @@ const handleAccordionClick = (event) => {
 
 <style lang="postcss">
 div.accordion {
-  @apply text-start w-full absolute;
+  @apply text-start w-full absolute p-4 rounded-md;
   details {
     @apply mb-4 last:my-0;
     summary {
@@ -130,11 +71,11 @@ div.accordion {
         @apply hover:text-yellow-500 font-bold transition-colors;
       }
       small {
-        @apply italic text-gray-500;
+        @apply italic text-gray-500 ms-auto;
       }
     }
     & > p {
-      @apply text-slate-500 text-justify ms-4 transition;
+      @apply text-slate-500 text-justify ms-4;
     }
     ul {
       @apply ms-4;

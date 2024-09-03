@@ -172,8 +172,8 @@
           class="prepend triangle !shadow-red-500/50"
           data-animation="from-left"
         >
-          <Row class="grid grid-cols-12 gap-4">
-            <Column class="sm:col-span-12 md:col-span-6 lg:col-span-6">
+          <row class="grid grid-cols-12 gap-4">
+            <column class="sm:col-span-12 md:col-span-6 lg:col-span-6">
               <h3 class="font-bold">Title A</h3>
               <p class="mb-2 text-slate-500">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic
@@ -192,8 +192,8 @@
                 voluptate, quibusdam commodi laudantium molestias velit cum
                 saepe a distinctio totam?
               </p>
-            </Column>
-            <Column class="sm:col-span-12 md:col-span-6 lg:col-span-6">
+            </column>
+            <column class="sm:col-span-12 md:col-span-6 lg:col-span-6">
               <h3 class="font-bold">Title D</h3>
               <p class="mb-2 text-slate-500">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic
@@ -212,8 +212,8 @@
                 voluptate, quibusdam commodi laudantium molestias velit cum
                 saepe a distinctio totam?
               </p>
-            </Column>
-          </Row>
+            </column>
+          </row>
         </div>
         <timeline-era
           title="Revolutionary France"
@@ -243,8 +243,8 @@
           shadow="gold"
           background="/images/histoire/napoleon-flag.jpeg"
         />
-        <div class="append triangle !bg-none" data-animation="from-right">
-          <timeline-accordion />
+        <div class="append triangle" data-animation="from-right">
+          <timeline-accordion class="!shadow-2xl !shadow-yellow-500" :items="napoleonicWars.data" />
         </div>
       </li>
       <!-- post napoleonic france -->
@@ -292,6 +292,8 @@ const bannerDetails = {
   title: "Notre Histoire",
   subTitle: "L'histoire de France.",
 };
+
+const napoleonicWars = useFetch("/api/public/histoire/napoleonic-wars");
 
 const revolutionaryFranceGallery = [
   {

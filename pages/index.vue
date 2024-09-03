@@ -5,8 +5,8 @@
   </section>
   <!-- mounments -->
   <section>
-    <Row class="grid grid-cols-3">
-      <Column
+    <row class="grid grid-cols-3">
+      <column
         v-for="(monument, index) in monuments.data.value"
         :key="'monument-box-' + index"
         :class="`col-span-1 opacity-0 animation-delay-${index} ease-out -z-[1]`"
@@ -18,8 +18,8 @@
           :background-color="monument.backgroundColor"
           :color="monument.color"
         />
-      </Column>
-    </Row>
+      </column>
+    </row>
   </section>
   <!-- gallery -->
   <section>
@@ -43,10 +43,10 @@
     id="eiffel-background"
   >
     <!-- france map row -->
-    <Row
+    <row
       class="grid grid-cols-1 lg:grid-cols-2 bg-white gap-8 py-8 clip-path-a z-10 relative"
     >
-      <Column class="col-span-1">
+      <column class="col-span-1">
         <div class="w-2/3 m-auto" data-animation="from-right">
           <h1 class="text-4xl mb-4 leading-relaxed text-center">
             Le Française est une belle launge.
@@ -59,14 +59,14 @@
             voluptate veniam dolorem rem quas.
           </p>
         </div>
-      </Column>
-      <Column
+      </column>
+      <column
         class="col-span-1 flex flex-col gap-4 justify-center items-center overflow-hidden sm:mb-16"
       >
         <h1 class="text-7xl font-serif font-bold">Bon<b class="text- xl">j</b>our!</h1>
         <span class="text-gray-500">Comment allez vous?</span>
-      </Column>
-    </Row>
+      </column>
+    </row>
     <!-- counters -->
     <section class="py-8">
       <div id="eiffel-overlay"></div>
@@ -77,8 +77,8 @@
         >
           Parce que vous êtes INTELLIGENTS!
         </div>
-        <Row class="grid grid-cols-2 md:grid-cols-4 py-4 gap-y-8">
-          <Column
+        <row class="grid grid-cols-2 md:grid-cols-4 py-4 gap-y-8">
+          <column
             v-for="(counter, index) in counters.data.value"
             :key="`home-counter-${index}`"
             :class="`col-span-1 animation-delay-${index + 1} opacity-0`"
@@ -89,8 +89,8 @@
               :subtitle="counter.subtitle"
               :color="counter.color"
             />
-          </Column>
-        </Row>
+          </column>
+        </row>
       </div>
     </section>
   </section>
@@ -102,8 +102,8 @@
     >
       Un Pays De Gens Grands
     </h2>
-    <Row class="grid grid-flow-row grid-cols-3 gap-8 p-4">
-      <Column
+    <row class="grid grid-flow-row grid-cols-3 gap-8 p-4">
+      <column
         v-for="(person, index) in famousPeople.data.value"
         :key="`famous-person-${index}`"
         :class="`sm:col-span-3 lg:col-span-1 opacity-0 animation-delay-${
@@ -117,14 +117,14 @@
           :title="person.title"
           :desciption="person.description ? person.description : null"
         />
-      </Column>
-    </Row>
+      </column>
+    </row>
     <div class="text-center px-4 py-8">Plus ICI.</div>
   </section>
   <!-- Louvre -->
   <section class="bg-gray-100">
-    <Row class="grid sm:grid-cols-1 md:grid-cols-2">
-      <Column class="col-span-1 h-full opacity-0" data-animation="fade-in">
+    <row class="grid sm:grid-cols-1 md:grid-cols-2">
+      <column class="col-span-1 h-full opacity-0" data-animation="fade-in">
         <div
           v-for="(louvreImage, index) in louvreImages.value"
           :key="`louvre-image-${index}`"
@@ -145,8 +145,8 @@
             <p class="text-white/75">{{ louvreImage.subtitle }}</p>
           </div>
         </div>
-      </Column>
-      <Column class="col-span-1 px-4 flex flex-col justify-around">
+      </column>
+      <column class="col-span-1 px-4 flex flex-col justify-around">
         <h2
           class="text-center text-3xl p-4 font-bold capitalize opacity-0"
           data-animation="fade-in"
@@ -156,8 +156,8 @@
             class="text-slate-800 font-bold"
           />
         </h2>
-        <Row class="lg:columns-2 sm:columns-1">
-          <Column
+        <row class="lg:columns-2 sm:columns-1">
+          <column
             class="mb-4"
             v-for="(louvreFeature, index) in louvreFeatures.data.value"
             :key="`louvre-feature-${index}`"
@@ -173,15 +173,15 @@
                 :colorClass="louvreFeature.colorClass"
               />
             </div>
-          </Column>
-        </Row>
-      </Column>
-    </Row>
+          </column>
+        </row>
+      </column>
+    </row>
   </section>
   <!-- buttons -->
   <section class="bg-teal-700 p-16">
-    <Row class="grid grid-cols-2 gap-y-16">
-      <Column
+    <row class="grid grid-cols-2 gap-y-16">
+      <column
         class="text-white text-center text-3xl flex sm:col-span-2 md:col-span-1"
       >
         <div class="m-auto opacity-0" data-animation="from-left">
@@ -189,8 +189,8 @@
           &nbsp;
           <span class="uppercase font-serif font-bold">maintenant!</span>
         </div>
-      </Column>
-      <Column
+      </column>
+      <column
         class="flex flex-wrap justify-center gap-4 sm:col-span-2 md:col-span-1"
       >
         <AppButton
@@ -249,8 +249,8 @@
           icon="eye"
           theme="black"
         />
-      </Column>
-    </Row>
+      </column>
+    </row>
   </section>
 </template>
 

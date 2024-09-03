@@ -13,16 +13,16 @@
       Lorem ipsum dolor, sit amet consectetur adipisicing elit.
     </p>
     <form class="border p-4 rounded-lg shadow-sm" action="#">
-      <Row class="grid grid-cols-3 gap-4 mb-4">
-        <Column class="sm:col-span-3 md:col-span-1">
+      <row class="grid grid-cols-3 gap-4 mb-4">
+        <column class="sm:col-span-3 md:col-span-1">
           <!-- prenom -->
           <FormsInput
             label="Prénom"
             info="Extra info"
             :validations="['required']"
           />
-        </Column>
-        <Column class="sm:col-span-3 md:col-span-1">
+        </column>
+        <column class="sm:col-span-3 md:col-span-1">
           <!-- email -->
           <FormsInput
             label="E-mail"
@@ -30,8 +30,8 @@
             info="Should be a valid email address."
             placeholder="quelque_chose@mail.fr"
           />
-        </Column>
-        <Column class="sm:col-span-3 md:col-span-1">
+        </column>
+        <column class="sm:col-span-3 md:col-span-1">
           <!-- mobile -->
           <FormsInput
             :type="'tel'"
@@ -40,16 +40,16 @@
             info="Onze Chiffres"
             :validations="['required', 'mobile']"
           />
-        </Column>
-        <Column class="sm:col-span-3 md:col-span-2">
+        </column>
+        <column class="sm:col-span-3 md:col-span-2">
           <FormsInput
             type="textarea"
             label="Message"
             placeholder="Écrivez votre message ici."
             :validations="['required']"
           />
-        </Column>
-        <Column class="sm:col-span-3 md:col-span-1">
+        </column>
+        <column class="sm:col-span-3 md:col-span-1">
           <div class="flex justify-between items-center">
             <FormsInput type="checkbox" label="Consent" />
             <FormsInput type="switch" label="Switch" />
@@ -60,10 +60,10 @@
             <FormsInput type="radio" name="age" value="0" label="Female" />
             <FormsInput type="radio" name="age" value="-1" label="Other" />
           </div>
-        </Column>
-      </Row>
-      <Row class="grid grid-cols-12 gap-4 mb-4">
-        <Column class="sm:col-span-12 md:col-span-4">
+        </column>
+      </row>
+      <row class="grid grid-cols-12 gap-4 mb-4">
+        <column class="sm:col-span-12 md:col-span-4">
           <FormsInput
             type="select"
             name="city"
@@ -72,8 +72,8 @@
             :validations="['required']"
             :options="selectOptions"
           />
-        </Column>
-        <Column class="sm:col-span-12 md:col-span-4">
+        </column>
+        <column class="sm:col-span-12 md:col-span-4">
           <FormsInput
             type="select"
             name="user"
@@ -81,8 +81,8 @@
             info="Type to search"
             :options="selectOptions"
           />
-        </Column>
-        <Column class="sm:col-span-12 md:col-span-4">
+        </column>
+        <column class="sm:col-span-12 md:col-span-4">
           <FormsInput
             type="tags"
             name="tags"
@@ -91,10 +91,10 @@
             :tags="frenchCities"
             :validations="['required']"
           />
-        </Column>
-      </Row>
-      <Row class="grid grid-cols-12 gap-4">
-        <Column class="col-span-12 flex justify-end gap-4">
+        </column>
+      </row>
+      <row class="grid grid-cols-12 gap-4">
+        <column class="col-span-12 flex justify-end gap-4">
           <AppButton
             type="reset"
             text="Reset"
@@ -107,8 +107,8 @@
             icon="send"
             theme="primary"
           />
-        </Column>
-      </Row>
+        </column>
+      </row>
     </form>
   </section>
 </template>
