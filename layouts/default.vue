@@ -1,15 +1,14 @@
 <template>
   <div class="relative">
-    <AppHeader />
-    <main>
+    <app-header />
+    <main class="overflow-clip">
       <slot />
     </main>
-    <AppFooter />
+    <app-footer />
   </div>
 </template>
 
 <script setup>
-
 const router = useRouter();
 
 let observables;
@@ -39,14 +38,12 @@ onMounted(() => {
 });
 
 router.afterEach(() => {
-
   setTimeout(() => {
     observables = document.querySelectorAll("[data-animation]");
     // observing all the elements that should be observed
     observables.forEach((observable) => {
       visibilityObserver.observe(observable);
     });
-  }, 100);  
-})
-
+  }, 100);
+});
 </script>

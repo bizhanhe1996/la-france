@@ -244,7 +244,10 @@
           background="/images/histoire/napoleon-flag.jpeg"
         />
         <div class="append triangle" data-animation="from-right">
-          <timeline-accordion class="!shadow-2xl !shadow-yellow-500" :items="napoleonicWars.data" />
+          <timeline-accordion
+            class="!shadow-2xl !shadow-yellow-500"
+            :items="napoleonicWars.data"
+          />
         </div>
       </li>
       <!-- post napoleonic france -->
@@ -253,12 +256,30 @@
           class="prepend triangle !shadow-zinc-500"
           data-animation="from-left"
         >
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia
-            exercitationem, consequuntur optio incidunt repudiandae magni
-            officiis deleniti laboriosam fuga minus! Sunt cum sint odio odit
-            quasi modi in fuga architecto!
-          </p>
+          <div class="text-slate-500">
+            <h1 class="font-bold">Une</h1>
+            <p class="mb-2">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia
+              exercitationem, consequuntur optio incidunt repudiandae magni
+              officiis deleniti laboriosam fuga minus! Sunt cum sint odio odit
+              quasi modi in fuga architecto!
+            </p>
+            <h1 class="font-bold">Deux</h1>
+            <p class="mb-2">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
+              numquam maxime sunt temporibus cupiditate voluptates amet
+              inventore cumque commodi aperiam sit quidem repellat eaque, fugit
+              eius placeat excepturi. Doloremque, labore.
+            </p>
+            <h1 class="font-bold">Trois</h1>
+            <p class="mb-2">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit
+              ipsa eius vitae at modi quibusdam autem a id laboriosam
+              doloremque. Earum consequuntur saepe, placeat sint cum quidem ipsa
+              harum? Soluta inventore reprehenderit vero dolores molestias
+              corporis tempora placeat. Architecto, reprehenderit?
+            </p>
+          </div>
         </div>
         <timeline-era
           title="Post-Napoleonic France"
@@ -269,15 +290,29 @@
           <timeline-carousell :images="postNapoleonicCarousell" />
         </div>
       </li>
+      <!-- world war I and II -->
       <li>
+        <div
+          class="prepend !bg-transparent !shadow-none"
+          data-animation="from-left"
+        >
+          <timeline-masonary :items="worldWarOneAndTwoImages" shadow="#3b82f6" />
+        </div>
         <timeline-era
           title="World War I & II"
           period="1914-1945"
-          shadow="gray"
+          shadow="#3b82f6"
         />
-      </li>
-      <li>
-        <timeline-era title="Modern Times" period="1945-now" shadow="cyan" />
+        <div class="append triangle !shadow-blue-500" data-animation="from-right">
+          <p
+          v-for="(item) in worldWarOneAndTwoImages.flatMap(item=>item)"
+          :key="'-' + item.id"
+          v-show="true"
+          >
+            <b>{{item.title}}</b>
+            <p>{{item.title}}</p>
+          </p>
+        </div>
       </li>
       <hr class="border-blue-500 border-2 absolute h-full z-[1]" />
     </ul>
@@ -285,6 +320,7 @@
 </template>
 
 <script setup>
+
 // non ref variables
 const bannerDetails = {
   src: "/images/histoire/banner.jpeg",
@@ -353,6 +389,51 @@ const postNapoleonicCarousell = [
     src: "/images/histoire/louis-xviii.jpeg",
     alt: "Louis XVIII",
   },
+];
+
+const worldWarOneAndTwoImages = [
+  [
+    {
+      path: "/images/histoire/masonary-1.jpeg",
+      alt: "Alternative text 1",
+      title: "Troops in Champs Elysees",
+      id:"masonary-item-1"
+    },
+    {
+      path: "/images/histoire/masonary-2.jpeg",
+      alt: "Alternative text 2",
+      title: "Title 2",
+      id:"masonary-item-2"
+    },
+    {
+      path: "/images/histoire/masonary-3.jpeg",
+      alt: "Alternative text 3",
+      title: "Title 3",
+      id:"masonary-item-3"
+    },
+  ],
+  [
+    {
+      path: "/images/histoire/masonary-4.jpeg",
+      alt: "Alternative text 4",
+      title: "Hilter invades Paris",
+      id:"masonary-item-4"
+    },
+    {
+      path: "/images/histoire/masonary-5.jpeg",
+      alt: "Alternative text 5",
+      title: "Normandy Operation",
+      id:"masonary-item-5"
+    },
+  ],
+  [
+    {
+      path: "/images/histoire/masonary-6.jpeg",
+      alt: "Alternative text 6",
+      title: "Paris Liberation",
+      id:"masonary-item-6"
+    },
+  ],
 ];
 </script>
 
