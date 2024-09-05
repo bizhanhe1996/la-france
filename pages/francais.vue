@@ -1,5 +1,5 @@
 <template>
-  <Banner :src="bannerImageSource" :alt="bannerImageAlt" :title="bannerImageTitle" :subTitle="bannerImageSubTitle" />
+  <banner :src="bannerImageSource" :alt="bannerImageAlt" :title="bannerImageTitle" :subTitle="bannerImageSubTitle" />
 </template>
 
 <script setup>

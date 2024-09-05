@@ -1,7 +1,7 @@
 <template>
   <!-- banner -->
   <section>
-    <Banner
+    <banner
       :src="bannerImageDetails.src"
       :alt="bannerImageDetails.alt"
       :title="bannerImageDetails.title"

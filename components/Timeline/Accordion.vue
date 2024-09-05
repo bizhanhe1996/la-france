@@ -1,7 +1,6 @@
 <template>
   <div
-    class="accordion bg-gray-100"
-    
+    class="accordion bg-gray-100"    
   >
     <details
       v-for="(item, index) in items"
@@ -56,7 +55,7 @@ div.accordion {
   details {
     @apply mb-4 last:my-0;
     summary {
-      @apply cursor-pointer flex select-none mb-2;
+      @apply cursor-pointer flex select-none mb-2 text-slate-500;
       &::before {
         content: "▼";
         @apply text-yellow-500 cursor-pointer float-start me-2;

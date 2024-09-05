@@ -2,7 +2,7 @@
   <div
     class="masonary"
     :style="{
-      'box-shadow': `0 0 3rem 0.25rem ${shadow}`,
+      'box-shadow': `0 1rem 3rem 0.25rem ${shadow}`,
     }"
   >
     <div
@@ -15,7 +15,6 @@
         :key="image.id"
         :id="image.id"
         :class="`row-span-${12 / column.length}`"
-        tabindex="0"
       >
         <img :src="image.path" :alt="image.alt" draggable="false" />
         <figcaption>{{ image.title }}</figcaption>
@@ -25,10 +24,6 @@
 </template>
 
 <script setup>
-// uses
-const route = useRoute();
-const router = useRouter();
-
 // props
 const props = defineProps({
   items: {
@@ -42,12 +37,6 @@ const props = defineProps({
   },
 });
 const { items, shadow } = props;
-
-// functions
-const handleClickOnFigure = (id) => {  
-  const baseUrl = route.fullPath.split("#")[0];
-  router.replace(baseUrl + "#" + id);
-};
 </script>
 
 <style lang="postcss">
