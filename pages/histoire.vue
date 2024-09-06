@@ -7,14 +7,14 @@
       :subTitle="bannerDetails.subTitle"
     />
   </section>
-  <section title="time-line">
-    <ul class="vertical-timeline">
+  <section title="timeline">
+    <ul class="vertical-timeline py-8">
       <li title="ancient france">
         <div
-          class="prepend triangle !shadow-green-500/50"
+          class="prepend triangle !shadow-green-500"
           data-animation="from-left"
         >
-          <p class="text-justify text-slate-500">
+          <p class="text-justify">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod
             mollitia, dignissimos animi cumque ex id nisi, magni repellat
             voluptate repudiandae recusandae beatae? Minus perferendis tempore
@@ -27,11 +27,13 @@
             dicta commodi, pariatur adipisci vitae. Deserunt.
           </p>
         </div>
-        <timeline-era title="Ancient France" period="-468" shadow="green" />
-        <div
-          class="append !p-0 !shadow-green-500/50"
-          data-animation="from-right"
-        >
+        <timeline-era
+          title="Ancient France"
+          period="-468"
+          shadow="green"
+          background="/images/histoire/flag-ancient.jpeg"
+        />
+        <div class="append !p-0 !shadow-green-500" data-animation="from-right">
           <timeline-image
             path="/images/histoire/ancient.jpeg"
             alt="ancient france"
@@ -41,7 +43,10 @@
         </div>
       </li>
       <li title="frankish kingdoms">
-        <div class="prepend overflow-hidden !p-0" data-animation="from-left">
+        <div
+          class="prepend overflow-hidden !p-0 !shadow-purple-500"
+          data-animation="from-left"
+        >
           <timeline-image
             path="/images/histoire/charlemagne.jpeg"
             alt="frankish kingdoms"
@@ -52,25 +57,29 @@
         <timeline-era
           title="Frankish Kingdoms"
           period="486-987"
-          shadow="orange"
+          shadow="#a855f7"
+          background="/images/histoire/flag-charlemagne.jpeg"
         />
-        <div class="append triangle" data-animation="from-right">
-          <div class="text-justify text-slate-500">
-            <h2 class="font-bold">Title A</h2>
+        <div
+          class="append triangle !shadow-purple-500"
+          data-animation="from-right"
+        >
+          <div class="text-justify">
+            <b>Title A</b>
             <p class="mb-2">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia
               exercitationem distinctio recusandae atque officiis deserunt earum
               voluptas dolor ea corporis repellat sint, labore rem! Eius
               perspiciatis pariatur rerum accusantium esse.
             </p>
-            <h2 class="font-bold">Title B</h2>
+            <b>Title B</b>
             <p class="mb-2">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad ipsa
               commodi itaque! Blanditiis quo, repellat, quisquam debitis eius
               officia minus soluta nesciunt suscipit enim ducimus! Provident a
               harum nostrum excepturi.
             </p>
-            <h2 class="font-bold">Title C</h2>
+            <b>Title C</b>
             <p class="mb-2">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Consectetur aut necessitatibus esse deleniti vitae odio aperiam
@@ -81,11 +90,14 @@
         </div>
       </li>
       <li title="early french monarchies">
-        <div class="prepend triangle" data-animation="from-left">
+        <div
+          class="prepend triangle !shadow-teal-500"
+          data-animation="from-left"
+        >
           <ul class="list-inside">
             <li class="mb-2">
-              <b class="text-slate-500">Merovingian Dynasty</b>
-              <p class="text-slate-500">
+              <b>Merovingian Dynasty</b>
+              <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
                 distinctio unde obcaecati! Amet maiores ut esse ea cumque quos
                 vel fugit dignissimos reprehenderit repellendus magni, deserunt
@@ -93,8 +105,8 @@
               </p>
             </li>
             <li class="mb-2">
-              <b class="text-slate-500">Carolingian Dynasty</b>
-              <p class="text-slate-500">
+              <b>Carolingian Dynasty</b>
+              <p>
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. At
                 labore dolore provident ut aut, quaerat quam, rem sed enim optio
                 eum, quas beatae sapiente assumenda necessitatibus sunt
@@ -102,8 +114,8 @@
               </p>
             </li>
             <li>
-              <b class="text-slate-500">Capetian Dynasty</b>
-              <p class="text-slate-500">
+              <b>Capetian Dynasty</b>
+              <p>
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                 Voluptatibus, veniam exercitationem alias odit sint modi
                 quibusdam velit dignissimos nisi, sunt saepe! Ullam, voluptas.
@@ -115,9 +127,10 @@
         <timeline-era
           title="Early French Monarchies"
           period="987-1453"
-          shadow="brown"
+          shadow="#14b8a6"
+          background="/images/histoire/flag-merovingian.jpeg"
         />
-        <div class="append !p-0" data-animation="from-right">
+        <div class="append !p-0 !shadow-teal-500" data-animation="from-right">
           <timeline-image
             path="/images/histoire/early-french-monarchies.jpg"
             alt="early french monarchies"
@@ -127,10 +140,7 @@
         </div>
       </li>
       <li title="pre-revolutionary">
-        <div
-          class="prepend !p-0 !shadow-blue-500/50"
-          data-animation="from-left"
-        >
+        <div class="prepend !p-0 !shadow-orange-500" data-animation="from-left">
           <timeline-image
             path="/images/histoire/louis-xiv.jpeg"
             alt="Louis XIV"
@@ -141,17 +151,17 @@
         <timeline-era
           title="Pre-Revolutionary France"
           period="1453-1789"
-          shadow="purple"
+          shadow="#f97316"
           background="/images/histoire/bourbons.jpeg"
         />
         <div
-          class="append !shadow-blue-500/50 triangle"
+          class="append !shadow-orange-500 triangle"
           data-animation="from-right"
         >
           <ul class="list-inside list-dic">
             <li class="mb-2">
-              <b class="text-slate-500">Social Structure</b>
-              <p class="text-slate-500 text-justify">
+              <b>Social Structure</b>
+              <p class="text-justify">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
                 rerum ducimus numquam dolor ad tenetur consectetur voluptatum
                 distinctio vitae fugiat totam blanditiis, molestias delectus
@@ -159,8 +169,8 @@
               </p>
             </li>
             <li class="mb-2">
-              <b class="text-slate-500">Political Structure</b>
-              <p class="text-slate-500 text-justify">
+              <b>Political Structure</b>
+              <p class="text-justify">
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                 Voluptatem voluptate quasi quam sunt temporibus vero enim rem
                 sequi doloribus, quos ea et consectetur, voluptas nisi tenetur a
@@ -169,8 +179,8 @@
               </p>
             </li>
             <li>
-              <b class="text-slate-500">Economic Conditions</b>
-              <p class="text-slate-500 text-justify">
+              <b>Economic Conditions</b>
+              <p class="text-justify">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit
                 modi dolore odio asperiores, iusto vel quod laboriosam illum a
                 qui corrupti. Fuga voluptatem, culpa quisquam voluptas nisi hic
@@ -182,46 +192,43 @@
         </div>
       </li>
       <li title="revolution">
-        <div
-          class="prepend triangle !shadow-red-500/50"
-          data-animation="from-left"
-        >
+        <div class="prepend triangle !shadow-red-500" data-animation="from-left">
           <row class="grid grid-cols-12 gap-4">
             <column class="sm:col-span-12 md:col-span-6 lg:col-span-6">
-              <h3 class="font-bold text-slate-500">Title A</h3>
-              <p class="mb-2 text-slate-500">
+              <b>Title A</b>
+              <p class="mb-2">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic
                 voluptate, quibusdam commodi laudantium molestias velit cum
                 saepe a distinctio totam?
               </p>
-              <h3 class="font-bold text-slate-500">Title B</h3>
-              <p class="mb-2 text-slate-500">
+              <b>Title B</b>
+              <p class="mb-2">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic
                 voluptate, quibusdam commodi laudantium molestias velit cum
                 saepe a distinctio totam?
               </p>
-              <h3 class="font-bold text-slate-500">Title C</h3>
-              <p class="text-slate-500">
+              <b>Title C</b>
+              <p>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic
                 voluptate, quibusdam commodi laudantium molestias velit cum
                 saepe a distinctio totam?
               </p>
             </column>
             <column class="sm:col-span-12 md:col-span-6 lg:col-span-6">
-              <h3 class="font-bold text-slate-500">Title D</h3>
-              <p class="mb-2 text-slate-500">
+              <b>Title D</b>
+              <p class="mb-2">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic
                 voluptate, quibusdam commodi laudantium molestias velit cum
                 saepe a distinctio totam?
               </p>
-              <h3 class="font-bold text-slate-500">Title E</h3>
-              <p class="mb-2 text-slate-500">
+              <b>Title E</b>
+              <p class="mb-2">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic
                 voluptate, quibusdam commodi laudantium molestias velit cum
                 saepe a distinctio totam?
               </p>
-              <h3 class="font-bold text-slate-500">Title F</h3>
-              <p class="text-slate-500">
+              <b>Title F</b>
+              <p>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic
                 voluptate, quibusdam commodi laudantium molestias velit cum
                 saepe a distinctio totam?
@@ -232,11 +239,10 @@
         <timeline-era
           title="Revolutionary France"
           period="1789-1815"
-          shadow="red"
+          shadow="#ef4444"
           background="/images/histoire/french-flag.jpeg"
-          beat
         />
-        <div class="append !p-0" data-animation="from-right">
+        <div class="append !p-0 !shadow-red-500" data-animation="from-right">
           <timeline-gallery
             direction="horizontal"
             :images="revolutionaryFranceGallery"
@@ -258,7 +264,7 @@
         />
         <div class="append triangle" data-animation="from-right">
           <timeline-accordion
-            class="!shadow-2xl !shadow-yellow-500"
+            class="!shadow-yellow-500 shadow-2xl"
             :items="napoleonicWars.data"
           />
         </div>
@@ -268,7 +274,7 @@
           class="prepend triangle !shadow-zinc-500"
           data-animation="from-left"
         >
-          <div class="text-slate-500">
+          <div>
             <h1 class="font-bold">Une</h1>
             <p class="mb-2">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia
@@ -297,6 +303,7 @@
           title="Post-Napoleonic France"
           period="1815-1914"
           shadow="gray"
+          background="/images/histoire/flag-post-napoleonic.jpeg"
         />
         <div class="append !p-0 !shadow-zinc-500" data-animation="from-right">
           <timeline-carousell :images="postNapoleonicCarousell" />
@@ -310,19 +317,19 @@
           <timeline-masonary
             :items="worldWarOneAndTwoImages"
             shadow="#3b82f6"
-            @image-clicked="masonaryEventListener"
           />
         </div>
         <timeline-era
           title="World War I & II"
           period="1914-1945"
           shadow="#3b82f6"
+          background="/images/histoire/flag-ww2.jpeg"
         />
         <div
           class="append triangle !shadow-blue-500"
           data-animation="from-right"
         >
-          <p class="text-justify text-slate-500">
+          <p class="text-justify">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita
             ipsum, non minus culpa consequuntur officiis quisquam tempora
             sapiente fugiat nihil maiores facilis harum fuga architecto sequi
@@ -337,7 +344,7 @@
           </p>
         </div>
       </li>
-      <hr class="border-blue-500 border-2 absolute h-full z-[1]" />
+      <hr />
     </ul>
   </section>
 </template>
@@ -461,9 +468,9 @@ const worldWarOneAndTwoImages = [
 
 <style lang="postcss">
 ul.vertical-timeline {
-  @apply flex flex-col justify-center items-center gap-24 my-4 pb-16 relative z-[2];
+  @apply flex flex-col justify-center items-center gap-24 relative z-[2] overflow-clip;
   & > li {
-    @apply z-[2] w-full flex items-center justify-evenly;
+    @apply z-[2] w-full flex items-center justify-evenly text-slate-500;
     div.prepend {
       @apply p-4 bg-gray-100 shadow-2xl relative text-justify rounded-md flex items-center justify-center;
       flex-basis: 40%;
@@ -475,7 +482,7 @@ ul.vertical-timeline {
       }
     }
     div.append {
-      @apply rounded-md shadow-2xl flex items-center justify-center relative bg-gray-100 p-4;
+      @apply rounded-md flex shadow-2xl items-center justify-center relative bg-gray-100 p-4;
       &.triangle::before {
         @apply h-8 w-6 bg-gray-100 absolute;
         content: "";
@@ -484,6 +491,9 @@ ul.vertical-timeline {
       }
       flex-basis: 40%;
     }
+  }
+  hr {
+    @apply border-slate-400 border-2 absolute h-full z-[1];
   }
 }
 </style>

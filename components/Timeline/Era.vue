@@ -34,27 +34,22 @@ const props = defineProps({
     required: false,
     default: "none",
   },
-  beat: {
-    type: Boolean,
-    required: false,
-    default: false,
-  },
 });
 
-const { title, period, shadow, background, beat } = props;
+const { title, period, shadow, background } = props;
 </script>
 
 <style lang="postcss">
 span.vertical-timeline-era {
-  @apply select-none bg-zinc-500 p-4 aspect-square rounded-full
+  @apply select-none bg-zinc-100 aspect-square rounded-full
     flex flex-col items-center justify-center w-36 text-center scale-0
-    overflow-hidden shadow-2xl text-white gap-2 bg-center bg-no-repeat bg-cover;
+    overflow-hidden shadow-2xl text-white gap-2 bg-center bg-no-repeat bg-cover
+    cursor-pointer p-4;
   text {
-    @apply font-bold;
+    @apply font-bold mix-blend-difference;
   }
   small {
-    font-size: 0.8rem;
-    font-weight: normal;
+    @apply mix-blend-difference;
   }
 }
 </style>
