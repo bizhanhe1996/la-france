@@ -445,7 +445,7 @@ const worldWarOneAndTwoImages = [
     {
       path: "/images/histoire/masonary-4.jpeg",
       alt: "Alternative text 4",
-      title: "Hilter invades Paris",
+      title: "Hitler invades Paris",
       id: "masonary-item-4",
     },
     {
@@ -470,7 +470,7 @@ const worldWarOneAndTwoImages = [
 ul.vertical-timeline {
   @apply flex flex-col justify-center items-center gap-24 relative z-[2] overflow-clip;
   & > li {
-    @apply z-[2] w-full flex items-center justify-evenly text-slate-500;
+    @apply z-[2] w-full flex sm:flex-col md:flex-row gap-4 items-center justify-evenly text-slate-500;
     div.prepend {
       @apply p-4 bg-gray-100 shadow-2xl relative text-justify rounded-md flex items-center justify-center;
       flex-basis: 40%;

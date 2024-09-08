@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   src: {
     type: String,
     required: true,
@@ -27,25 +27,19 @@ defineProps({
     required: false,
   },
 });
+const { src, alt, title, subTitle } = props;
 </script>
 
 <style lang="postcss">
 .component-banner {
-  position: relative;
-  @apply select-none;
+  @apply select-none relative shadow-lg shadow-zinc-300;
   img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    -webkit-user-drag: none;
+    @apply w-full h-80 object-cover;
   }
   div {
-    z-index: 2;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    @apply mix-blend-difference flex flex-col justify-center items-center gap-5 select-none;
+    @apply mix-blend-difference flex flex-col 
+      justify-center items-center gap-4 absolute
+      top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[2];
     h4 {
       @apply text-5xl text-center text-white font-bold;
     }
