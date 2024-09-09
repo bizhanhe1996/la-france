@@ -7,15 +7,41 @@
       :subTitle="bannerData.subTitle"
     />
   </section>
-  <section title="worldmap">
-    <img
-      id="french-speaking-countries"
-      src="/images/francais/worldmap.svg"
-      usemap="#french-speaking-countries-map"
-    />
-    <map name="french-speaking-countries-map">
-      <!-- <area shape="circle" coords="50vw, 50vw, 200" href="www.google.com" alt="Link A" /> -->
-    </map>
+  <section title="skills">
+    <row class="grid grid-cols-12">
+      <column class="sm:col-span-6 md:col-span-3">
+        <francais-skill
+          title="Ecouter"
+          icon="ear"
+          color="#3b82f6"
+          background-color="#dbeafe"
+        />
+      </column>
+      <column class="sm:col-span-6 md:col-span-3">
+        <francais-skill
+          title="Lire"
+          icon="book"
+          color="#ef4444"
+          background-color="#fee2e2"
+        />
+      </column>
+      <column class="sm:col-span-6 md:col-span-3">
+        <francais-skill
+          title="Parler"
+          icon="volume-up-fill"
+          color="#22c55e"
+          background-color="#dcfce7"
+        />
+      </column>
+      <column class="sm:col-span-6 md:col-span-3">
+        <francais-skill
+          title="Ecrire"
+          icon="pen"
+          color="#eab308"
+          background-color="#fef9c3"
+        />
+      </column>
+    </row>
   </section>
 </template>
 
@@ -28,8 +54,3 @@ const bannerData = {
 };
 </script>
 
-<style lang="postcss">
-img#french-speaking-countries {
-  stroke: blue;
-}
-</style>
