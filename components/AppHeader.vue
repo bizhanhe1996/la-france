@@ -39,20 +39,12 @@ const topMenuLinks: TopMenuLink[] = [
     innerHtml: "Accueil",
   },
   {
-    to: "/francais",
-    innerHtml: "Français",
-  },
-  {
     to: "/histoire",
     innerHtml: "Histoire",
   },
   {
     to: "/contact-us",
     innerHtml: "Contactez-nous",
-  },
-  {
-    to: "/about-us",
-    innerHtml: "Qui sommes-nous",
   },
 ];
 
